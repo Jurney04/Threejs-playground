@@ -43,6 +43,7 @@ function Wing({ position, rotation, scale, innerRef, pivot = [0, 0, 0] }) {
 		roughness: 0.5,
 		normalMap: normal,
 		roughnessMap: roughness,
+		normalScale: [5, 5],
 	};
 
 	return (
@@ -102,7 +103,7 @@ function Wing2({ position, rotation, scale, innerRef, pivot = [0, 0, 0] }) {
 		roughness: 20,
 		normalMap: normal,
 		roughnessMap: roughness,
-		normalScale: [2, 2],
+		normalScale: [5, 5],
 	};
 
 	return (
@@ -303,12 +304,36 @@ function Scene8() {
 			{/* <Environment files="/HDR_sunset.hdr" background /> */}
 			<Environment files="/HDR.hdr" background />
 			<Center rotation={[Math.PI, 0, 0]}>
-				<Wing innerRef={lm_wing} position={[-4, 0, 0]} pivot={[0, 0, 0]} />
-				<Wing innerRef={lb_wing} position={[-4, 3, 0.3]} rotation={[0, 0, Math.PI * -0.2]} pivot={[0, 0, 0]} />
-				<Wing innerRef={lt_wing} position={[-2, -2.5, 0.3]} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} />
-				<Wing2 innerRef={rm_wing} position={[4, 0, 0.16]} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} />
-				<Wing2 innerRef={rb_wing} position={[4, 3, 0.36]} rotation={[0, Math.PI, Math.PI * -0.2]} pivot={[0, 0, 0]} />
-				<Wing2 innerRef={rt_wing} position={[2, -2.5, 0.36]} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} />
+				<group position={[0, 0, 0]} rotation={[0, Math.PI * 0.3, 0]} scale={1}>
+					<Wing innerRef={lm_wing} position={[-4, 0, 0]} pivot={[0, 0, 0]} />
+					<Wing innerRef={lb_wing} position={[-4, 3, 0.3]} rotation={[0, 0, Math.PI * -0.2]} pivot={[0, 0, 0]} />
+					<Wing innerRef={lt_wing} position={[-2, -2.5, 0.3]} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} />
+				</group>
+				<group position={[0, 0, 0]} rotation={[0, Math.PI * 0, 0]} scale={1}>
+					<Wing innerRef={lm_wing} position={[-4, 0, 0]} pivot={[0, 0, 0]} />
+					<Wing innerRef={lb_wing} position={[-4, 3, 0.3]} rotation={[0, 0, Math.PI * -0.2]} pivot={[0, 0, 0]} />
+					<Wing innerRef={lt_wing} position={[-2, -2.5, 0.3]} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} />
+				</group>
+				<group position={[0, 0, 0]} rotation={[0, Math.PI * -0.3, 0]} scale={1}>
+					<Wing innerRef={lm_wing} position={[-4, 0, 0]} pivot={[0, 0, 0]} />
+					<Wing innerRef={lb_wing} position={[-4, 3, 0.3]} rotation={[0, 0, Math.PI * -0.2]} pivot={[0, 0, 0]} />
+					<Wing innerRef={lt_wing} position={[-2, -2.5, 0.3]} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} />
+				</group>
+				<group position={[0, 0, 0]} rotation={[0, Math.PI * 0.3, 0]} scale={1}>
+					<Wing2 innerRef={rm_wing} position={[4, 0, 0.16]} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} />
+					<Wing2 innerRef={rb_wing} position={[4, 3, 0.36]} rotation={[0, Math.PI, Math.PI * -0.2]} pivot={[0, 0, 0]} />
+					<Wing2 innerRef={rt_wing} position={[2, -2.5, 0.36]} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} />
+				</group>
+				<group position={[0, 0, 0]} rotation={[0, Math.PI * 0, 0]} scale={1}>
+					<Wing2 innerRef={rm_wing} position={[4, 0, 0.16]} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} />
+					<Wing2 innerRef={rb_wing} position={[4, 3, 0.36]} rotation={[0, Math.PI, Math.PI * -0.2]} pivot={[0, 0, 0]} />
+					<Wing2 innerRef={rt_wing} position={[2, -2.5, 0.36]} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} />
+				</group>
+				<group position={[0, 0, 0]} rotation={[0, Math.PI * -0.3, 0]} scale={1}>
+					<Wing2 innerRef={rm_wing} position={[4, 0, 0.16]} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} />
+					<Wing2 innerRef={rb_wing} position={[4, 3, 0.36]} rotation={[0, Math.PI, Math.PI * -0.2]} pivot={[0, 0, 0]} />
+					<Wing2 innerRef={rt_wing} position={[2, -2.5, 0.36]} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} />
+				</group>
 
 				<Circle innerRef={outer_circle} position={[0, 1.5, 0.1]} rotation={[0, 0, -1.5]} scale={1} materialProps={materialProps} args={[1.5, 0.15, 12, 48, Math.PI * 2]} />
 				<Circle innerRef={inner_circle} position={[0, 1.5, 0.1]} rotation={[0, 0, -1.5]} scale={1} materialProps={materialProps} args={[1.25, 0.15, 12, 48, Math.PI * 2]} />
