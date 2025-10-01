@@ -404,21 +404,50 @@ function Scene8() {
 	const inner_circle = useRef();
 	const second_circle = useRef();
 	const third_circle = useRef();
-	const lt_wing = useRef();
-	const lm_wing = useRef();
-	const lb_wing = useRef();
-	const rt_wing = useRef();
-	const rm_wing = useRef();
-	const rb_wing = useRef();
+
+	const leftWing1Ref = useRef();
+	const leftWing2Ref = useRef();
+	const leftWing3Ref = useRef();
+	const leftWing4Ref = useRef();
+	const leftWing5Ref = useRef();
+	const leftWing6Ref = useRef();
+	const leftWing7Ref = useRef();
+	const leftWing8Ref = useRef();
+	const leftWing9Ref = useRef();
+
+	const rightWing1Ref = useRef();
+	const rightWing2Ref = useRef();
+	const rightWing3Ref = useRef();
+	const rightWing4Ref = useRef();
+	const rightWing5Ref = useRef();
+	const rightWing6Ref = useRef();
+	const rightWing7Ref = useRef();
+	const rightWing8Ref = useRef();
+	const rightWing9Ref = useRef();
+
 	const eye = useRef();
 	const iris = useRef();
 
-	const [lmWingDirection, setLmWingDirection] = useState(1);
-	const [ltWingDirection, setLtWingDirection] = useState(1);
-	const [lbWingDirection, setLbWingDirection] = useState(1);
-	const [rmWingDirection, setRmWingDirection] = useState(1);
-	const [rtWingDirection, setRtWingDirection] = useState(1);
-	const [rbWingDirection, setRbWingDirection] = useState(1);
+	const [leftWing1Direction, setLeftWing1Direction] = useState(1);
+	const [leftWing2Direction, setLeftWing2Direction] = useState(1);
+	const [leftWing3Direction, setLeftWing3Direction] = useState(1);
+	const [leftWing4Direction, setLeftWing4Direction] = useState(1);
+	const [leftWing5Direction, setLeftWing5Direction] = useState(1);
+	const [leftWing6Direction, setLeftWing6Direction] = useState(1);
+	const [leftWing7Direction, setLeftWing7Direction] = useState(1);
+	const [leftWing8Direction, setLeftWing8Direction] = useState(1);
+	const [leftWing9Direction, setLeftWing9Direction] = useState(1);
+
+	const [rightWing1Direction, setRightWing1Direction] = useState(1);
+	const [rightWing2Direction, setRightWing2Direction] = useState(1);
+	const [rightWing3Direction, setRightWing3Direction] = useState(1);
+	const [rightWing4Direction, setRightWing4Direction] = useState(1);
+	const [rightWing5Direction, setRightWing5Direction] = useState(1);
+	const [rightWing6Direction, setRightWing6Direction] = useState(1);
+	const [rightWing7Direction, setRightWing7Direction] = useState(1);
+	const [rightWing8Direction, setRightWing8Direction] = useState(1);
+	const [rightWing9Direction, setRightWing9Direction] = useState(1);
+
 	const [eyeDirection, setEyeDirection] = useState(1);
 	const [irisDirection, setIrisDirection] = useState(1);
 
@@ -455,47 +484,124 @@ function Scene8() {
 				setIrisDirection((prev) => -prev);
 			}
 		}
-		if (lt_wing.current) {
-			lt_wing.current.rotation.y -= delta * 0.1 * ltWingDirection;
-			if (lt_wing.current.rotation.y > 0.25 || lt_wing.current.rotation.y < -0.25) {
-				setLtWingDirection((prev) => -prev);
+
+		// Left Wing Group 1
+		if (leftWing1Ref.current) {
+			leftWing1Ref.current.rotation.y += delta * 0.08 * leftWing1Direction;
+			if (leftWing1Ref.current.rotation.y > 0.3 || leftWing1Ref.current.rotation.y < -0.3) {
+				setLeftWing1Direction((prev) => -prev);
 			}
 		}
-		//Flapping animation for lm_wing
-		if (lm_wing.current) {
-			lm_wing.current.rotation.y += delta * 0.05 * lmWingDirection;
-			if (lm_wing.current.rotation.y > 0.25 || lm_wing.current.rotation.y < -0.25) {
-				setLmWingDirection((prev) => -prev);
+		if (leftWing2Ref.current) {
+			leftWing2Ref.current.rotation.y -= delta * 0.06 * leftWing2Direction;
+			if (leftWing2Ref.current.rotation.y > 0.25 || leftWing2Ref.current.rotation.y < -0.25) {
+				setLeftWing2Direction((prev) => -prev);
+			}
+		}
+		if (leftWing3Ref.current) {
+			leftWing3Ref.current.rotation.y += delta * 0.09 * leftWing3Direction;
+			if (leftWing3Ref.current.rotation.y > 0.35 || leftWing3Ref.current.rotation.y < -0.35) {
+				setLeftWing3Direction((prev) => -prev);
 			}
 		}
 
-		// Flapping animation for lb_wing
-		if (lb_wing.current) {
-			lb_wing.current.rotation.y -= delta * 0.075 * lbWingDirection;
-			if (lb_wing.current.rotation.y > 0.25 || lb_wing.current.rotation.y < -0.25) {
-				setLbWingDirection((prev) => -prev);
+		// Left Wing Group 2
+		if (leftWing4Ref.current) {
+			leftWing4Ref.current.rotation.y -= delta * 0.07 * leftWing4Direction;
+			if (leftWing4Ref.current.rotation.y > 0.28 || leftWing4Ref.current.rotation.y < -0.28) {
+				setLeftWing4Direction((prev) => -prev);
 			}
 		}
-		// Flapping animation for rt_wing
-		if (rt_wing.current) {
-			rt_wing.current.rotation.y += delta * 0.05 * rtWingDirection;
-			if (rt_wing.current.rotation.y > 0.25 || rt_wing.current.rotation.y < -0.25) {
-				setRtWingDirection((prev) => -prev);
+		if (leftWing5Ref.current) {
+			leftWing5Ref.current.rotation.y += delta * 0.05 * leftWing5Direction;
+			if (leftWing5Ref.current.rotation.y > 0.2 || leftWing5Ref.current.rotation.y < -0.2) {
+				setLeftWing5Direction((prev) => -prev);
 			}
 		}
-		//Flapping animation for rm_wing
-		if (rm_wing.current) {
-			rm_wing.current.rotation.y -= delta * 0.075 * rmWingDirection;
-			if (rm_wing.current.rotation.y > 0.25 || rm_wing.current.rotation.y < -0.25) {
-				setRmWingDirection((prev) => -prev);
+		if (leftWing6Ref.current) {
+			leftWing6Ref.current.rotation.y -= delta * 0.1 * leftWing6Direction;
+			if (leftWing6Ref.current.rotation.y > 0.32 || leftWing6Ref.current.rotation.y < -0.32) {
+				setLeftWing6Direction((prev) => -prev);
 			}
 		}
 
-		// Flapping animation for rb_wing
-		if (rb_wing.current) {
-			rb_wing.current.rotation.y -= delta * 0.1 * rbWingDirection;
-			if (rb_wing.current.rotation.y > 0.25 || rb_wing.current.rotation.y < -0.25) {
-				setRbWingDirection((prev) => -prev);
+		// Left Wing Group 3
+		if (leftWing7Ref.current) {
+			leftWing7Ref.current.rotation.y += delta * 0.06 * leftWing7Direction;
+			if (leftWing7Ref.current.rotation.y > 0.27 || leftWing7Ref.current.rotation.y < -0.27) {
+				setLeftWing7Direction((prev) => -prev);
+			}
+		}
+		if (leftWing8Ref.current) {
+			leftWing8Ref.current.rotation.y -= delta * 0.09 * leftWing8Direction;
+			if (leftWing8Ref.current.rotation.y > 0.33 || leftWing8Ref.current.rotation.y < -0.33) {
+				setLeftWing8Direction((prev) => -prev);
+			}
+		}
+		if (leftWing9Ref.current) {
+			leftWing9Ref.current.rotation.y += delta * 0.07 * leftWing9Direction;
+			if (leftWing9Ref.current.rotation.y > 0.29 || leftWing9Ref.current.rotation.y < -0.29) {
+				setLeftWing9Direction((prev) => -prev);
+			}
+		}
+
+		// Right Wing Group 1
+		if (rightWing1Ref.current) {
+			rightWing1Ref.current.rotation.y -= delta * 0.08 * rightWing1Direction;
+			if (rightWing1Ref.current.rotation.y > 0.3 || rightWing1Ref.current.rotation.y < -0.3) {
+				setRightWing1Direction((prev) => -prev);
+			}
+		}
+		if (rightWing2Ref.current) {
+			rightWing2Ref.current.rotation.y += delta * 0.06 * rightWing2Direction;
+			if (rightWing2Ref.current.rotation.y > 0.25 || rightWing2Ref.current.rotation.y < -0.25) {
+				setRightWing2Direction((prev) => -prev);
+			}
+		}
+		if (rightWing3Ref.current) {
+			rightWing3Ref.current.rotation.y -= delta * 0.09 * rightWing3Direction;
+			if (rightWing3Ref.current.rotation.y > 0.35 || rightWing3Ref.current.rotation.y < -0.35) {
+				setRightWing3Direction((prev) => -prev);
+			}
+		}
+
+		// Right Wing Group 2
+		if (rightWing4Ref.current) {
+			rightWing4Ref.current.rotation.y += delta * 0.07 * rightWing4Direction;
+			if (rightWing4Ref.current.rotation.y > 0.28 || rightWing4Ref.current.rotation.y < -0.28) {
+				setRightWing4Direction((prev) => -prev);
+			}
+		}
+		if (rightWing5Ref.current) {
+			rightWing5Ref.current.rotation.y -= delta * 0.05 * rightWing5Direction;
+			if (rightWing5Ref.current.rotation.y > 0.2 || rightWing5Ref.current.rotation.y < -0.2) {
+				setRightWing5Direction((prev) => -prev);
+			}
+		}
+		if (rightWing6Ref.current) {
+			rightWing6Ref.current.rotation.y += delta * 0.1 * rightWing6Direction;
+			if (rightWing6Ref.current.rotation.y > 0.32 || rightWing6Ref.current.rotation.y < -0.32) {
+				setRightWing6Direction((prev) => -prev);
+			}
+		}
+
+		// Right Wing Group 3
+		if (rightWing7Ref.current) {
+			rightWing7Ref.current.rotation.y -= delta * 0.06 * rightWing7Direction;
+			if (rightWing7Ref.current.rotation.y > 0.27 || rightWing7Ref.current.rotation.y < -0.27) {
+				setRightWing7Direction((prev) => -prev);
+			}
+		}
+		if (rightWing8Ref.current) {
+			rightWing8Ref.current.rotation.y += delta * 0.09 * rightWing8Direction;
+			if (rightWing8Ref.current.rotation.y > 0.33 || rightWing8Ref.current.rotation.y < -0.33) {
+				setRightWing8Direction((prev) => -prev);
+			}
+		}
+		if (rightWing9Ref.current) {
+			rightWing9Ref.current.rotation.y -= delta * 0.07 * rightWing9Direction;
+			if (rightWing9Ref.current.rotation.y > 0.29 || rightWing9Ref.current.rotation.y < -0.29) {
+				setRightWing9Direction((prev) => -prev);
 			}
 		}
 	});
@@ -507,34 +613,34 @@ function Scene8() {
 			<Environment files="/HDR.hdr" background />
 			<Center rotation={[Math.PI, 0, 0]}>
 				<group position={[0, 0, 0]} rotation={[0, 0, 0]}>
-					<Wing innerRef={lm_wing} position={[-4, 0, 0]} pivot={[0, 0, 0]} version="default" />
-					<Wing innerRef={lb_wing} position={[-1.5, 2.25, 0.06]} scale={2} rotation={[0, 0, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
-					<Wing innerRef={lt_wing} position={[-1.25, -2.5, 0.3]} scale={0.9} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
+					<Wing innerRef={leftWing1Ref} position={[-4, 0, 0]} pivot={[0, 0, 0]} version="default" />
+					<Wing innerRef={leftWing2Ref} position={[-1.5, 2.25, 0.06]} scale={2} rotation={[0, 0, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
+					<Wing innerRef={leftWing3Ref} position={[-1.25, -2.5, 0.3]} scale={0.9} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
 				</group>
 				<group position={[0, 0, 0]} rotation={[0, 0.85, 0]}>
-					<Wing innerRef={lm_wing} position={[-4, 0, 0]} pivot={[0, 0, 0]} version="default" />
-					<Wing innerRef={lb_wing} position={[-1.5, 2.25, 0.06]} scale={2} rotation={[0, 0, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
-					<Wing innerRef={lt_wing} position={[-1.25, -2.5, 0.3]} scale={0.9} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
+					<Wing innerRef={leftWing4Ref} position={[-4, 0, 0]} pivot={[0, 0, 0]} version="default" />
+					<Wing innerRef={leftWing5Ref} position={[-1.5, 2.25, 0.06]} scale={2} rotation={[0, 0, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
+					<Wing innerRef={leftWing6Ref} position={[-1.25, -2.5, 0.3]} scale={0.9} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
 				</group>
 				<group position={[0, 0, 0]} rotation={[0, -0.85, 0]}>
-					<Wing innerRef={lm_wing} position={[-4, 0, 0]} pivot={[0, 0, 0]} version="default" />
-					<Wing innerRef={lb_wing} position={[-1.5, 2.25, 0.06]} scale={2} rotation={[0, 0, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
-					<Wing innerRef={lt_wing} position={[-1.25, -2.5, 0.3]} scale={0.9} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
+					<Wing innerRef={leftWing7Ref} position={[-4, 0, 0]} pivot={[0, 0, 0]} version="default" />
+					<Wing innerRef={leftWing8Ref} position={[-1.5, 2.25, 0.06]} scale={2} rotation={[0, 0, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
+					<Wing innerRef={leftWing9Ref} position={[-1.25, -2.5, 0.3]} scale={0.9} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
 				</group>
 				<group position={[0, 0, 0]} rotation={[0, 0, 0]}>
-					<Wing2 innerRef={rm_wing} position={[4, 0, 0.16]} scale={1} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} version="default" />
-					<Wing2 innerRef={rb_wing} position={[1.5, 2.25, 0.36]} scale={2} rotation={[0, Math.PI, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
-					<Wing2 innerRef={rt_wing} position={[1.25, -2.5, 0.36]} scale={0.9} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
+					<Wing2 innerRef={rightWing1Ref} position={[4, 0, 0.16]} scale={1} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} version="default" />
+					<Wing2 innerRef={rightWing2Ref} position={[1.5, 2.25, 0.36]} scale={2} rotation={[0, Math.PI, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
+					<Wing2 innerRef={rightWing3Ref} position={[1.25, -2.5, 0.36]} scale={0.9} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
 				</group>
 				<group position={[0, 0, 0]} rotation={[0, 0.85, 0]}>
-					<Wing2 innerRef={rm_wing} position={[4, 0, 0.16]} scale={1} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} version="default" />
-					<Wing2 innerRef={rb_wing} position={[1.5, 2.25, 0.36]} scale={2} rotation={[0, Math.PI, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
-					<Wing2 innerRef={rt_wing} position={[1.25, -2.5, 0.36]} scale={0.9} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
+					<Wing2 innerRef={rightWing4Ref} position={[4, 0, 0.16]} scale={1} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} version="default" />
+					<Wing2 innerRef={rightWing5Ref} position={[1.5, 2.25, 0.36]} scale={2} rotation={[0, Math.PI, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
+					<Wing2 innerRef={rightWing6Ref} position={[1.25, -2.5, 0.36]} scale={0.9} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
 				</group>
 				<group position={[0, 0, 0]} rotation={[0, -0.85, 0]}>
-					<Wing2 innerRef={rm_wing} position={[4, 0, 0.16]} scale={1} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} version="default" />
-					<Wing2 innerRef={rb_wing} position={[1.5, 2.25, 0.36]} scale={2} rotation={[0, Math.PI, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
-					<Wing2 innerRef={rt_wing} position={[1.25, -2.5, 0.36]} scale={0.9} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
+					<Wing2 innerRef={rightWing7Ref} position={[4, 0, 0.16]} scale={1} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} version="default" />
+					<Wing2 innerRef={rightWing8Ref} position={[1.5, 2.25, 0.36]} scale={2} rotation={[0, Math.PI, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
+					<Wing2 innerRef={rightWing9Ref} position={[1.25, -2.5, 0.36]} scale={0.9} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
 				</group>
 				<Ring innerRef={inner_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1.5]} groupScale={0.8} />
 				<Ring innerRef={second_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1.5]} groupScale={0.6} />
