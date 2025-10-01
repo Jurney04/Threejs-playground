@@ -2,6 +2,8 @@ import React from "react";
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Sky } from "three/addons/objects/Sky.js";
+import { MathUtils, Vector3 } from "three";
+import { scene } from "three";
 
 function Scene3() {
 	//useRef is a hook that allows us to create a reference to a DOM element or a component instance

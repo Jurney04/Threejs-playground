@@ -9,13 +9,9 @@ import Scene8 from "./Scene8.jsx";
 createRoot(document.getElementById("root")).render(
 	<>
 		<Canvas>
-			{/* <Scene1 /> */}
-			{/* <Scene2 /> */}
-			{/* <Scene3 /> */}
-			{/* <Scene4 /> */}
-			{/* <Scene6 /> */}
+			<Scene6 />
 			{/* <Scene7 /> */}
-			<Scene8 />
+			{/* <Scene8 /> */}
 			<OrbitControls />
 		</Canvas>
 		{/* <Scene5 /> */}
