@@ -5,7 +5,7 @@ import { OrbitControls, Center, useTexture, Sky, Environment } from "@react-thre
 import * as THREE from "three";
 import { useMemo } from "react";
 
-function Wing({ position, rotation, scale, innerRef, pivot = [0, 0, 0], version = "default" }) {
+const Wing = React.memo(function Wing({ position, rotation, scale, innerRef, pivot = [0, 0, 0], version = "default" }) {
 	let svg_bottom, svg_middle, svg_top;
 	let textureRepeat = [0.01, 0.01];
 
@@ -137,9 +137,9 @@ function Wing({ position, rotation, scale, innerRef, pivot = [0, 0, 0], version 
 			</group>
 		);
 	}
-}
+});
 
-function Wing2({ position, rotation, scale, innerRef, pivot = [0, 0, 0], version = "default" }) {
+const Wing2 = React.memo(function Wing2({ position, rotation, scale, innerRef, pivot = [0, 0, 0], version = "default" }) {
 	let svg_bottom, svg_middle, svg_top;
 
 	if (version === "default") {
@@ -256,8 +256,9 @@ function Wing2({ position, rotation, scale, innerRef, pivot = [0, 0, 0], version
 			</group>
 		);
 	}
-}
-function Eye({ position, rotation, scale, innerRef, pivot = [0, 0, 0], irisRef }) {
+});
+
+const Eye = React.memo(function Eye({ position, rotation, scale, innerRef, pivot = [0, 0, 0], irisRef }) {
 	const { paths: paths_eye } = useLoader(SVGLoader, "/eye.svg");
 	const shapes_eye = paths_eye.flatMap((path) => path.toShapes(true));
 
@@ -289,7 +290,7 @@ function Eye({ position, rotation, scale, innerRef, pivot = [0, 0, 0], irisRef }
 	const [basecolorM, ambientOcclusionM, metallicM, normalM, roughnessM] = useTexture([
 		"/marble/Marble_White_007_basecolor.jpg",
 		"/marble/Marble_White_007_ambientOcclusion.jpg",
-		"marble/Marble_White_007_height.png",
+		"/marble/Marble_White_007_height.png",
 		"/marble/Marble_White_007_normal.jpg",
 		"/marble/Marble_White_007_roughness.jpg",
 	]);
@@ -331,9 +332,9 @@ function Eye({ position, rotation, scale, innerRef, pivot = [0, 0, 0], irisRef }
 			</group>
 		</group>
 	);
-}
+});
 
-function Ring({ innerRef, innerScale, groupPosition, groupRotation, groupScale }) {
+const Ring = React.memo(function Ring({ innerRef, innerScale, groupPosition, groupRotation, groupScale }) {
 	const [basecolor, ambientOcclusion, metallic, normal, roughness] = useTexture([
 		"/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg",
 		"/gold_texture/Poliigon_MetalGoldPaint_7253_AmbientOcclusion.jpg",
@@ -368,6 +369,7 @@ function Ring({ innerRef, innerScale, groupPosition, groupRotation, groupScale }
 			bevelEnabled: false,
 			bevelThickness: 0.1,
 			bevelSize: 0.15,
+			bevelOffset: 0,
 			bevelSegments: 2,
 		};
 
@@ -396,7 +398,7 @@ function Ring({ innerRef, innerScale, groupPosition, groupRotation, groupScale }
 			<Eye position={[-0.4, -1.475, -0.225]} rotation={[Math.PI * 0.5, Math.PI * 0.85, 0]} scale={0.8} />
 		</group>
 	);
-}
+});
 
 function Scene8() {
 	const outer_circle = useRef();

@@ -7,7 +7,7 @@ import Scene8 from "./Scene8.jsx";
 
 createRoot(document.getElementById("root")).render(
 	<>
-		<Canvas>
+		<Canvas dpr={window.devicePixelRatio}>
 			{/* <Scene6 /> */}
 			{/* <Scene7 /> */}
 			<Scene8 />
