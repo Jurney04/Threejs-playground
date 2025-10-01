@@ -402,6 +402,8 @@ function Scene8() {
 	const outer_circle = useRef();
 	const middle_circle = useRef();
 	const inner_circle = useRef();
+	const second_circle = useRef();
+	const third_circle = useRef();
 	const lt_wing = useRef();
 	const lm_wing = useRef();
 	const lb_wing = useRef();
@@ -426,16 +428,27 @@ function Scene8() {
 			outer_circle.current.rotation.y += delta * 0.75;
 			outer_circle.current.rotation.z -= delta * 0.75;
 		}
+		if (third_circle.current) {
+			third_circle.current.rotation.x += delta * 1;
+			third_circle.current.rotation.y -= delta * 1;
+			third_circle.current.rotation.z -= delta * 1;
+		}
 		if (middle_circle.current) {
 			middle_circle.current.rotation.x += delta * 1;
 			middle_circle.current.rotation.y -= delta * 0.75;
 			middle_circle.current.rotation.z += delta * 0.5;
+		}
+		if (second_circle.current) {
+			second_circle.current.rotation.x -= delta * 0.5;
+			second_circle.current.rotation.y += delta * 0.75;
+			second_circle.current.rotation.z += delta * 0.5;
 		}
 		if (inner_circle.current) {
 			inner_circle.current.rotation.x -= delta * 1;
 			inner_circle.current.rotation.y += delta * 1.25;
 			inner_circle.current.rotation.z -= delta * 0.75;
 		}
+
 		if (iris.current) {
 			iris.current.position.x += delta * 0.05 * irisDirection;
 			if (iris.current.position.x > 0.45 || iris.current.position.x < 0.25) {
@@ -493,20 +506,45 @@ function Scene8() {
 			{/* <Environment files="/HDR_sunset.hdr" background /> */}
 			<Environment files="/HDR.hdr" background />
 			<Center rotation={[Math.PI, 0, 0]}>
-				<Wing innerRef={lm_wing} position={[-4, 0, 0]} pivot={[0, 0, 0]} version="default" />
-				<Wing innerRef={lb_wing} position={[-1.5, 2.25, 0.06]} scale={2} rotation={[0, 0, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
-				<Wing innerRef={lt_wing} position={[-1.25, -2.5, 0.3]} scale={0.9} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
-				<Wing2 innerRef={rm_wing} position={[4, 0, 0.16]} scale={1} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} version="default" />
-				<Wing2 innerRef={rb_wing} position={[1.5, 2.25, 0.36]} scale={2} rotation={[0, Math.PI, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
-				<Wing2 innerRef={rt_wing} position={[1.25, -2.5, 0.36]} scale={0.9} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />{" "}
-				<Ring innerRef={inner_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1.5]} groupScale={0.8} />{" "}
+				<group position={[0, 0, 0]} rotation={[0, 0, 0]}>
+					<Wing innerRef={lm_wing} position={[-4, 0, 0]} pivot={[0, 0, 0]} version="default" />
+					<Wing innerRef={lb_wing} position={[-1.5, 2.25, 0.06]} scale={2} rotation={[0, 0, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
+					<Wing innerRef={lt_wing} position={[-1.25, -2.5, 0.3]} scale={0.9} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
+				</group>
+				<group position={[0, 0, 0]} rotation={[0, 0.85, 0]}>
+					<Wing innerRef={lm_wing} position={[-4, 0, 0]} pivot={[0, 0, 0]} version="default" />
+					<Wing innerRef={lb_wing} position={[-1.5, 2.25, 0.06]} scale={2} rotation={[0, 0, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
+					<Wing innerRef={lt_wing} position={[-1.25, -2.5, 0.3]} scale={0.9} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
+				</group>
+				<group position={[0, 0, 0]} rotation={[0, -0.85, 0]}>
+					<Wing innerRef={lm_wing} position={[-4, 0, 0]} pivot={[0, 0, 0]} version="default" />
+					<Wing innerRef={lb_wing} position={[-1.5, 2.25, 0.06]} scale={2} rotation={[0, 0, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
+					<Wing innerRef={lt_wing} position={[-1.25, -2.5, 0.3]} scale={0.9} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
+				</group>
+				<group position={[0, 0, 0]} rotation={[0, 0, 0]}>
+					<Wing2 innerRef={rm_wing} position={[4, 0, 0.16]} scale={1} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} version="default" />
+					<Wing2 innerRef={rb_wing} position={[1.5, 2.25, 0.36]} scale={2} rotation={[0, Math.PI, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
+					<Wing2 innerRef={rt_wing} position={[1.25, -2.5, 0.36]} scale={0.9} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
+				</group>
+				<group position={[0, 0, 0]} rotation={[0, 0.85, 0]}>
+					<Wing2 innerRef={rm_wing} position={[4, 0, 0.16]} scale={1} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} version="default" />
+					<Wing2 innerRef={rb_wing} position={[1.5, 2.25, 0.36]} scale={2} rotation={[0, Math.PI, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
+					<Wing2 innerRef={rt_wing} position={[1.25, -2.5, 0.36]} scale={0.9} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
+				</group>
+				<group position={[0, 0, 0]} rotation={[0, -0.85, 0]}>
+					<Wing2 innerRef={rm_wing} position={[4, 0, 0.16]} scale={1} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} version="default" />
+					<Wing2 innerRef={rb_wing} position={[1.5, 2.25, 0.36]} scale={2} rotation={[0, Math.PI, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
+					<Wing2 innerRef={rt_wing} position={[1.25, -2.5, 0.36]} scale={0.9} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
+				</group>
+				<Ring innerRef={inner_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1.5]} groupScale={0.8} />
+				<Ring innerRef={second_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1.5]} groupScale={0.6} />
+				<Ring innerRef={third_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1.5]} groupScale={0.7} />
 				<Ring innerRef={middle_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1]} groupScale={1} />
 				<Ring innerRef={outer_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, 0.25]} groupScale={0.9} />
-				<Eye innerRef={eye} pivot={[-1, 0.75, 0]} position={[0, 0, 0]} rotation={[0, 0, 0]} scale={3} irisRef={iris} />{" "}
+				<Eye innerRef={eye} pivot={[-0.65, 0.85, 0]} position={[0, 0, 0]} rotation={[0, 0, 0]} scale={2} irisRef={iris} />
 			</Center>
 		</>
 	);
 }
 
 export default Scene8;
-1;
