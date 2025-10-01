@@ -4,6 +4,8 @@ import { useLoader, useFrame } from "@react-three/fiber";
 import { OrbitControls, Center, useTexture, Sky, Environment } from "@react-three/drei";
 import * as THREE from "three";
 import { useMemo } from "react";
+import { Perf } from "r3f-perf";
+import { AmbientLight } from "three";
 
 const Wing = React.memo(function Wing({ position, rotation, scale, innerRef, pivot = [0, 0, 0], version = "default" }) {
 	let svg_bottom, svg_middle, svg_top;
@@ -400,7 +402,7 @@ const Ring = React.memo(function Ring({ innerRef, innerScale, groupPosition, gro
 	);
 });
 
-function Scene8() {
+function Scene8({ position = [0, 0, 0] }) {
 	const outer_circle = useRef();
 	const middle_circle = useRef();
 	const inner_circle = useRef();
@@ -610,10 +612,15 @@ function Scene8() {
 
 	return (
 		<>
+			<Perf position="top-left" />
 			<OrbitControls />
-			{/* <Environment files="/HDR_sunset.hdr" background /> */}
-			<Environment files="/HDR.hdr" background />
-			<Center rotation={[Math.PI, 0, 0]}>
+			<Environment files="/HDR_sunset.hdr" background />
+			{/* <Environment files="/HDR.hdr" background /> */}
+			{/* <Sky distance={100} up={0} /> */}
+			{/* <ambientLight intensity={1} /> */}
+			{/* <spotLight position={[0, 10, 0]} angle={0.3} penumbra={1} intensity={10} /> */}
+			{/* <Environment preset="sunset" background /> */}
+			<Center position={position} rotation={[Math.PI, 0, 0]}>
 				<group position={[0, 0, 0]} rotation={[0, 0, 0]}>
 					<Wing innerRef={leftWing1Ref} position={[-4, 0, 0]} pivot={[0, 0, 0]} version="default" />
 					<Wing innerRef={leftWing2Ref} position={[-1.5, 2.25, 0.06]} scale={2} rotation={[0, 0, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />

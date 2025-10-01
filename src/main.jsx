@@ -10,7 +10,9 @@ createRoot(document.getElementById("root")).render(
 		<Canvas dpr={window.devicePixelRatio}>
 			{/* <Scene6 /> */}
 			{/* <Scene7 /> */}
-			<Scene8 />
+			{/* <Scene8 position={[-10, 0, 0]} /> */}
+			<Scene8 position={[0, 0, 0]} />
+			{/* <Scene8 position={[10, 0, 0]} /> */}
 			<OrbitControls />
 		</Canvas>
 		{/* <Scene5 /> */}
