@@ -2,7 +2,7 @@ import * as THREE from "three";
 import React, { useMemo } from "react";
 import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader";
 import { useLoader } from "@react-three/fiber";
-import {  useTexture } from "@react-three/drei";
+import {  useTexture, Sky, Environment } from "@react-three/drei";
 
 const Wing = React.memo(function Wing({ position, rotation, scale, innerRef, pivot = [0, 0, 0], version = "default" }) {
 	let svg_bottom, svg_middle, svg_top;
