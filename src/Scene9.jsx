@@ -1,334 +1,17 @@
-import React, { useRef, useState, useMemo, useEffect } from "react";
+import * as THREE from "three";
+import React, { useRef, useLayoutEffect, useState, useMemo } from "react";
 import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader";
 import { useLoader, useFrame } from "@react-three/fiber";
-import { OrbitControls, Center, useTexture, Sky, Environment, InstancedMesh } from "@react-three/drei";
-import * as THREE from "three";
-import { useMemo } from "react";
+import { OrbitControls, Center, useTexture, Sky, Environment } from "@react-three/drei";
 import { Perf } from "r3f-perf";
 import { AmbientLight } from "three";
 
+import Wing from "./scene9/Wing.jsx";
+import Wing2 from "./scene9/Wing2.jsx";
+import Eye from "./scene9/Eye.jsx";
+import Ring from "./scene9/Ring.jsx";
 
-const InstancedEyes = React.memo(function InstancedEyes({ eyeData }) {
-	const { paths: paths_eye } = useLoader(SVGLoader, "/scene8/eye.svg");
-	const shapes_eye = paths_eye.flatMap((path) => path.toShapes(true));
-
-	const extrudeSettings = {
-		steps: 2,
-		depth: 10,
-		bevelEnabled: true,
-		bevelThickness: 1,
-		bevelSize: 1,
-		bevelOffset: 0,
-		bevelSegments: 1,
-	};
-	const [basecolor, ambientOcclusion, metallic, normal, roughness] = useTexture([
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_AmbientOcclusion.jpg",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Metallic.jpg",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Normal.png",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Roughness.jpg",
-	]);
-
-	const materialProps = {
-		map: basecolor,
-		aoMap: ambientOcclusion,
-		metalness: 1,
-		roughness: 0.5,
-		normalMap: normal,
-		roughnessMap: roughness,
-	};
-	const [basecolorM, ambientOcclusionM, metallicM, normalM, roughnessM] = useTexture([
-		"/scene8/marble/Marble_White_007_basecolor.jpg",
-		"/scene8/marble/Marble_White_007_ambientOcclusion.jpg",
-		"/scene8/marble/Marble_White_007_height.png",
-		"/scene8/marble/Marble_White_007_normal.jpg",
-		"/scene8/marble/Marble_White_007_roughness.jpg",
-	]);
-
-	const materialPropsMarble = {
-		map: basecolorM,
-		aoMap: ambientOcclusionM,
-		metalness: 1,
-		roughness: 2,
-		normalMap: normalM,
-		roughnessMap: roughnessM,
-	};
-	const [basecolorB, ambientOcclusionB, metallicB, normalB, roughnessB] = useTexture([
-		"/scene8/gem/Sapphire_001_COLOR.jpg",
-		"/scene8/gem/Sapphire_001_OCC.jpg",
-		"/scene8/gem/Sapphire_001_DISP.png",
-		"/scene8/gem/Sapphire_001_NORM.jpg",
-		"/scene8/gem/Sapphire_001_ROUGH.jpg",
-	]);
-
-	const materialPropsBlue = {
-		map: basecolorB,
-		aoMap: ambientOcclusionB,
-		metalness: 1,
-		roughness: 0.5,
-		normalMap: normalB,
-		roughnessMap: roughnessB,
-	};
-
-	const ref = useRef();
-	const ref2 = useRef();
-	const ref3 = useRef();
-
-	useFrame(() => {
-		ref.current.instanceMatrix.needsUpdate = true;
-		ref2.current.instanceMatrix.needsUpdate = true;
-		ref3.current.instanceMatrix.needsUpdate = true;
-	});
-
-	return (
-		<group>
-			<InstancedMesh ref={ref} args={[null, null, eyeData.length]}>
-				<extrudeGeometry args={[shapes_eye, extrudeSettings]} />
-				<meshStandardMaterial {...materialProps} />
-			</InstancedMesh>
-			<InstancedMesh ref={ref2} args={[null, null, eyeData.length]}>
-				<extrudeGeometry args={[shapes_eye, extrudeSettings]} />
-				<meshStandardMaterial {...materialPropsMarble} />
-			</InstancedMesh>
-			<InstancedMesh ref={ref3} args={[null, null, eyeData.length]}>
-				<sphereGeometry args={[10, 32, 32]} />
-				<meshStandardMaterial {...materialPropsBlue} />
-			</InstancedMesh>
-		</group>
-	);
-});
-
-const Ring = React.memo(function Ring({ innerRef, innerScale, groupPosition, groupRotation, groupScale }) {
-	const [basecolor, ambientOcclusion, metallic, normal, roughness] = useTexture([
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_AmbientOcclusion.jpg",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Metallic.jpg",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Normal.png",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Roughness.jpg",
-	]);
-
-	const materialProps = {
-		map: basecolor,
-		aoMap: ambientOcclusion,
-		metalness: 1,
-		roughness: 0,
-		normalMap: normal,
-		roughnessMap: roughness,
-	};
-
-	const geometry = useMemo(() => {
-		const ringShape = new THREE.Shape();
-
-		// Outer circle path
-		ringShape.absarc(0, 0, 2, 0, Math.PI * 2, false);
-
-		// Inner circular hole
-		const holePath = new THREE.Path();
-		holePath.absarc(0, 0, innerScale, 0, Math.PI * 2, true);
-		ringShape.holes.push(holePath);
-
-		const extrudeSettings = {
-			steps: 100,
-			depth: 0.5,
-			bevelEnabled: false,
-			bevelThickness: 0.1,
-			bevelSize: 0.15,
-			bevelOffset: 0,
-			bevelSegments: 2,
-		};
-
-		return new THREE.ExtrudeGeometry(ringShape, extrudeSettings);
-	}, [innerScale]);
-
-	const eyeData = useMemo(() => [
-		{ position: [-0.3, -1.5, 0.1], rotation: [Math.PI * -0.5, 0, 0], scale: 0.8 },
-		{ position: [0.35, -1.45, 0.1], rotation: [Math.PI * -0.5, Math.PI * -0.125, 0], scale: 0.8 },
-		{ position: [1.275, -0.8, -0.225], rotation: [Math.PI * 0.5, Math.PI * -0.725, 0], scale: 0.8 },
-		{ position: [1.475, -0.2, -0.225], rotation: [Math.PI * 0.5, Math.PI * -0.6, 0], scale: 0.8 },
-		{ position: [1.425, 0.4, -0.225], rotation: [Math.PI * 0.5, Math.PI * -0.475, 0], scale: 0.8 },
-		{ position: [1.125, 1, -0.225], rotation: [Math.PI * 0.5, Math.PI * -0.35, 0], scale: 0.8 },
-		{ position: [0.65, 1.35, -0.225], rotation: [Math.PI * 0.5, Math.PI * -0.2, 0], scale: 0.8 },
-		{ position: [-0, 1.5, -0.225], rotation: [Math.PI * 0.5, Math.PI * -0.06, 0], scale: 0.8 },
-		{ position: [-0.6, 1.375, -0.225], rotation: [Math.PI * 0.5, Math.PI * 0.06, 0], scale: 0.8 },
-		{ position: [-1.05, 1.05, -0.225], rotation: [Math.PI * 0.5, Math.PI * 0.2, 0], scale: 0.8 },
-		{ position: [-1.4, 0.5, -0.225], rotation: [Math.PI * 0.5, Math.PI * 0.3, 0], scale: 0.8 },
-		{ position: [-1.5, -0.1, -0.225], rotation: [Math.PI * 0.5, Math.PI * 0.45, 0], scale: 0.8 },
-		{ position: [-1.35, -0.7, -0.225], rotation: [Math.PI * 0.5, Math.PI * 0.575, 0], scale: 0.8 },
-		{ position: [-0.95, -1.15, -0.225], rotation: [Math.PI * 0.5, Math.PI * 0.725, 0], scale: 0.8 },
-		{ position: [-0.4, -1.475, -0.225], rotation: [Math.PI * 0.5, Math.PI * 0.85, 0], scale: 0.8 },
-	], []);
-
-	return (
-		<group ref={innerRef} position={groupPosition} rotation={groupRotation} scale={groupScale}>
-			<mesh geometry={geometry} position={[0, 0, -0.25]} scale={[0.75, 0.75, 0.75]}>
-				<meshStandardMaterial {...materialProps} />
-			</mesh>
-			<InstancedEyes eyeData={eyeData} />
-		</group>
-	);
-});
-
-const InstancedWings = React.memo(function InstancedWings({ wingData, version, wingType }) {
-	let svg_bottom, svg_middle, svg_top;
-	let textureRepeat = [0.01, 0.01];
-
-	if (version === "default") {
-		svg_bottom = "/scene8/wing_bottom.svg";
-		svg_middle = "/scene8/wing_middle.svg";
-		svg_top = "/scene8/wing_top.svg";
-	} else if (version === "v2") {
-		svg_bottom = "/scene8/wing_top_bottom.svg";
-		svg_middle = "/scene8/wing_top_middle.svg";
-		svg_top = "/scene8/wing_top_top.svg";
-		textureRepeat = [2.5, 2.5];
-	} else if (version === "v3") {
-		svg_bottom = "/scene8/wing_bottom_bottom.svg";
-		svg_middle = "/scene8/wing_bottom_middle.svg";
-		svg_top = "/scene8/wing_bottom_top.svg";
-	}
-
-	const { paths: paths_bottom } = useLoader(SVGLoader, svg_bottom) || {};
-	const { paths: paths_middle } = useLoader(SVGLoader, svg_middle) || {};
-	const { paths: paths_top } = useLoader(SVGLoader, svg_top) || {};
-
-	if (!paths_bottom || !paths_middle || !paths_top) {
-		return null;
-	}
-
-	const shapes_bottom = paths_bottom.flatMap((path) => path.toShapes(true));
-	const shapes_middle = paths_middle.flatMap((path) => path.toShapes(true));
-	const shapes_top = paths_top.flatMap((path) => path.toShapes(true));
-
-	const extrudeSettings = {
-		steps: 2,
-		depth: 16,
-		bevelEnabled: true,
-		bevelThickness: 1,
-		bevelSize: 1,
-		bevelOffset: 0,
-		bevelSegments: 1,
-	};
-
-	const [basecolor, ambientOcclusion, metallic, normal, roughness] = useTexture([
-		"/scene8/feathers/Stylized_Feathers_002_ambientOcclusion.png",
-		"/scene8/feathers/Stylized_Feathers_002_ambientOcclusion.png",
-		"/scene8/feathers/Stylized_Feathers_002_height.png",
-		"/scene8/feathers/Stylized_Feathers_002_normal.png",
-		"/scene8/feathers/Stylized_Feathers_002_roughness.png",
-	]);
-
-	const materialProps = useMemo(() => {
-		[basecolor, ambientOcclusion, metallic, normal, roughness].forEach((texture) => {
-			if (texture) {
-				texture.repeat.set(textureRepeat[0], textureRepeat[1]);
-				texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-			}
-		});
-
-		return {
-			map: basecolor,
-			aoMap: ambientOcclusion,
-			metalness: 1,
-			roughness: wingType === "wing" ? 0.5 : 20,
-			normalMap: normal,
-			roughnessMap: roughness,
-			normalScale: wingType === "wing" ? [1, 1] : [2, 2],
-		};
-	}, [basecolor, ambientOcclusion, metallic, normal, roughness, textureRepeat, wingType]);
-
-	const ref1 = useRef();
-	const ref2 = useRef();
-	const ref3 = useRef();
-
-	const dummy = useMemo(() => new THREE.Object3D(), []);
-
-	useEffect(() => {
-		wingData.forEach((data, i) => {
-			const { position, rotation, scale } = data;
-			dummy.position.set(position[0], position[1], position[2]);
-			dummy.rotation.set(rotation[0], rotation[1], rotation[2]);
-			dummy.scale.set(scale, scale, scale);
-			dummy.updateMatrix();
-			ref1.current.setMatrixAt(i, dummy.matrix);
-			ref2.current.setMatrixAt(i, dummy.matrix);
-			ref3.current.setMatrixAt(i, dummy.matrix);
-		});
-		ref1.current.instanceMatrix.needsUpdate = true;
-		ref2.current.instanceMatrix.needsUpdate = true;
-		ref3.current.instanceMatrix.needsUpdate = true;
-	}, [wingData]);
-
-	const wingPositions = useMemo(() => {
-		if (wingType === "wing") {
-			if (version === "default") {
-				return {
-					top: { scale: 0.01, position: [0, 0, -0.05], rotation: [0, 0, 0] },
-					middle: { scale: 0.01, position: [-0.2, 0.7, 0], rotation: [0, 0, 0] },
-					bottom: { scale: 0.01, position: [-0.35, 1, 0.05], rotation: [0, 0, 0] },
-				};
-			} else if (version === "v2") {
-				return {
-					top: { scale: 0.025, position: [0, 0, -0.05], rotation: [0, 0, 0.7] },
-					middle: { scale: 0.025, position: [-0.25, 0.125, 0], rotation: [0, 0, 0.7] },
-					bottom: { scale: 0.025, position: [-2.1, 0.2, 0.05], rotation: [0, 0, 0.4] },
-				};
-			} else if (version === "v3") {
-				return {
-					top: { scale: 0.01, position: [0, 0, -0.05], rotation: [0, 0, 0.8] },
-					middle: { scale: 0.01, position: [-0.22, 0.15, 0], rotation: [0, 0, 0.8] },
-					bottom: { scale: 0.01, position: [-0.45, 0.2, 0.05], rotation: [0, 0, 0.6] },
-				};
-			}
-		} else {
-			// wingType === "wing2"
-			if (version === "default") {
-				return {
-					top: { scale: 0.01, position: [0, 0, 0.05], rotation: [0, 0, 0] },
-					middle: { scale: 0.01, position: [-0.2, 0.7, 0], rotation: [0, 0, 0] },
-					bottom: { scale: 0.01, position: [-0.35, 1, -0.05], rotation: [0, 0, 0] },
-				};
-			} else if (version === "v2") {
-				return {
-					top: { scale: 0.025, position: [0, 0, 0.05], rotation: [0, 0, 0.7] },
-					middle: { scale: 0.025, position: [-0.25, 0.125, 0], rotation: [0, 0, 0.7] },
-					bottom: { scale: 0.025, position: [-2.1, 0.2, -0.05], rotation: [0, 0, 0.4] },
-				};
-			} else if (version === "v3") {
-				return {
-					top: { scale: 0.01, position: [0, 0, 0.05], rotation: [0, 0, 0.8] },
-					middle: { scale: 0.01, position: [-0.22, 0.15, 0], rotation: [0, 0, 0.8] },
-					bottom: { scale: 0.01, position: [-0.45, 0.2, -0.05], rotation: [0, 0, 0.6] },
-				};
-			}
-		}
-	}, [version, wingType]);
-
-	return (
-		<group>
-			<group {...wingPositions.top}>
-				<InstancedMesh ref={ref1} args={[null, null, wingData.length]}>
-					<extrudeGeometry args={[shapes_top, extrudeSettings]} />
-					<meshStandardMaterial {...materialProps} />
-				</InstancedMesh>
-			</group>
-			<group {...wingPositions.middle}>
-				<InstancedMesh ref={ref2} args={[null, null, wingData.length]}>
-					<extrudeGeometry args={[shapes_middle, extrudeSettings]} />
-					<meshStandardMaterial {...materialProps} />
-				</InstancedMesh>
-			</group>
-			<group {...wingPositions.bottom}>
-				<InstancedMesh ref={ref3} args={[null, null, wingData.length]}>
-					<extrudeGeometry args={[shapes_bottom, extrudeSettings]} />
-					<meshStandardMaterial {...materialProps} />
-				</InstancedMesh>
-			</group>
-		</group>
-	);
-});
-
-const Eye = React.memo(function Eye({ position, rotation, scale, innerRef, pivot = [0, 0, 0], irisRef }) {
-
+function InstancedAngel({ position = [0, 0, 0] }) {
 	const outer_circle = useRef();
 	const middle_circle = useRef();
 	const inner_circle = useRef();
@@ -357,6 +40,52 @@ const Eye = React.memo(function Eye({ position, rotation, scale, innerRef, pivot
 
 	const eye = useRef();
 	const iris = useRef();
+
+	const wingInstances = useMemo(() => {
+		const instances = [];
+
+		// Group 1 (rotation: [0, 0, 0])
+		instances.push({ position: [-4, 0, 0], rotation: [0, 0, 0], scale: 1, version: "default" });
+		instances.push({ position: [-1.5, 2.25, 0.06], rotation: [0, 0, Math.PI * -0.125], scale: 2, version: "v3" });
+		instances.push({ position: [-1.25, -2.5, 0.3], rotation: [0, 0, Math.PI * 0.2], scale: 0.9, version: "v2" });
+
+		// Group 2 (rotation: [0, 0.85, 0])
+		const group2Rotation = new THREE.Euler(0, 0.85, 0);
+		instances.push({ position: [-4, 0, 0], rotation: [0, 0, 0], scale: 1, version: "default", groupRotation: group2Rotation });
+		instances.push({ position: [-1.5, 2.25, 0.06], rotation: [0, 0, Math.PI * -0.125], scale: 2, version: "v3", groupRotation: group2Rotation });
+		instances.push({ position: [-1.25, -2.5, 0.3], rotation: [0, 0, Math.PI * 0.2], scale: 0.9, version: "v2", groupRotation: group2Rotation });
+
+		// Group 3 (rotation: [0, -0.85, 0])
+		const group3Rotation = new THREE.Euler(0, -0.85, 0);
+		instances.push({ position: [-4, 0, 0], rotation: [0, 0, 0], scale: 1, version: "default", groupRotation: group3Rotation });
+		instances.push({ position: [-1.5, 2.25, 0.06], rotation: [0, 0, Math.PI * -0.125], scale: 2, version: "v3", groupRotation: group3Rotation });
+		instances.push({ position: [-1.25, -2.5, 0.3], rotation: [0, 0, Math.PI * 0.2], scale: 0.9, version: "v2", groupRotation: group3Rotation });
+
+		return instances;
+	}, []);
+
+	const wing2Instances = useMemo(() => {
+		const instances = [];
+
+		// Group 1 (rotation: [0, 0, 0])
+		instances.push({ position: [4, 0, 0.16], rotation: [0, Math.PI, 0], scale: 1, version: "default" });
+		instances.push({ position: [1.5, 2.25, 0.36], rotation: [0, Math.PI, Math.PI * -0.125], scale: 2, version: "v3" });
+		instances.push({ position: [1.25, -2.5, 0.36], rotation: [0, Math.PI, Math.PI * 0.2], scale: 0.9, version: "v2" });
+
+		// Group 2 (rotation: [0, 0.85, 0])
+		const group2Rotation = new THREE.Euler(0, 0.85, 0);
+		instances.push({ position: [4, 0, 0.16], rotation: [0, Math.PI, 0], scale: 1, version: "default", groupRotation: group2Rotation });
+		instances.push({ position: [1.5, 2.25, 0.36], rotation: [0, Math.PI, Math.PI * -0.125], scale: 2, version: "v3", groupRotation: group2Rotation });
+		instances.push({ position: [1.25, -2.5, 0.36], rotation: [0, Math.PI, Math.PI * 0.2], scale: 0.9, version: "v2", groupRotation: group2Rotation });
+
+		// Group 3 (rotation: [0, -0.85, 0])
+		const group3Rotation = new THREE.Euler(0, -0.85, 0);
+		instances.push({ position: [4, 0, 0.16], rotation: [0, Math.PI, 0], scale: 1, version: "default", groupRotation: group3Rotation });
+		instances.push({ position: [1.5, 2.25, 0.36], rotation: [0, Math.PI, Math.PI * -0.125], scale: 2, version: "v3", groupRotation: group3Rotation });
+		instances.push({ position: [1.25, -2.5, 0.36], rotation: [0, Math.PI, Math.PI * 0.2], scale: 0.9, version: "v2", groupRotation: group3Rotation });
+
+		return instances;
+	}, []);
 
 	const [leftWing1Direction, setLeftWing1Direction] = useState(1);
 	const [leftWing2Direction, setLeftWing2Direction] = useState(1);
@@ -552,31 +281,31 @@ const Eye = React.memo(function Eye({ position, rotation, scale, innerRef, pivot
 					<Wing innerRef={leftWing2Ref} position={[-1.5, 2.25, 0.06]} scale={2} rotation={[0, 0, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
 					<Wing innerRef={leftWing3Ref} position={[-1.25, -2.5, 0.3]} scale={0.9} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
 				</group>
-				<group position={[0, 0, 0]} rotation={[0, 0.85, 0]}>
+				{/* <group position={[0, 0, 0]} rotation={[0, 0.85, 0]}>
 					<Wing innerRef={leftWing4Ref} position={[-4, 0, 0]} pivot={[0, 0, 0]} version="default" />
 					<Wing innerRef={leftWing5Ref} position={[-1.5, 2.25, 0.06]} scale={2} rotation={[0, 0, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
 					<Wing innerRef={leftWing6Ref} position={[-1.25, -2.5, 0.3]} scale={0.9} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
-				</group>
-				<group position={[0, 0, 0]} rotation={[0, -0.85, 0]}>
+				</group> */}
+				{/* <group position={[0, 0, 0]} rotation={[0, -0.85, 0]}>
 					<Wing innerRef={leftWing7Ref} position={[-4, 0, 0]} pivot={[0, 0, 0]} version="default" />
 					<Wing innerRef={leftWing8Ref} position={[-1.5, 2.25, 0.06]} scale={2} rotation={[0, 0, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
 					<Wing innerRef={leftWing9Ref} position={[-1.25, -2.5, 0.3]} scale={0.9} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
-				</group>
+				</group> */}
 				<group position={[0, 0, 0]} rotation={[0, 0, 0]}>
 					<Wing2 innerRef={rightWing1Ref} position={[4, 0, 0.16]} scale={1} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} version="default" />
 					<Wing2 innerRef={rightWing2Ref} position={[1.5, 2.25, 0.36]} scale={2} rotation={[0, Math.PI, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
 					<Wing2 innerRef={rightWing3Ref} position={[1.25, -2.5, 0.36]} scale={0.9} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
 				</group>
-				<group position={[0, 0, 0]} rotation={[0, 0.85, 0]}>
+				{/* <group position={[0, 0, 0]} rotation={[0, 0.85, 0]}>
 					<Wing2 innerRef={rightWing4Ref} position={[4, 0, 0.16]} scale={1} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} version="default" />
 					<Wing2 innerRef={rightWing5Ref} position={[1.5, 2.25, 0.36]} scale={2} rotation={[0, Math.PI, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
 					<Wing2 innerRef={rightWing6Ref} position={[1.25, -2.5, 0.36]} scale={0.9} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
-				</group>
-				<group position={[0, 0, 0]} rotation={[0, -0.85, 0]}>
+				</group> */}
+				{/* <group position={[0, 0, 0]} rotation={[0, -0.85, 0]}>
 					<Wing2 innerRef={rightWing7Ref} position={[4, 0, 0.16]} scale={1} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} version="default" />
 					<Wing2 innerRef={rightWing8Ref} position={[1.5, 2.25, 0.36]} scale={2} rotation={[0, Math.PI, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
 					<Wing2 innerRef={rightWing9Ref} position={[1.25, -2.5, 0.36]} scale={0.9} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
-				</group>
+				</group> */}
 				<Ring innerRef={inner_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1.5]} groupScale={0.8} />
 				<Ring innerRef={second_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1.5]} groupScale={0.6} />
 				<Ring innerRef={third_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1.5]} groupScale={0.7} />

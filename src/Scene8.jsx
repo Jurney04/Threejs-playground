@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader";
 import { useLoader, useFrame } from "@react-three/fiber";
-import { OrbitControls, Center, useTexture, Sky, Environment,InstancedMesh } from "@react-three/drei";
+import { OrbitControls, Center, useTexture, Sky, Environment } from "@react-three/drei";
 import * as THREE from "three";
 import { useMemo } from "react";
 import { Perf } from "r3f-perf";
