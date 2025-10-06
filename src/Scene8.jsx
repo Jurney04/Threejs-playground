@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader";
 import { useLoader, useFrame } from "@react-three/fiber";
-import { OrbitControls, Center, useTexture, Sky, Environment } from "@react-three/drei";
+import { OrbitControls, Center, useTexture, Sky, Environment,InstancedMesh } from "@react-three/drei";
 import * as THREE from "three";
 import { useMemo } from "react";
 import { Perf } from "r3f-perf";
@@ -12,18 +12,18 @@ const Wing = React.memo(function Wing({ position, rotation, scale, innerRef, piv
 	let textureRepeat = [0.01, 0.01];
 
 	if (version === "default") {
-		svg_bottom = "/wing_bottom.svg";
-		svg_middle = "/wing_middle.svg";
-		svg_top = "/wing_top.svg";
+		svg_bottom = "/scene8/wing_bottom.svg";
+		svg_middle = "/scene8/wing_middle.svg";
+		svg_top = "/scene8/wing_top.svg";
 	} else if (version === "v2") {
-		svg_bottom = "/wing_top_bottom.svg";
-		svg_middle = "/wing_top_middle.svg";
-		svg_top = "/wing_top_top.svg";
+		svg_bottom = "/scene8/wing_top_bottom.svg";
+		svg_middle = "/scene8/wing_top_middle.svg";
+		svg_top = "/scene8/wing_top_top.svg";
 		textureRepeat = [2.5, 2.5];
 	} else if (version === "v3") {
-		svg_bottom = "/wing_bottom_bottom.svg";
-		svg_middle = "/wing_bottom_middle.svg";
-		svg_top = "/wing_bottom_top.svg";
+		svg_bottom = "/scene8/wing_bottom_bottom.svg";
+		svg_middle = "/scene8/wing_bottom_middle.svg";
+		svg_top = "/scene8/wing_bottom_top.svg";
 	}
 
 	const { paths: paths_bottom } = useLoader(SVGLoader, svg_bottom) || {};
@@ -49,11 +49,11 @@ const Wing = React.memo(function Wing({ position, rotation, scale, innerRef, piv
 	};
 
 	const [basecolor, ambientOcclusion, metallic, normal, roughness] = useTexture([
-		"/feathers/Stylized_Feathers_002_ambientOcclusion.png",
-		"/feathers/Stylized_Feathers_002_ambientOcclusion.png",
-		"/feathers/Stylized_Feathers_002_height.png",
-		"/feathers/Stylized_Feathers_002_normal.png",
-		"/feathers/Stylized_Feathers_002_roughness.png",
+		"/scene8/feathers/Stylized_Feathers_002_ambientOcclusion.png",
+		"/scene8/feathers/Stylized_Feathers_002_ambientOcclusion.png",
+		"/scene8/feathers/Stylized_Feathers_002_height.png",
+		"/scene8/feathers/Stylized_Feathers_002_normal.png",
+		"/scene8/feathers/Stylized_Feathers_002_roughness.png",
 	]);
 
 	const memoizedMaterialProps = useMemo(() => {
@@ -145,17 +145,17 @@ const Wing2 = React.memo(function Wing2({ position, rotation, scale, innerRef, p
 	let svg_bottom, svg_middle, svg_top;
 
 	if (version === "default") {
-		svg_bottom = "/wing_bottom.svg";
-		svg_middle = "/wing_middle.svg";
-		svg_top = "/wing_top.svg";
+		svg_bottom = "/scene8/wing_bottom.svg";
+		svg_middle = "/scene8/wing_middle.svg";
+		svg_top = "/scene8/wing_top.svg";
 	} else if (version === "v2") {
-		svg_bottom = "/wing_top_bottom.svg";
-		svg_middle = "/wing_top_middle.svg";
-		svg_top = "/wing_top_top.svg";
+		svg_bottom = "/scene8/wing_top_bottom.svg";
+		svg_middle = "/scene8/wing_top_middle.svg";
+		svg_top = "/scene8/wing_top_top.svg";
 	} else if (version === "v3") {
-		svg_bottom = "/wing_bottom_bottom.svg";
-		svg_middle = "/wing_bottom_middle.svg";
-		svg_top = "/wing_bottom_top.svg";
+		svg_bottom = "/scene8/wing_bottom_bottom.svg";
+		svg_middle = "/scene8/wing_bottom_middle.svg";
+		svg_top = "/scene8/wing_bottom_top.svg";
 	}
 
 	const { paths: paths_bottom } = useLoader(SVGLoader, svg_bottom) || {};
@@ -181,11 +181,11 @@ const Wing2 = React.memo(function Wing2({ position, rotation, scale, innerRef, p
 	};
 
 	const [basecolor, ambientOcclusion, metallic, normal, roughness] = useTexture([
-		"/feathers/Stylized_Feathers_002_ambientOcclusion.png",
-		"/feathers/Stylized_Feathers_002_ambientOcclusion.png",
-		"/feathers/Stylized_Feathers_002_height.png",
-		"/feathers/Stylized_Feathers_002_normal.png",
-		"/feathers/Stylized_Feathers_002_roughness.png",
+		"/scene8/feathers/Stylized_Feathers_002_ambientOcclusion.png",
+		"/scene8/feathers/Stylized_Feathers_002_ambientOcclusion.png",
+		"/scene8/feathers/Stylized_Feathers_002_height.png",
+		"/scene8/feathers/Stylized_Feathers_002_normal.png",
+		"/scene8/feathers/Stylized_Feathers_002_roughness.png",
 	]);
 	[basecolor, ambientOcclusion, metallic, normal, roughness].forEach((texture) => {
 		texture.repeat.set(0.01, 0.01);
@@ -261,7 +261,7 @@ const Wing2 = React.memo(function Wing2({ position, rotation, scale, innerRef, p
 });
 
 const Eye = React.memo(function Eye({ position, rotation, scale, innerRef, pivot = [0, 0, 0], irisRef }) {
-	const { paths: paths_eye } = useLoader(SVGLoader, "/eye.svg");
+	const { paths: paths_eye } = useLoader(SVGLoader, "/scene8/eye.svg");
 	const shapes_eye = paths_eye.flatMap((path) => path.toShapes(true));
 
 	const extrudeSettings = {
@@ -274,11 +274,11 @@ const Eye = React.memo(function Eye({ position, rotation, scale, innerRef, pivot
 		bevelSegments: 1,
 	};
 	const [basecolor, ambientOcclusion, metallic, normal, roughness] = useTexture([
-		"/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg",
-		"/gold_texture/Poliigon_MetalGoldPaint_7253_AmbientOcclusion.jpg",
-		"/gold_texture/Poliigon_MetalGoldPaint_7253_Metallic.jpg",
-		"/gold_texture/Poliigon_MetalGoldPaint_7253_Normal.png",
-		"/gold_texture/Poliigon_MetalGoldPaint_7253_Roughness.jpg",
+		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg",
+		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_AmbientOcclusion.jpg",
+		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Metallic.jpg",
+		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Normal.png",
+		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Roughness.jpg",
 	]);
 
 	const materialProps = {
@@ -290,11 +290,11 @@ const Eye = React.memo(function Eye({ position, rotation, scale, innerRef, pivot
 		roughnessMap: roughness,
 	};
 	const [basecolorM, ambientOcclusionM, metallicM, normalM, roughnessM] = useTexture([
-		"/marble/Marble_White_007_basecolor.jpg",
-		"/marble/Marble_White_007_ambientOcclusion.jpg",
-		"/marble/Marble_White_007_height.png",
-		"/marble/Marble_White_007_normal.jpg",
-		"/marble/Marble_White_007_roughness.jpg",
+		"/scene8/marble/Marble_White_007_basecolor.jpg",
+		"/scene8/marble/Marble_White_007_ambientOcclusion.jpg",
+		"/scene8/marble/Marble_White_007_height.png",
+		"/scene8/marble/Marble_White_007_normal.jpg",
+		"/scene8/marble/Marble_White_007_roughness.jpg",
 	]);
 
 	const materialPropsMarble = {
@@ -305,7 +305,13 @@ const Eye = React.memo(function Eye({ position, rotation, scale, innerRef, pivot
 		normalMap: normalM,
 		roughnessMap: roughnessM,
 	};
-	const [basecolorB, ambientOcclusionB, metallicB, normalB, roughnessB] = useTexture(["/gem/Sapphire_001_COLOR.jpg", "/gem/Sapphire_001_OCC.jpg", "/gem/Sapphire_001_DISP.png", "/gem/Sapphire_001_NORM.jpg", "/gem/Sapphire_001_ROUGH.jpg"]);
+	const [basecolorB, ambientOcclusionB, metallicB, normalB, roughnessB] = useTexture([
+		"/scene8/gem/Sapphire_001_COLOR.jpg",
+		"/scene8/gem/Sapphire_001_OCC.jpg",
+		"/scene8/gem/Sapphire_001_DISP.png",
+		"/scene8/gem/Sapphire_001_NORM.jpg",
+		"/scene8/gem/Sapphire_001_ROUGH.jpg",
+	]);
 
 	const materialPropsBlue = {
 		map: basecolorB,
@@ -337,11 +343,11 @@ const Eye = React.memo(function Eye({ position, rotation, scale, innerRef, pivot
 });
 const Ring = React.memo(function Ring({ innerRef, innerScale, groupPosition, groupRotation, groupScale }) {
 	const [basecolor, ambientOcclusion, metallic, normal, roughness] = useTexture([
-		"/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg",
-		"/gold_texture/Poliigon_MetalGoldPaint_7253_AmbientOcclusion.jpg",
-		"/gold_texture/Poliigon_MetalGoldPaint_7253_Metallic.jpg",
-		"/gold_texture/Poliigon_MetalGoldPaint_7253_Normal.png",
-		"/gold_texture/Poliigon_MetalGoldPaint_7253_Roughness.jpg",
+		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg",
+		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_AmbientOcclusion.jpg",
+		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Metallic.jpg",
+		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Normal.png",
+		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Roughness.jpg",
 	]);
 
 	const materialProps = {
@@ -401,7 +407,7 @@ const Ring = React.memo(function Ring({ innerRef, innerScale, groupPosition, gro
 	);
 });
 
-function Scene8({ position = [0, 0, 0] }) {
+function Angel({ position = [0, 0, 0] }) {
 	const outer_circle = useRef();
 	const middle_circle = useRef();
 	const inner_circle = useRef();
@@ -613,8 +619,8 @@ function Scene8({ position = [0, 0, 0] }) {
 		<>
 			<Perf position="top-left" />
 			<OrbitControls />
-			<Environment files="/HDR_sunset.hdr" background />
-			{/* <Environment files="/HDR.hdr" background /> */}
+			<Environment files="/scene8/HDR_sunset.hdr" background />
+			{/* <Environment files="/scene8/HDR.hdr" background /> */}
 			{/* <Sky distance={100} up={0} /> */}
 			{/* <ambientLight intensity={1} /> */}
 			{/* <spotLight position={[0, 10, 0]} angle={0.3} penumbra={1} intensity={10} /> */}
@@ -625,35 +631,35 @@ function Scene8({ position = [0, 0, 0] }) {
 					<Wing innerRef={leftWing2Ref} position={[-1.5, 2.25, 0.06]} scale={2} rotation={[0, 0, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
 					<Wing innerRef={leftWing3Ref} position={[-1.25, -2.5, 0.3]} scale={0.9} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
 				</group>
-				{/* <group position={[0, 0, 0]} rotation={[0, 0.85, 0]}>
+				<group position={[0, 0, 0]} rotation={[0, 0.85, 0]}>
 					<Wing innerRef={leftWing4Ref} position={[-4, 0, 0]} pivot={[0, 0, 0]} version="default" />
 					<Wing innerRef={leftWing5Ref} position={[-1.5, 2.25, 0.06]} scale={2} rotation={[0, 0, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
 					<Wing innerRef={leftWing6Ref} position={[-1.25, -2.5, 0.3]} scale={0.9} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
-				</group> */}
-				{/* <group position={[0, 0, 0]} rotation={[0, -0.85, 0]}>
+				</group>
+				<group position={[0, 0, 0]} rotation={[0, -0.85, 0]}>
 					<Wing innerRef={leftWing7Ref} position={[-4, 0, 0]} pivot={[0, 0, 0]} version="default" />
 					<Wing innerRef={leftWing8Ref} position={[-1.5, 2.25, 0.06]} scale={2} rotation={[0, 0, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
 					<Wing innerRef={leftWing9Ref} position={[-1.25, -2.5, 0.3]} scale={0.9} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
-				</group> */}
+				</group>
 				<group position={[0, 0, 0]} rotation={[0, 0, 0]}>
 					<Wing2 innerRef={rightWing1Ref} position={[4, 0, 0.16]} scale={1} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} version="default" />
 					<Wing2 innerRef={rightWing2Ref} position={[1.5, 2.25, 0.36]} scale={2} rotation={[0, Math.PI, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
 					<Wing2 innerRef={rightWing3Ref} position={[1.25, -2.5, 0.36]} scale={0.9} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
 				</group>
-				{/* <group position={[0, 0, 0]} rotation={[0, 0.85, 0]}>
+				<group position={[0, 0, 0]} rotation={[0, 0.85, 0]}>
 					<Wing2 innerRef={rightWing4Ref} position={[4, 0, 0.16]} scale={1} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} version="default" />
 					<Wing2 innerRef={rightWing5Ref} position={[1.5, 2.25, 0.36]} scale={2} rotation={[0, Math.PI, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
 					<Wing2 innerRef={rightWing6Ref} position={[1.25, -2.5, 0.36]} scale={0.9} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
-				</group> */}
-				{/* <group position={[0, 0, 0]} rotation={[0, -0.85, 0]}>
+				</group>
+				<group position={[0, 0, 0]} rotation={[0, -0.85, 0]}>
 					<Wing2 innerRef={rightWing7Ref} position={[4, 0, 0.16]} scale={1} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} version="default" />
 					<Wing2 innerRef={rightWing8Ref} position={[1.5, 2.25, 0.36]} scale={2} rotation={[0, Math.PI, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
 					<Wing2 innerRef={rightWing9Ref} position={[1.25, -2.5, 0.36]} scale={0.9} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
-				</group> */}
+				</group>
 				<Ring innerRef={inner_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1.5]} groupScale={0.8} />
-				{/* <Ring innerRef={second_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1.5]} groupScale={0.6} /> */}
+				<Ring innerRef={second_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1.5]} groupScale={0.6} />
 				<Ring innerRef={third_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1.5]} groupScale={0.7} />
-				{/* <Ring innerRef={middle_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1]} groupScale={1} /> */}
+				<Ring innerRef={middle_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1]} groupScale={1} />
 				<Ring innerRef={outer_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, 0.25]} groupScale={0.9} />
 				<Eye innerRef={eye} pivot={[-0.65, 0.85, 0]} position={[0, 0, 0]} rotation={[0, 0, 0]} scale={2} irisRef={iris} />
 			</Center>
@@ -661,4 +667,4 @@ function Scene8({ position = [0, 0, 0] }) {
 	);
 }
 
-export default Scene8;
+export default Angel;

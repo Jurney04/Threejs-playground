@@ -3,7 +3,8 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import "./index.css";
 import Scene7 from "./Scene7.jsx";
-import Scene8 from "./Scene8.jsx";
+import Angel from "./Scene8.jsx";
+import InstancedAngel from "./Scene9.jsx";
 
 createRoot(document.getElementById("root")).render(
 	<>
@@ -11,7 +12,8 @@ createRoot(document.getElementById("root")).render(
 			{/* <Scene6 /> */}
 			{/* <Scene7 /> */}
 			{/* <Scene8 position={[-10, 0, 0]} /> */}
-			<Scene8 position={[0, 0, 0]} />
+			{/* <Angel position={[0, 0, 0]} /> */}
+			<InstancedAngel position={[0, 0, 0]} />
 			{/* <Scene8 position={[10, 0, 0]} /> */}
 			<OrbitControls />
 		</Canvas>
