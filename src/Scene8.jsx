@@ -335,7 +335,6 @@ const Eye = React.memo(function Eye({ position, rotation, scale, innerRef, pivot
 		</group>
 	);
 });
-
 const Ring = React.memo(function Ring({ innerRef, innerScale, groupPosition, groupRotation, groupScale }) {
 	const [basecolor, ambientOcclusion, metallic, normal, roughness] = useTexture([
 		"/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg",
@@ -626,35 +625,35 @@ function Scene8({ position = [0, 0, 0] }) {
 					<Wing innerRef={leftWing2Ref} position={[-1.5, 2.25, 0.06]} scale={2} rotation={[0, 0, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
 					<Wing innerRef={leftWing3Ref} position={[-1.25, -2.5, 0.3]} scale={0.9} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
 				</group>
-				<group position={[0, 0, 0]} rotation={[0, 0.85, 0]}>
+				{/* <group position={[0, 0, 0]} rotation={[0, 0.85, 0]}>
 					<Wing innerRef={leftWing4Ref} position={[-4, 0, 0]} pivot={[0, 0, 0]} version="default" />
 					<Wing innerRef={leftWing5Ref} position={[-1.5, 2.25, 0.06]} scale={2} rotation={[0, 0, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
 					<Wing innerRef={leftWing6Ref} position={[-1.25, -2.5, 0.3]} scale={0.9} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
-				</group>
-				<group position={[0, 0, 0]} rotation={[0, -0.85, 0]}>
+				</group> */}
+				{/* <group position={[0, 0, 0]} rotation={[0, -0.85, 0]}>
 					<Wing innerRef={leftWing7Ref} position={[-4, 0, 0]} pivot={[0, 0, 0]} version="default" />
 					<Wing innerRef={leftWing8Ref} position={[-1.5, 2.25, 0.06]} scale={2} rotation={[0, 0, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
 					<Wing innerRef={leftWing9Ref} position={[-1.25, -2.5, 0.3]} scale={0.9} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
-				</group>
+				</group> */}
 				<group position={[0, 0, 0]} rotation={[0, 0, 0]}>
 					<Wing2 innerRef={rightWing1Ref} position={[4, 0, 0.16]} scale={1} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} version="default" />
 					<Wing2 innerRef={rightWing2Ref} position={[1.5, 2.25, 0.36]} scale={2} rotation={[0, Math.PI, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
 					<Wing2 innerRef={rightWing3Ref} position={[1.25, -2.5, 0.36]} scale={0.9} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
 				</group>
-				<group position={[0, 0, 0]} rotation={[0, 0.85, 0]}>
+				{/* <group position={[0, 0, 0]} rotation={[0, 0.85, 0]}>
 					<Wing2 innerRef={rightWing4Ref} position={[4, 0, 0.16]} scale={1} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} version="default" />
 					<Wing2 innerRef={rightWing5Ref} position={[1.5, 2.25, 0.36]} scale={2} rotation={[0, Math.PI, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
 					<Wing2 innerRef={rightWing6Ref} position={[1.25, -2.5, 0.36]} scale={0.9} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
-				</group>
-				<group position={[0, 0, 0]} rotation={[0, -0.85, 0]}>
+				</group> */}
+				{/* <group position={[0, 0, 0]} rotation={[0, -0.85, 0]}>
 					<Wing2 innerRef={rightWing7Ref} position={[4, 0, 0.16]} scale={1} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} version="default" />
 					<Wing2 innerRef={rightWing8Ref} position={[1.5, 2.25, 0.36]} scale={2} rotation={[0, Math.PI, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" />
 					<Wing2 innerRef={rightWing9Ref} position={[1.25, -2.5, 0.36]} scale={0.9} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" />
-				</group>
+				</group> */}
 				<Ring innerRef={inner_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1.5]} groupScale={0.8} />
-				<Ring innerRef={second_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1.5]} groupScale={0.6} />
+				{/* <Ring innerRef={second_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1.5]} groupScale={0.6} /> */}
 				<Ring innerRef={third_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1.5]} groupScale={0.7} />
-				<Ring innerRef={middle_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1]} groupScale={1} />
+				{/* <Ring innerRef={middle_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1]} groupScale={1} /> */}
 				<Ring innerRef={outer_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, 0.25]} groupScale={0.9} />
 				<Eye innerRef={eye} pivot={[-0.65, 0.85, 0]} position={[0, 0, 0]} rotation={[0, 0, 0]} scale={2} irisRef={iris} />
 			</Center>
