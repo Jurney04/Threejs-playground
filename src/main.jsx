@@ -5,6 +5,7 @@ import "./index.css";
 import Scene7 from "./Scene7.jsx";
 import Angel from "./Scene8.jsx";
 import InstancedAngel from "./Scene9.jsx";
+import { SceneLightsAndFog } from "./SceneLightsAndFog";
 
 createRoot(document.getElementById("root")).render(
 	<>
@@ -13,9 +14,9 @@ createRoot(document.getElementById("root")).render(
 			{/* <Scene7 /> */}
 			{/* <Scene8 position={[-10, 0, 0]} /> */}
 			{/* <Angel position={[0, 0, 0]} /> */}
+			<SceneLightsAndFog />
 			<InstancedAngel position={[0, 0, 0]} />
 			{/* <Scene8 position={[10, 0, 0]} /> */}
-			<OrbitControls />
 		</Canvas>
 		{/* <Scene5 /> */}
 	</>

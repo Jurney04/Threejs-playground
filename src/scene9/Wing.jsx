@@ -2,26 +2,49 @@ import * as THREE from "three";
 import React, { useMemo } from "react";
 import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader";
 import { useLoader } from "@react-three/fiber";
-import {  useTexture, Sky, Environment } from "@react-three/drei";
+import { useTexture } from "@react-three/drei";
 
-const Wing = React.memo(function Wing({ position, rotation, scale, innerRef, pivot = [0, 0, 0], version = "default" }) {
-	let svg_bottom, svg_middle, svg_top;
-	let textureRepeat = [0.01, 0.01];
+const Wing = React.memo(function Wing({
+	position,
+	rotation,
+	scale,
+	innerRef,
+	pivot = [0, 0, 0],
+	version = "default",
+	side = "front", // "front" for left wings (negative Z for top), "back" for right wings (positive Z for top)
+}) {
+	// SVG and texture configuration as an object for each version
+	// textureRotation: Rotation in radians for the main texture (map). Customize these values as needed.
+	const svgConfigs = useMemo(
+		() => ({
+			default: {
+				bottom: "/scene8/wing_bottom.svg",
+				middle: "/scene8/wing_middle.svg",
+				top: "/scene8/wing_top.svg",
+				textureRotation: Math.PI , // No rotation
+			},
+			v2: {
+				bottom: "/scene8/wing_top_bottom.svg",
+				middle: "/scene8/wing_top_middle.svg",
+				top: "/scene8/wing_top_top.svg",
+				textureRotation: Math.PI, // 90 degrees (example: clockwise rotation for v2)
+			},
+			v3: {
+				bottom: "/scene8/wing_bottom_bottom.svg",
+				middle: "/scene8/wing_bottom_middle.svg",
+				top: "/scene8/wing_bottom_top.svg",
+				textureRotation: -Math.PI, // -45 degrees (example: counter-clockwise for v3)
+			},
+		}),
+		[]
+	);
 
-	if (version === "default") {
-		svg_bottom = "/scene8/wing_bottom.svg";
-		svg_middle = "/scene8/wing_middle.svg";
-		svg_top = "/scene8/wing_top.svg";
-	} else if (version === "v2") {
-		svg_bottom = "/scene8/wing_top_bottom.svg";
-		svg_middle = "/scene8/wing_top_middle.svg";
-		svg_top = "/scene8/wing_top_top.svg";
-		textureRepeat = [2.5, 2.5];
-	} else if (version === "v3") {
-		svg_bottom = "/scene8/wing_bottom_bottom.svg";
-		svg_middle = "/scene8/wing_bottom_middle.svg";
-		svg_top = "/scene8/wing_bottom_top.svg";
-	}
+	const config = svgConfigs[version] || svgConfigs.default;
+	const textureRotation = config.textureRotation;
+
+	const svg_bottom = config.bottom;
+	const svg_middle = config.middle;
+	const svg_top = config.top;
 
 	const { paths: paths_bottom } = useLoader(SVGLoader, svg_bottom) || {};
 	const { paths: paths_middle } = useLoader(SVGLoader, svg_middle) || {};
@@ -37,7 +60,7 @@ const Wing = React.memo(function Wing({ position, rotation, scale, innerRef, piv
 
 	const extrudeSettings = {
 		steps: 2,
-		depth: 16,
+		depth: 5,
 		bevelEnabled: true,
 		bevelThickness: 1,
 		bevelSize: 1,
@@ -45,96 +68,123 @@ const Wing = React.memo(function Wing({ position, rotation, scale, innerRef, piv
 		bevelSegments: 1,
 	};
 
-	const [basecolor, ambientOcclusion, metallic, normal, roughness] = useTexture([
+	// Mesh configurations as arrays of objects [top, middle, bottom] for each version
+	const meshConfigs = useMemo(
+		() => ({
+			default: [
+				// top
+				{ scale: 0.01, position: [0, 0, 0], rotation: [0, 0, 0] },
+				// middle
+				{ scale: 0.01, position: [-0.2, 0.7, 0], rotation: [0, 0, 0] },
+				// bottom
+				{ scale: 0.01, position: [-0.35, 1, 0], rotation: [0, 0, 0] },
+			],
+			v2: [
+				// top
+				{ scale: 0.025, position: [0, 0, 0], rotation: [0, 0, 0.7] },
+				// middle
+				{ scale: 0.025, position: [-0.25, 0.125, 0], rotation: [0, 0, 0.7] },
+				// bottom
+				{ scale: 0.025, position: [-2.1, 0.2, 0], rotation: [0, 0, 0.4] },
+			],
+			v3: [
+				// top
+				{ scale: 0.01, position: [0, 0, 0], rotation: [0, 0, 0.8] },
+				// middle
+				{ scale: 0.01, position: [-0.22, 0.15, 0], rotation: [0, 0, 0.8] },
+				// bottom
+				{ scale: 0.01, position: [-0.45, 0.2, 0], rotation: [0, 0, 0.6] },
+			],
+		}),
+		[]
+	);
+
+	const versionMeshes = meshConfigs[version] || meshConfigs.default;
+
+	// Apply side flipping: for "back", negate Z positions (mirrors right wing behavior)
+	const adjustedMeshes = versionMeshes.map((mesh) => ({
+		...mesh,
+		position: mesh.position.map((coord, i) => (i === 2 ? (side === "back" ? -coord : coord) : coord)), // Flip Z for back
+	}));
+
+	// Z offsets per part and side (applied after base position)
+	const zOffsets = useMemo(
+		() => [
+			// top z offset
+			side === "front" ? -0.05 : 0.05,
+			// middle z offset
+			0,
+			// bottom z offset
+			side === "front" ? 0.05 : -0.05,
+		],
+		[side]
+	);
+
+	// Final positions with Z offsets
+	const finalMeshes = adjustedMeshes.map((mesh, index) => ({
+		...mesh,
+		position: [mesh.position[0], mesh.position[1], mesh.position[2] + zOffsets[index]],
+	}));
+
+	const [basecolor, ambientOcclusion, normal, roughness] = useTexture([
+		"/scene8/feathers/Stylized_Feathers_002_ambientOcclusion.png", // Note: This is used as basecolor; consider swapping if needed
 		"/scene8/feathers/Stylized_Feathers_002_ambientOcclusion.png",
-		"/scene8/feathers/Stylized_Feathers_002_ambientOcclusion.png",
-		"/scene8/feathers/Stylized_Feathers_002_height.png",
 		"/scene8/feathers/Stylized_Feathers_002_normal.png",
 		"/scene8/feathers/Stylized_Feathers_002_roughness.png",
 	]);
 
-	const memoizedMaterialProps = useMemo(() => {
-		[basecolor, ambientOcclusion, metallic, normal, roughness].forEach((texture) => {
+	// Unified material configuration (same for all wings, based on original Wing2)
+	const materialProps = useMemo(() => {
+		const textureRepeat = [0.01, 0.01]; // Always uniform
+
+		// Clone and configure textures to avoid side effects on shared instances
+		const clonedBasecolor = basecolor ? basecolor.clone() : null;
+		const clonedAmbientOcclusion = ambientOcclusion ? ambientOcclusion.clone() : null;
+		const clonedNormal = normal ? normal.clone() : null;
+		const clonedRoughness = roughness ? roughness.clone() : null;
+
+		// Apply repeat and wrapping to clones
+		[clonedBasecolor, clonedAmbientOcclusion, clonedNormal, clonedRoughness].forEach((texture) => {
 			if (texture) {
 				texture.repeat.set(textureRepeat[0], textureRepeat[1]);
 				texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 			}
 		});
 
+		// Apply version-specific rotation to the main map texture (basecolor)
+		if (clonedBasecolor) {
+			clonedBasecolor.rotation = textureRotation;
+			// Optionally rotate other maps to match (uncomment if needed):
+			// if (clonedNormal) clonedNormal.rotation = textureRotation;
+			// if (clonedRoughness) clonedRoughness.rotation = textureRotation;
+		}
+
 		return {
-			map: basecolor,
-			aoMap: ambientOcclusion,
-			metalness: 1,
-			roughness: 0.5,
-			normalMap: normal,
-			roughnessMap: roughness,
+			map: clonedBasecolor,
+			aoMap: clonedAmbientOcclusion,
+			metalness: 0.5,
+			roughness: 2,
+			normalMap: clonedNormal,
+			roughnessMap: clonedRoughness,
+			normalScale: [5, 5],
 		};
-	}, [basecolor, ambientOcclusion, metallic, normal, roughness, textureRepeat]);
-	const materialProps = {
-		map: basecolor,
-		aoMap: ambientOcclusion,
-		metalness: 1,
-		roughness: 0.5,
-		normalMap: normal,
-		roughnessMap: roughness,
-	};
-	if (version === "default") {
-		return (
-			<group position={pivot} ref={innerRef}>
-				<group position={position} rotation={rotation} scale={scale}>
-					<mesh scale={0.01} position={[0, 0, -0.05]} rotation={[0, 0, 0]}>
-						<extrudeGeometry args={[shapes_top, extrudeSettings]} />
+	}, [basecolor, ambientOcclusion, normal, roughness, textureRotation]);
+
+	// Shapes array in order: top, middle, bottom
+	const shapesArray = [shapes_top, shapes_middle, shapes_bottom];
+
+	return (
+		<group position={pivot} ref={innerRef}>
+			<group position={position} rotation={rotation} scale={scale}>
+				{finalMeshes.map((meshConfig, index) => (
+					<mesh key={index} scale={meshConfig.scale} position={meshConfig.position} rotation={meshConfig.rotation}>
+						<extrudeGeometry args={[shapesArray[index], extrudeSettings]} />
 						<meshStandardMaterial {...materialProps} />
 					</mesh>
-					<mesh scale={0.01} position={[-0.2, 0.7, 0]} rotation={[0, 0, 0]}>
-						<extrudeGeometry args={[shapes_middle, extrudeSettings]} />
-						<meshStandardMaterial {...materialProps} />
-					</mesh>
-					<mesh scale={0.01} position={[-0.35, 1, 0.05]} rotation={[0, 0, 0]}>
-						<extrudeGeometry args={[shapes_bottom, extrudeSettings]} />
-						<meshStandardMaterial {...materialProps} />
-					</mesh>
-				</group>
+				))}
 			</group>
-		);
-	} else if (version === "v2") {
-		return (
-			<group position={pivot} ref={innerRef}>
-				<group position={position} rotation={rotation} scale={scale}>
-					<mesh scale={0.025} position={[0, 0, -0.05]} rotation={[0, 0, 0.7]}>
-						<extrudeGeometry args={[shapes_top, extrudeSettings]} />
-						<meshStandardMaterial {...materialProps} />
-					</mesh>
-					<mesh scale={0.025} position={[-0.25, 0.125, 0]} rotation={[0, 0, 0.7]}>
-						<extrudeGeometry args={[shapes_middle, extrudeSettings]} />
-						<meshStandardMaterial {...materialProps} />
-					</mesh>
-					<mesh scale={0.025} position={[-2.1, 0.2, 0.05]} rotation={[0, 0, 0.4]}>
-						<extrudeGeometry args={[shapes_bottom, extrudeSettings]} />
-						<meshStandardMaterial {...materialProps} />
-					</mesh>
-				</group>
-			</group>
-		);
-	} else if (version === "v3") {
-		return (
-			<group position={pivot} ref={innerRef}>
-				<group position={position} rotation={rotation} scale={scale}>
-					<mesh scale={0.01} position={[0, 0, -0.05]} rotation={[0, 0, 0.8]}>
-						<extrudeGeometry args={[shapes_top, extrudeSettings]} />
-						<meshStandardMaterial {...materialProps} />
-					</mesh>
-					<mesh scale={0.01} position={[-0.22, 0.15, 0]} rotation={[0, 0, 0.8]}>
-						<extrudeGeometry args={[shapes_middle, extrudeSettings]} />
-						<meshStandardMaterial {...materialProps} />
-					</mesh>
-					<mesh scale={0.01} position={[-0.45, 0.2, 0.05]} rotation={[0, 0, 0.6]}>
-						<extrudeGeometry args={[shapes_bottom, extrudeSettings]} />
-						<meshStandardMaterial {...materialProps} />
-					</mesh>
-				</group>
-			</group>
-		);
-	}
+		</group>
+	);
 });
+
 export default Wing;
