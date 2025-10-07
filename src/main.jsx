@@ -6,6 +6,7 @@ import Scene7 from "./Scene7.jsx";
 import Angel from "./Scene8.jsx";
 import InstancedAngel from "./Scene9.jsx";
 import { SceneLightsAndFog } from "./SceneLightsAndFog";
+import CloudComponent from "./cloud.jsx";
 
 createRoot(document.getElementById("root")).render(
 	<>
@@ -14,9 +15,11 @@ createRoot(document.getElementById("root")).render(
 			{/* <Scene7 /> */}
 			{/* <Scene8 position={[-10, 0, 0]} /> */}
 			{/* <Angel position={[0, 0, 0]} /> */}
-			<SceneLightsAndFog />
+			{/* <SceneLightsAndFog /> */}
+			<CloudComponent position={[0, 0, 0]} scale={10} />
 			<InstancedAngel position={[0, 0, 0]} />
 			{/* <Scene8 position={[10, 0, 0]} /> */}
+			
 		</Canvas>
 		{/* <Scene5 /> */}
 	</>
