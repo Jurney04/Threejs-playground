@@ -131,10 +131,10 @@ function InstancedAngel({ position = [0, 0, 0] }) {
 		<>
 			<OrbitControls />
 			<Perf position="top-left" />
-			<Environment files="/scene8/HDR_sunset.hdr" background />
-			<Environment files="/scene8/HDR.hdr" background />
+			{/* <Environment files="/scene8/HDR_sunset.hdr" background /> */}
+			{/* <Environment files="/scene8/HDR.hdr" background /> */}
 
-			{/* <Environment files="/scene8/HDR_night2.hdr" background /> */}
+			<Environment files="/scene8/HDR_night2.hdr" background />
 			<Center position={position} rotation={[Math.PI, 0, 0]}>
 				<group position={[0, 0, 0]} rotation={[0, 0, 0]}>
 					<Wing innerRef={leftWing1Ref} position={[-4, 0, 0]} pivot={[0, 0, 0]} version="default" side="front" style="wing" />

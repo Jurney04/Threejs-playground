@@ -21,7 +21,7 @@ const Wing = React.memo(function Wing({
 				bottom: "/scene8/wing_bottom.svg",
 				middle: "/scene8/wing_middle.svg",
 				top: "/scene8/wing_top.svg",
-				textureRotation: Math.PI , // No rotation
+				textureRotation: Math.PI, // No rotation
 			},
 			v2: {
 				bottom: "/scene8/wing_top_bottom.svg",
@@ -155,8 +155,9 @@ const Wing = React.memo(function Wing({
 		if (clonedBasecolor) {
 			clonedBasecolor.rotation = textureRotation;
 			// Optionally rotate other maps to match (uncomment if needed):
-			// if (clonedNormal) clonedNormal.rotation = textureRotation;
-			// if (clonedRoughness) clonedRoughness.rotation = textureRotation;
+			if (clonedNormal) clonedNormal.rotation = textureRotation;
+			if (clonedRoughness) clonedRoughness.rotation = textureRotation;
+			if (clonedAmbientOcclusion) clonedAmbientOcclusion.rotation = textureRotation;
 		}
 
 		return {

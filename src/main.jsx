@@ -15,11 +15,10 @@ createRoot(document.getElementById("root")).render(
 			{/* <Scene7 /> */}
 			{/* <Scene8 position={[-10, 0, 0]} /> */}
 			{/* <Angel position={[0, 0, 0]} /> */}
-			{/* <SceneLightsAndFog /> */}
-			<CloudComponent position={[0, 0, 0]} scale={10} />
+			<SceneLightsAndFog />
+			<CloudComponent position={[0, 0, 0]} scale={30} threshold={0.25} opacity={0.05} range={0.1} steps={100} />
 			<InstancedAngel position={[0, 0, 0]} />
 			{/* <Scene8 position={[10, 0, 0]} /> */}
-			
 		</Canvas>
 		{/* <Scene5 /> */}
 	</>
