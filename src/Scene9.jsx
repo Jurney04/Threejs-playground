@@ -132,9 +132,9 @@ function InstancedAngel({ position = [0, 0, 0] }) {
 			<OrbitControls />
 			<Perf position="top-left" />
 			{/* <Environment files="/scene8/HDR_sunset.hdr" background /> */}
-			{/* <Environment files="/scene8/HDR.hdr" background /> */}
+			<Environment files="/scene8/HDR.hdr" background />
 
-			<Environment files="/scene8/HDR_night2.hdr" background />
+			{/* <Environment files="/scene8/HDR_night2.hdr" background /> */}
 			<Center position={position} rotation={[Math.PI, 0, 0]}>
 				<group position={[0, 0, 0]} rotation={[0, 0, 0]}>
 					<Wing innerRef={leftWing1Ref} position={[-4, 0, 0]} pivot={[0, 0, 0]} version="default" side="front" style="wing" />
@@ -142,7 +142,7 @@ function InstancedAngel({ position = [0, 0, 0] }) {
 					<Wing innerRef={leftWing3Ref} position={[-1.25, -2.5, 0.3]} scale={0.9} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" side="front" style="wing" />
 				</group>
 
-				<group position={[0, 0, 0]} rotation={[0, 0.85, 0]}>
+				{/* <group position={[0, 0, 0]} rotation={[0, 0.85, 0]}>
 					<Wing innerRef={leftWing4Ref} position={[-4, 0, 0]} pivot={[0, 0, 0]} version="default" side="front" style="wing" />
 					<Wing innerRef={leftWing5Ref} position={[-1.5, 2.25, 0.06]} scale={2} rotation={[0, 0, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" side="front" style="wing" />
 					<Wing innerRef={leftWing6Ref} position={[-1.25, -2.5, 0.3]} scale={0.9} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" side="front" style="wing" />
@@ -152,7 +152,7 @@ function InstancedAngel({ position = [0, 0, 0] }) {
 					<Wing innerRef={leftWing7Ref} position={[-4, 0, 0]} pivot={[0, 0, 0]} version="default" side="front" style="wing" />
 					<Wing innerRef={leftWing8Ref} position={[-1.5, 2.25, 0.06]} scale={2} rotation={[0, 0, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" side="front" style="wing" />
 					<Wing innerRef={leftWing9Ref} position={[-1.25, -2.5, 0.3]} scale={0.9} rotation={[0, 0, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" side="front" style="wing" />
-				</group>
+				</group> */}
 
 				<group position={[0, 0, 0]} rotation={[0, 0, 0]}>
 					<Wing innerRef={rightWing1Ref} position={[4, 0, 0.16]} scale={1} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} version="default" side="back" style="wing2" />
@@ -160,7 +160,7 @@ function InstancedAngel({ position = [0, 0, 0] }) {
 					<Wing innerRef={rightWing3Ref} position={[1.25, -2.5, 0.36]} scale={0.9} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" side="back" style="wing2" />
 				</group>
 
-				<group position={[0, 0, 0]} rotation={[0, 0.85, 0]}>
+				{/* <group position={[0, 0, 0]} rotation={[0, 0.85, 0]}>
 					<Wing innerRef={rightWing4Ref} position={[4, 0, 0.16]} scale={1} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} version="default" side="back" style="wing2" />
 					<Wing innerRef={rightWing5Ref} position={[1.5, 2.25, 0.36]} scale={2} rotation={[0, Math.PI, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" side="back" style="wing2" />
 					<Wing innerRef={rightWing6Ref} position={[1.25, -2.5, 0.36]} scale={0.9} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" side="back" style="wing2" />
@@ -170,7 +170,7 @@ function InstancedAngel({ position = [0, 0, 0] }) {
 					<Wing innerRef={rightWing7Ref} position={[4, 0, 0.16]} scale={1} rotation={[0, Math.PI, 0]} pivot={[0, 0, 0]} version="default" side="back" style="wing2" />
 					<Wing innerRef={rightWing8Ref} position={[1.5, 2.25, 0.36]} scale={2} rotation={[0, Math.PI, Math.PI * -0.125]} pivot={[0, 0, 0]} version="v3" side="back" style="wing2" />
 					<Wing innerRef={rightWing9Ref} position={[1.25, -2.5, 0.36]} scale={0.9} rotation={[0, Math.PI, Math.PI * 0.2]} pivot={[0, 0, 0]} version="v2" side="back" style="wing2" />
-				</group>
+				</group> */}
 
 				<Ring innerRef={inner_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1.5]} groupScale={0.8} />
 				<Ring innerRef={second_circle} innerScale={[1.9]} groupPosition={[0, 1.25, -0.05]} groupRotation={[0, 0, -1.5]} groupScale={0.6} />

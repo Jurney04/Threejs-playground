@@ -14,11 +14,10 @@ export const SceneLightsAndFog = React.forwardRef((props, ref) => {
 
 	return (
 		<>
-			<ambientLight intensity={0.5} />
-			<spotLight position={[0, 10, 0]} angle={0.65} penumbra={1} intensity={10000} color="gold" />
-			<directionalLight position={[0, 10, 0]} intensity={1} />
+			<ambientLight intensity={2} color="gold" />
+			{/* <spotLight position={[0, 15, 0]} angle={0.65} penumbra={1} intensity={5000} color="red" /> */}
+			{/* <directionalLight position={[0, 10, 0]} intensity={1} /> */}
 			<pointLight position={[-10, -10, -10]} />
-			{/* <fogExp2 attach="fog" args={[0xf0f0f0, 0.075]} /> */}
 			{/* {cones} */}
 		</>
 	);

@@ -16,7 +16,7 @@ const Ring = React.memo(function Ring({ innerRef, innerScale, groupPosition, gro
 	const materialProps = {
 		map: basecolor,
 		aoMap: ambientOcclusion,
-		metalness: 1,
+		metalness: 1.5,
 		roughness: 0,
 		normalMap: normal,
 		roughnessMap: roughness,
