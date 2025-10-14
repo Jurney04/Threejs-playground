@@ -6,6 +6,7 @@ import "./index.css";
 import Scene7 from "./Scene7.jsx";
 import Angel from "./Scene8.jsx";
 import { Scene9 } from "./Scene9.jsx";
+import Scene10 from "./scene10.jsx";
 
 function App() {
 	const audioRef = useRef(null);
@@ -36,6 +37,7 @@ function App() {
 				{/* <Scene7 /> */}
 				{/* <Angel position={[0, 0, 0]} /> */}
 				{/* <Scene9 onModelLoad={() => setModelLoaded(true)} /> */}
+				<Scene10 />
 			</Canvas>
 
 			{modelLoaded && (
