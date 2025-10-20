@@ -5,70 +5,72 @@ import { HDRLoader } from "three/addons/loaders/HDRLoader.js";
 import { GUI } from "three/addons/libs/lil-gui.module.min.js";
 import { useEffect, useState } from "react";
 
-function Statue() {
-  const { gl } = useThree();
-  const gltf = useLoader(GLTFLoader, "/elven_guard_statue.glb");
-  const texture = useLoader(THREE.TextureLoader, "/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg");
-  const hdr = useLoader(HDRLoader, "/royal_esplanade_1k.hdr", (loader) => {
-    loader.setDataType(THREE.FloatType);
-  });
+function Statue({ onModelLoaded }) {
+	const { gl } = useThree();
+	const gltf = useLoader(GLTFLoader, "/elven_guard_statue.glb");
+	const texture = useLoader(THREE.TextureLoader, "/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg");
 
-  const [material, setMaterial] = useState(null);
+	const { scene } = useThree();
 
-  useEffect(() => {
-    if (!gltf) return;
+	const [material, setMaterial] = useState(null);
 
-    let newMaterial;
-    gltf.scene.traverse((child) => {
-      if (child.isMesh) {
-        newMaterial = new THREE.MeshPhysicalMaterial({
-          map: texture,
-        });
-        child.material = newMaterial;
-      }
-    });
-    setMaterial(newMaterial);
-  }, [gltf, texture]);
+	useEffect(() => {
+		if (!gltf || !texture) return;
 
-  useEffect(() => {
-    if (!material) return;
+		let newMaterial;
+		gltf.scene.traverse((child) => {
+			if (child.isMesh) {
+				newMaterial = new THREE.MeshPhysicalMaterial({
+					map: texture,
+				});
+				child.material = newMaterial;
+			}
+		});
+		setMaterial(newMaterial);
+		console.log("Material applied to GLTF");
 
-    const gui = new GUI();
+		if (onModelLoaded) onModelLoaded(true);
+	}, [gltf, texture, onModelLoaded]);
 
-    const params = {
-      color: material.color.getHex(),
-      metalness: material.metalness,
-      roughness: material.roughness,
-      ior: material.ior,
-      transmission: material.transmission,
-      thickness: material.thickness,
-    };
+	useEffect(() => {
+		if (!material) return;
 
-    gui.addColor(params, "color").onChange((value) => {
-      material.color.set(value);
-    });
-    gui.add(params, "metalness", 0, 1).onChange((value) => {
-      material.metalness = value;
-    });
-    gui.add(params, "roughness", 0, 1).onChange((value) => {
-      material.roughness = value;
-    });
-    gui.add(params, "ior", 1, 2).onChange((value) => {
-      material.ior = value;
-    });
-    gui.add(params, "transmission", 0, 1).onChange((value) => {
-      material.transmission = value;
-    });
-    gui.add(params, "thickness", 0, 5).onChange((value) => {
-      material.thickness = value;
-    });
+		const gui = new GUI();
 
-    return () => {
-      gui.destroy();
-    };
-  }, [material]);
+		const params = {
+			color: material.color.getHex(),
+			metalness: material.metalness,
+			roughness: material.roughness,
+			ior: material.ior,
+			transmission: material.transmission,
+			thickness: material.thickness,
+		};
 
-  return <primitive object={gltf.scene} />;
+		gui.addColor(params, "color").onChange((value) => {
+			material.color.set(value);
+		});
+		gui.add(params, "metalness", 0, 1).onChange((value) => {
+			material.metalness = value;
+		});
+		gui.add(params, "roughness", 0, 1).onChange((value) => {
+			material.roughness = value;
+		});
+		gui.add(params, "ior", 1, 2).onChange((value) => {
+			material.ior = value;
+		});
+		gui.add(params, "transmission", 0, 1).onChange((value) => {
+			material.transmission = value;
+		});
+		gui.add(params, "thickness", 0, 5).onChange((value) => {
+			material.thickness = value;
+		});
+
+		return () => {
+			gui.destroy();
+		};
+	}, [material]);
+
+	return <primitive object={gltf.scene} />;
 }
 
 export default Statue;

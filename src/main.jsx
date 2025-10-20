@@ -1,10 +1,11 @@
 import { createRoot } from "react-dom/client";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Sky } from "@react-three/drei";
-import { useRef, useState, useEffect } from "react";
+import { Environment, OrbitControls, Sky } from "@react-three/drei";
+import { useRef, useState, useEffect, Suspense } from "react";
 import "./index.css";
 import Statue from "./Scene11_r3f.jsx";
 import Overlay from "./Overlay.jsx";
+import { Perf } from "r3f-perf";
 
 function App() {
 	const audioRef = useRef(null);
@@ -30,13 +31,17 @@ function App() {
 
 	return (
 		<>
-			<Canvas camera={{ position: [0, 2, 10] }}>
-				<ambientLight />
-				<OrbitControls />
-				<Sky />
-				<Statue />
-				<Overlay />
-			</Canvas>
+			{/* Move Suspense outside Canvas to avoid HTML in 3D scene */}
+			<Suspense fallback={<div>Loading...</div>}>
+				<Canvas camera={{ position: [0, 2, 10] }}>
+					<Perf position="top-left" />
+					<ambientLight />
+					<OrbitControls />
+					<Environment files="/theater.hdr" background />
+					<Statue onModelLoaded={setModelLoaded} /> {/* Pass callback to set modelLoaded */}
+					<Overlay />
+				</Canvas>
+			</Suspense>
 
 			{modelLoaded && (
 				<audio ref={audioRef} loop controls style={{ display: "none" }} preload="auto">

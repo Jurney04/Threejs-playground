@@ -7,6 +7,7 @@ function Overlay() {
 	const boxRef = useRef();
 	const groupRef = useRef();
 	const groupRef2 = useRef();
+	const groupRef3 = useRef();
 
 	const speed = 1;
 	useFrame((state, delta) => {
@@ -16,6 +17,8 @@ function Overlay() {
 		groupRef.current.rotation.z += delta * -speed;
 		groupRef2.current.rotation.y += delta * -speed;
 		groupRef2.current.rotation.z += delta * speed;
+		groupRef3.current.rotation.y += delta * -speed;
+		groupRef3.current.rotation.z += delta * -speed;
 	});
 
 	return (
@@ -139,6 +142,69 @@ function Overlay() {
 					<meshBasicMaterial
 						color="pink"
 						blending={THREE.AdditiveBlending} // Add subtractive blending
+						transparent={true} // Enable transparency for blending
+						opacity={0.5} // Adjust opacity for effect strength (0 = fully subtractive, 1 = no effect)
+						premultipliedAlpha={true} // Ensure correct alpha handling
+					/>
+				</mesh>
+			</group>
+
+			<group ref={groupRef3} position={[0, 1, 0]} scale={2}>
+				<mesh ref={boxRef} scale={0.15} position={[0, 0, -1]}>
+					<boxGeometry args={[1, 1, 1]} />
+					<meshBasicMaterial
+						color="red"
+						blending={THREE.MultiplyBlending} // Add subtractive blending
+						transparent={true} // Enable transparency for blending
+						opacity={0.5} // Adjust opacity for effect strength (0 = fully subtractive, 1 = no effect)
+						premultipliedAlpha={true} // Ensure correct alpha handling
+					/>
+				</mesh>
+				<mesh ref={boxRef} scale={0.15} position={[0, -1, 0]}>
+					<boxGeometry args={[1, 1, 1]} />
+					<meshBasicMaterial
+						color="blue"
+						blending={THREE.MultiplyBlending} // Add subtractive blending
+						transparent={true} // Enable transparency for blending
+						opacity={0.5} // Adjust opacity for effect strength (0 = fully subtractive, 1 = no effect)
+						premultipliedAlpha={true} // Ensure correct alpha handling
+					/>
+				</mesh>
+				<mesh ref={boxRef} scale={0.15} position={[-1, 0, 0]}>
+					<boxGeometry args={[1, 1, 1]} />
+					<meshBasicMaterial
+						color="yellow"
+						blending={THREE.MultiplyBlending} // Add subtractive blending
+						transparent={true} // Enable transparency for blending
+						opacity={0.5} // Adjust opacity for effect strength (0 = fully subtractive, 1 = no effect)
+						premultipliedAlpha={true} // Ensure correct alpha handling
+					/>
+				</mesh>
+				<mesh ref={boxRef} scale={0.15} position={[1, 0, 0]}>
+					<boxGeometry args={[1, 1, 1]} />
+					<meshBasicMaterial
+						color="green"
+						blending={THREE.MultiplyBlending} // Add subtractive blending
+						transparent={true} // Enable transparency for blending
+						opacity={0.5} // Adjust opacity for effect strength (0 = fully subtractive, 1 = no effect)
+						premultipliedAlpha={true} // Ensure correct alpha handling
+					/>
+				</mesh>
+				<mesh ref={boxRef} scale={0.15} position={[0, 1, 0]}>
+					<boxGeometry args={[1, 1, 1]} />
+					<meshBasicMaterial
+						color="purple"
+						blending={THREE.MultiplyBlending} // Add subtractive blending
+						transparent={true} // Enable transparency for blending
+						opacity={0.5} // Adjust opacity for effect strength (0 = fully subtractive, 1 = no effect)
+						premultipliedAlpha={true} // Ensure correct alpha handling
+					/>
+				</mesh>
+				<mesh ref={boxRef} scale={0.15} position={[0, 0, 1]}>
+					<boxGeometry args={[1, 1, 1]} />
+					<meshBasicMaterial
+						color="pink"
+						blending={THREE.MultiplyBlending} // Add subtractive blending
 						transparent={true} // Enable transparency for blending
 						opacity={0.5} // Adjust opacity for effect strength (0 = fully subtractive, 1 = no effect)
 						premultipliedAlpha={true} // Ensure correct alpha handling
