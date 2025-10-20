@@ -54,26 +54,26 @@ export function InstancedAngel({ position = [0, 0, 0], onModelLoad }) {
 	const iris = useRef();
 	const [irisDirection, setIrisDirection] = useState(1);
 
-	useLayoutEffect(() => {
-		startWiggle(leftWing1Ref, 0.25, 0.3, 1.8, 2.5);
-		startWiggle(leftWing2Ref, 0.2, 0.25, 2.0, 3.0);
-		startWiggle(leftWing3Ref, 0.3, 0.35, 1.5, 2.2);
-		startWiggle(leftWing4Ref, 0.25, 0.28, 1.7, 2.8);
-		startWiggle(leftWing5Ref, 0.18, 0.22, 2.2, 3.2);
-		startWiggle(leftWing6Ref, 0.28, 0.32, 1.4, 2.0);
-		startWiggle(leftWing7Ref, 0.24, 0.27, 1.9, 2.6);
-		startWiggle(leftWing8Ref, 0.3, 0.33, 1.6, 2.3);
-		startWiggle(leftWing9Ref, 0.26, 0.29, 1.8, 2.7);
-		startWiggle(rightWing1Ref, 0.25, 0.3, 1.8, 2.5);
-		startWiggle(rightWing2Ref, 0.2, 0.25, 2.0, 3.0);
-		startWiggle(rightWing3Ref, 0.3, 0.35, 1.5, 2.2);
-		startWiggle(rightWing4Ref, 0.25, 0.28, 1.7, 2.8);
-		startWiggle(rightWing5Ref, 0.18, 0.22, 2.2, 3.2);
-		startWiggle(rightWing6Ref, 0.28, 0.32, 1.4, 2.0);
-		startWiggle(rightWing7Ref, 0.24, 0.27, 1.9, 2.6);
-		startWiggle(rightWing8Ref, 0.3, 0.33, 1.6, 2.3);
-		startWiggle(rightWing9Ref, 0.26, 0.29, 1.8, 2.7);
-	}, []);
+	// useLayoutEffect(() => {
+	// 	startWiggle(leftWing1Ref, 0.25, 0.3, 1.8, 2.5);
+	// 	startWiggle(leftWing2Ref, 0.2, 0.25, 2.0, 3.0);
+	// 	startWiggle(leftWing3Ref, 0.3, 0.35, 1.5, 2.2);
+	// 	startWiggle(leftWing4Ref, 0.25, 0.28, 1.7, 2.8);
+	// 	startWiggle(leftWing5Ref, 0.18, 0.22, 2.2, 3.2);
+	// 	startWiggle(leftWing6Ref, 0.28, 0.32, 1.4, 2.0);
+	// 	startWiggle(leftWing7Ref, 0.24, 0.27, 1.9, 2.6);
+	// 	startWiggle(leftWing8Ref, 0.3, 0.33, 1.6, 2.3);
+	// 	startWiggle(leftWing9Ref, 0.26, 0.29, 1.8, 2.7);
+	// 	startWiggle(rightWing1Ref, 0.25, 0.3, 1.8, 2.5);
+	// 	startWiggle(rightWing2Ref, 0.2, 0.25, 2.0, 3.0);
+	// 	startWiggle(rightWing3Ref, 0.3, 0.35, 1.5, 2.2);
+	// 	startWiggle(rightWing4Ref, 0.25, 0.28, 1.7, 2.8);
+	// 	startWiggle(rightWing5Ref, 0.18, 0.22, 2.2, 3.2);
+	// 	startWiggle(rightWing6Ref, 0.28, 0.32, 1.4, 2.0);
+	// 	startWiggle(rightWing7Ref, 0.24, 0.27, 1.9, 2.6);
+	// 	startWiggle(rightWing8Ref, 0.3, 0.33, 1.6, 2.3);
+	// 	startWiggle(rightWing9Ref, 0.26, 0.29, 1.8, 2.7);
+	// }, []);
 
 	useEffect(() => {
 		const timer = setTimeout(() => {

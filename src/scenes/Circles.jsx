@@ -4,7 +4,7 @@ import { useFrame } from "@react-three/fiber";
 import { Sky, useTexture, Environment } from "@react-three/drei";
 import { DoubleSide } from "three";
 
-function Scene7() {
+function Circles() {
 	//useRef is a hook that allows us to create a reference to a DOM element or a component instance
 	const sphereRef1 = useRef();
 	const sphereRef2 = useRef();
@@ -17,11 +17,11 @@ function Scene7() {
 	const groupRef = useRef();
 
 	const [basecolor, ambientOcclusion, metallic, normal, roughness] = useTexture([
-		"/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg",
-		"/gold_texture/Poliigon_MetalGoldPaint_7253_AmbientOcclusion.jpg",
-		"/gold_texture/Poliigon_MetalGoldPaint_7253_Metallic.jpg",
-		"/gold_texture/Poliigon_MetalGoldPaint_7253_Normal.png",
-		"/gold_texture/Poliigon_MetalGoldPaint_7253_Roughness.jpg",
+		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg",
+		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_AmbientOcclusion.jpg",
+		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Metallic.jpg",
+		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Normal.png",
+		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Roughness.jpg",
 	]);
 
 	//State and delta are passed to the function. State is the current state of the scene and delta is the time since the last frame.
@@ -113,4 +113,4 @@ function Scene7() {
 	);
 }
 
-export default Scene7;
+export default Circles;

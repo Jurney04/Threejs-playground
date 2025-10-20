@@ -1,12 +1,20 @@
 import { createRoot } from "react-dom/client";
 import { Canvas } from "@react-three/fiber";
-import { Environment, OrbitControls, Sky } from "@react-three/drei";
+import { OrbitControls, Sky } from "@react-three/drei";
 import { useRef, useState, useEffect, Suspense } from "react";
 import "./index.css";
-import Statue from "./Scene11_r3f.jsx";
-import Overlay from "./Overlay.jsx";
 import { Perf } from "r3f-perf";
 
+//imports scenes
+import BasicDemo from "./scenes/BasicDemo.jsx";
+import Circles from "./scenes/Circles.jsx";
+import Angel from "./scenes/Angel.jsx";
+import FullAngelScene from "./scenes/FullAngelScene.jsx";
+import Coloring from "./scenes/Coloring.jsx";
+import BlendingModes from "./scenes/BlendingModes.jsx";
+import DemoMaterials from "./scenes/DemoMaterials.jsx";
+//
+//
 function App() {
 	const audioRef = useRef(null);
 	const [modelLoaded, setModelLoaded] = useState(false);
@@ -31,15 +39,18 @@ function App() {
 
 	return (
 		<>
-			{/* Move Suspense outside Canvas to avoid HTML in 3D scene */}
 			<Suspense fallback={<div>Loading...</div>}>
 				<Canvas camera={{ position: [0, 2, 10] }}>
 					<Perf position="top-left" />
-					<ambientLight />
 					<OrbitControls />
-					<Environment files="/theater.hdr" background />
-					<Statue onModelLoaded={setModelLoaded} /> {/* Pass callback to set modelLoaded */}
-					<Overlay />
+
+					{/* <BasicDemo /> */}
+					{/* <Circles /> */}
+					{/* <Angel position={[0, 0, 0]} /> */}
+					{/* <FullAngelScene onModelLoad={() => setModelLoaded(true)} /> */}
+					{/* <Coloring /> */}
+					{/* <BlendingModes /> */}
+					<DemoMaterials />
 				</Canvas>
 			</Suspense>
 

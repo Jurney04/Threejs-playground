@@ -16,7 +16,7 @@ const defaultColor = new THREE.Color(0xffffff); // White as default
 
 let hoveredInfo = [];
 
-function scene10() {
+function Coloring() {
 	camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
 	camera.position.set(amount / 3, amount, amount / 3);
 	camera.lookAt(0, 0, 0);
@@ -181,4 +181,4 @@ function animate() {
 	stats.update();
 }
 
-export default scene10;
+export default Coloring;

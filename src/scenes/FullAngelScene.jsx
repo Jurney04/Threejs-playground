@@ -1,7 +1,7 @@
 import React from "react";
-import { InstancedAngel } from "./scene9/InstancedAngel.jsx"; // Assuming you rename Scene9.jsx to InstancedAngel.jsx
-import { SceneLightsAndFog } from "./scene9/SceneLightsAndFog.jsx";
-import CloudComponent from "./scene9/cloudComponent.jsx";
+import { InstancedAngel } from "../Angel/InstancedAngel.jsx";
+import { SceneLightsAndFog } from "../Angel/SceneLightsAndFog.jsx";
+import CloudComponent from "../Angel/cloudComponent.jsx";
 import * as THREE from "three";
 
 // Static light props (kept as is)
@@ -15,7 +15,7 @@ const lightDirection = new THREE.Vector3(...targetPosition)
 	.normalize()
 	.toArray();
 
-export function Scene9({ onModelLoad }) {
+export function FullAngelScene({ onModelLoad }) {
 	return (
 		<>
 			<SceneLightsAndFog />
@@ -48,3 +48,4 @@ export function Scene9({ onModelLoad }) {
 		</>
 	);
 }
+export default FullAngelScene;
