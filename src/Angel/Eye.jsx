@@ -5,7 +5,7 @@ import { useLoader } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 
 const Eye = React.memo(function Eye({ position, rotation, scale, innerRef, pivot = [0, 0, 0], irisRef }) {
-	const { paths: paths_eye } = useLoader(SVGLoader, "/scene8/eye.svg");
+	const { paths: paths_eye } = useLoader(SVGLoader, "/angel/eye.svg");
 	const shapes_eye = paths_eye.flatMap((path) => path.toShapes(true));
 
 	const extrudeSettings = {
@@ -18,11 +18,11 @@ const Eye = React.memo(function Eye({ position, rotation, scale, innerRef, pivot
 		bevelSegments: 1,
 	};
 	const [basecolor, ambientOcclusion, metallic, normal, roughness] = useTexture([
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_AmbientOcclusion.jpg",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Metallic.jpg",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Normal.png",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Roughness.jpg",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_AmbientOcclusion.jpg",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_Metallic.jpg",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_Normal.png",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_Roughness.jpg",
 	]);
 
 	const materialProps = {
@@ -34,11 +34,11 @@ const Eye = React.memo(function Eye({ position, rotation, scale, innerRef, pivot
 		roughnessMap: roughness,
 	};
 	const [basecolorM, ambientOcclusionM, metallicM, normalM, roughnessM] = useTexture([
-		"/scene8/marble/Marble_White_007_basecolor.jpg",
-		"/scene8/marble/Marble_White_007_ambientOcclusion.jpg",
-		"/scene8/marble/Marble_White_007_height.png",
-		"/scene8/marble/Marble_White_007_normal.jpg",
-		"/scene8/marble/Marble_White_007_roughness.jpg",
+		"/angel/marble/Marble_White_007_basecolor.jpg",
+		"/angel/marble/Marble_White_007_ambientOcclusion.jpg",
+		"/angel/marble/Marble_White_007_height.png",
+		"/angel/marble/Marble_White_007_normal.jpg",
+		"/angel/marble/Marble_White_007_roughness.jpg",
 	]);
 
 	const materialPropsMarble = {
@@ -50,11 +50,11 @@ const Eye = React.memo(function Eye({ position, rotation, scale, innerRef, pivot
 		roughnessMap: roughnessM,
 	};
 	const [basecolorB, ambientOcclusionB, metallicB, normalB, roughnessB] = useTexture([
-		"/scene8/gem/Sapphire_001_COLOR.jpg",
-		"/scene8/gem/Sapphire_001_OCC.jpg",
-		"/scene8/gem/Sapphire_001_DISP.png",
-		"/scene8/gem/Sapphire_001_NORM.jpg",
-		"/scene8/gem/Sapphire_001_ROUGH.jpg",
+		"/angel/gem/Sapphire_001_COLOR.jpg",
+		"/angel/gem/Sapphire_001_OCC.jpg",
+		"/angel/gem/Sapphire_001_DISP.png",
+		"/angel/gem/Sapphire_001_NORM.jpg",
+		"/angel/gem/Sapphire_001_ROUGH.jpg",
 	]);
 
 	const materialPropsBlue = {

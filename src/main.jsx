@@ -13,6 +13,7 @@ import FullAngelScene from "./scenes/FullAngelScene.jsx";
 import Coloring from "./scenes/Coloring.jsx";
 import BlendingModes from "./scenes/BlendingModes.jsx";
 import DemoMaterials from "./scenes/DemoMaterials.jsx";
+import Lines from "./scenes/Lines.jsx";
 //
 //
 function App() {
@@ -45,12 +46,13 @@ function App() {
 					<OrbitControls />
 
 					{/* <BasicDemo /> */}
-					{/* <Circles /> */}
+					<Circles />
 					{/* <Angel position={[0, 0, 0]} /> */}
 					{/* <FullAngelScene onModelLoad={() => setModelLoaded(true)} /> */}
 					{/* <Coloring /> */}
 					{/* <BlendingModes /> */}
-					<DemoMaterials />
+					{/* <DemoMaterials /> */}
+					{/* <Lines /> */}
 				</Canvas>
 			</Suspense>
 

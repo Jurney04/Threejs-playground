@@ -12,18 +12,18 @@ const Wing = React.memo(function Wing({ position, rotation, scale, innerRef, piv
 	let textureRepeat = [0.01, 0.01];
 
 	if (version === "default") {
-		svg_bottom = "/scene8/wing_bottom.svg";
-		svg_middle = "/scene8/wing_middle.svg";
-		svg_top = "/scene8/wing_top.svg";
+		svg_bottom = "/angel/wing_bottom.svg";
+		svg_middle = "/angel/wing_middle.svg";
+		svg_top = "/angel/wing_top.svg";
 	} else if (version === "v2") {
-		svg_bottom = "/scene8/wing_top_bottom.svg";
-		svg_middle = "/scene8/wing_top_middle.svg";
-		svg_top = "/scene8/wing_top_top.svg";
+		svg_bottom = "/angel/wing_top_bottom.svg";
+		svg_middle = "/angel/wing_top_middle.svg";
+		svg_top = "/angel/wing_top_top.svg";
 		textureRepeat = [2.5, 2.5];
 	} else if (version === "v3") {
-		svg_bottom = "/scene8/wing_bottom_bottom.svg";
-		svg_middle = "/scene8/wing_bottom_middle.svg";
-		svg_top = "/scene8/wing_bottom_top.svg";
+		svg_bottom = "/angel/wing_bottom_bottom.svg";
+		svg_middle = "/angel/wing_bottom_middle.svg";
+		svg_top = "/angel/wing_bottom_top.svg";
 	}
 
 	const { paths: paths_bottom } = useLoader(SVGLoader, svg_bottom) || {};
@@ -49,11 +49,11 @@ const Wing = React.memo(function Wing({ position, rotation, scale, innerRef, piv
 	};
 
 	const [basecolor, ambientOcclusion, metallic, normal, roughness] = useTexture([
-		"/scene8/feathers/Stylized_Feathers_002_ambientOcclusion.png",
-		"/scene8/feathers/Stylized_Feathers_002_ambientOcclusion.png",
-		"/scene8/feathers/Stylized_Feathers_002_height.png",
-		"/scene8/feathers/Stylized_Feathers_002_normal.png",
-		"/scene8/feathers/Stylized_Feathers_002_roughness.png",
+		"/angel/feathers/Stylized_Feathers_002_ambientOcclusion.png",
+		"/angel/feathers/Stylized_Feathers_002_ambientOcclusion.png",
+		"/angel/feathers/Stylized_Feathers_002_height.png",
+		"/angel/feathers/Stylized_Feathers_002_normal.png",
+		"/angel/feathers/Stylized_Feathers_002_roughness.png",
 	]);
 
 	const memoizedMaterialProps = useMemo(() => {
@@ -145,17 +145,17 @@ const Wing2 = React.memo(function Wing2({ position, rotation, scale, innerRef, p
 	let svg_bottom, svg_middle, svg_top;
 
 	if (version === "default") {
-		svg_bottom = "/scene8/wing_bottom.svg";
-		svg_middle = "/scene8/wing_middle.svg";
-		svg_top = "/scene8/wing_top.svg";
+		svg_bottom = "/angel/wing_bottom.svg";
+		svg_middle = "/angel/wing_middle.svg";
+		svg_top = "/angel/wing_top.svg";
 	} else if (version === "v2") {
-		svg_bottom = "/scene8/wing_top_bottom.svg";
-		svg_middle = "/scene8/wing_top_middle.svg";
-		svg_top = "/scene8/wing_top_top.svg";
+		svg_bottom = "/angel/wing_top_bottom.svg";
+		svg_middle = "/angel/wing_top_middle.svg";
+		svg_top = "/angel/wing_top_top.svg";
 	} else if (version === "v3") {
-		svg_bottom = "/scene8/wing_bottom_bottom.svg";
-		svg_middle = "/scene8/wing_bottom_middle.svg";
-		svg_top = "/scene8/wing_bottom_top.svg";
+		svg_bottom = "/angel/wing_bottom_bottom.svg";
+		svg_middle = "/angel/wing_bottom_middle.svg";
+		svg_top = "/angel/wing_bottom_top.svg";
 	}
 
 	const { paths: paths_bottom } = useLoader(SVGLoader, svg_bottom) || {};
@@ -181,11 +181,11 @@ const Wing2 = React.memo(function Wing2({ position, rotation, scale, innerRef, p
 	};
 
 	const [basecolor, ambientOcclusion, metallic, normal, roughness] = useTexture([
-		"/scene8/feathers/Stylized_Feathers_002_ambientOcclusion.png",
-		"/scene8/feathers/Stylized_Feathers_002_ambientOcclusion.png",
-		"/scene8/feathers/Stylized_Feathers_002_height.png",
-		"/scene8/feathers/Stylized_Feathers_002_normal.png",
-		"/scene8/feathers/Stylized_Feathers_002_roughness.png",
+		"/angel/feathers/Stylized_Feathers_002_ambientOcclusion.png",
+		"/angel/feathers/Stylized_Feathers_002_ambientOcclusion.png",
+		"/angel/feathers/Stylized_Feathers_002_height.png",
+		"/angel/feathers/Stylized_Feathers_002_normal.png",
+		"/angel/feathers/Stylized_Feathers_002_roughness.png",
 	]);
 	[basecolor, ambientOcclusion, metallic, normal, roughness].forEach((texture) => {
 		texture.repeat.set(0.01, 0.01);
@@ -261,7 +261,7 @@ const Wing2 = React.memo(function Wing2({ position, rotation, scale, innerRef, p
 });
 
 const Eye = React.memo(function Eye({ position, rotation, scale, innerRef, pivot = [0, 0, 0], irisRef }) {
-	const { paths: paths_eye } = useLoader(SVGLoader, "/scene8/eye.svg");
+	const { paths: paths_eye } = useLoader(SVGLoader, "/angel/eye.svg");
 	const shapes_eye = paths_eye.flatMap((path) => path.toShapes(true));
 
 	const extrudeSettings = {
@@ -274,11 +274,11 @@ const Eye = React.memo(function Eye({ position, rotation, scale, innerRef, pivot
 		bevelSegments: 1,
 	};
 	const [basecolor, ambientOcclusion, metallic, normal, roughness] = useTexture([
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_AmbientOcclusion.jpg",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Metallic.jpg",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Normal.png",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Roughness.jpg",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_AmbientOcclusion.jpg",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_Metallic.jpg",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_Normal.png",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_Roughness.jpg",
 	]);
 
 	const materialProps = {
@@ -290,11 +290,11 @@ const Eye = React.memo(function Eye({ position, rotation, scale, innerRef, pivot
 		roughnessMap: roughness,
 	};
 	const [basecolorM, ambientOcclusionM, metallicM, normalM, roughnessM] = useTexture([
-		"/scene8/marble/Marble_White_007_basecolor.jpg",
-		"/scene8/marble/Marble_White_007_ambientOcclusion.jpg",
-		"/scene8/marble/Marble_White_007_height.png",
-		"/scene8/marble/Marble_White_007_normal.jpg",
-		"/scene8/marble/Marble_White_007_roughness.jpg",
+		"/angel/marble/Marble_White_007_basecolor.jpg",
+		"/angel/marble/Marble_White_007_ambientOcclusion.jpg",
+		"/angel/marble/Marble_White_007_height.png",
+		"/angel/marble/Marble_White_007_normal.jpg",
+		"/angel/marble/Marble_White_007_roughness.jpg",
 	]);
 
 	const materialPropsMarble = {
@@ -306,11 +306,11 @@ const Eye = React.memo(function Eye({ position, rotation, scale, innerRef, pivot
 		roughnessMap: roughnessM,
 	};
 	const [basecolorB, ambientOcclusionB, metallicB, normalB, roughnessB] = useTexture([
-		"/scene8/gem/Sapphire_001_COLOR.jpg",
-		"/scene8/gem/Sapphire_001_OCC.jpg",
-		"/scene8/gem/Sapphire_001_DISP.png",
-		"/scene8/gem/Sapphire_001_NORM.jpg",
-		"/scene8/gem/Sapphire_001_ROUGH.jpg",
+		"/angel/gem/Sapphire_001_COLOR.jpg",
+		"/angel/gem/Sapphire_001_OCC.jpg",
+		"/angel/gem/Sapphire_001_DISP.png",
+		"/angel/gem/Sapphire_001_NORM.jpg",
+		"/angel/gem/Sapphire_001_ROUGH.jpg",
 	]);
 
 	const materialPropsBlue = {
@@ -343,11 +343,11 @@ const Eye = React.memo(function Eye({ position, rotation, scale, innerRef, pivot
 });
 const Ring = React.memo(function Ring({ innerRef, innerScale, groupPosition, groupRotation, groupScale }) {
 	const [basecolor, ambientOcclusion, metallic, normal, roughness] = useTexture([
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_AmbientOcclusion.jpg",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Metallic.jpg",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Normal.png",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Roughness.jpg",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_AmbientOcclusion.jpg",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_Metallic.jpg",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_Normal.png",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_Roughness.jpg",
 	]);
 
 	const materialProps = {
@@ -619,8 +619,8 @@ function Angel({ position = [0, 0, 0] }) {
 		<>
 			<Perf position="top-left" />
 			<OrbitControls />
-			<Environment files="/scene8/HDR.hdr" background />
-			{/* <Environment files="/scene8/HDR.hdr" background /> */}
+			<Environment files="/angel/HDR.hdr" background />
+			{/* <Environment files="/angel/HDR.hdr" background /> */}
 			{/* <Sky distance={100} up={0} /> */}
 			{/* <ambientLight intensity={1} /> */}
 			{/* <spotLight position={[0, 10, 0]} angle={0.3} penumbra={1} intensity={10} /> */}

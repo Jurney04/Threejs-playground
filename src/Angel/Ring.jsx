@@ -6,11 +6,11 @@ import { useTexture } from "@react-three/drei";
 
 const Ring = React.memo(function Ring({ innerRef, innerScale, groupPosition, groupRotation, groupScale }) {
 	const [basecolor, ambientOcclusion, metallic, normal, roughness] = useTexture([
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_AmbientOcclusion.jpg",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Metallic.jpg",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Normal.png",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Roughness.jpg",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_AmbientOcclusion.jpg",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_Metallic.jpg",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_Normal.png",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_Roughness.jpg",
 	]);
 
 	const materialProps = {
@@ -46,7 +46,7 @@ const Ring = React.memo(function Ring({ innerRef, innerScale, groupPosition, gro
 		return new THREE.ExtrudeGeometry(ringShape, extrudeSettings);
 	}, [innerScale]);
 
-	const { paths: paths_eye } = useLoader(SVGLoader, "/scene8/eye.svg");
+	const { paths: paths_eye } = useLoader(SVGLoader, "/angel/eye.svg");
 	const shapes_eye = paths_eye.flatMap((path) => path.toShapes(true));
 
 	const eyeExtrudeSettings = {
@@ -60,11 +60,11 @@ const Ring = React.memo(function Ring({ innerRef, innerScale, groupPosition, gro
 	};
 
 	const [basecolorEye, ambientOcclusionEye, metallicEye, normalEye, roughnessEye] = useTexture([
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_AmbientOcclusion.jpg",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Metallic.jpg",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Normal.png",
-		"/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_Roughness.jpg",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_AmbientOcclusion.jpg",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_Metallic.jpg",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_Normal.png",
+		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_Roughness.jpg",
 	]);
 
 	const eyeMaterialProps = {

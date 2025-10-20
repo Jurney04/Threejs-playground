@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 function Statue({ onModelLoaded }) {
 	const { gl } = useThree();
 	const gltf = useLoader(GLTFLoader, "/elven_guard_statue.glb");
-	const texture = useLoader(THREE.TextureLoader, "/scene8/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg");
+	const texture = useLoader(THREE.TextureLoader, "/angel/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg");
 
 	const { scene } = useThree();
 

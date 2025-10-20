@@ -119,7 +119,7 @@ export function InstancedAngel({ position = [0, 0, 0], onModelLoad }) {
 
 	return (
 		<>
-			<Environment files="/scene8/HDR.hdr" background />
+			<Environment files="/angel/HDR.hdr" background />
 			<Center position={position} rotation={[Math.PI, 0, 0]}>
 				<group position={[0, 0, 0]} rotation={[0, 0, 0]}>
 					<Wing innerRef={leftWing1Ref} position={[-4, 0, 0]} pivot={[0, 0, 0]} version="default" side="front" style="wing" />

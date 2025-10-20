@@ -47,5 +47,5 @@ export function FullAngelScene({ onModelLoad }) {
 			<InstancedAngel position={[0, 0, 0]} onModelLoad={onModelLoad} />
 		</>
 	);
-}
+}	
 export default FullAngelScene;
