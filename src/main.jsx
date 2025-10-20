@@ -1,13 +1,10 @@
 import { createRoot } from "react-dom/client";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, Sky } from "@react-three/drei";
 import { useRef, useState, useEffect } from "react";
 import "./index.css";
-import Scene7 from "./Scene7.jsx";
-import Angel from "./Scene8.jsx";
-import { Scene9 } from "./Scene9.jsx";
-import Scene10 from "./scene10.jsx";
-import Init from "./scene11.jsx";
+import Statue from "./Scene11_r3f.jsx";
+import Overlay from "./Overlay.jsx";
 
 function App() {
 	const audioRef = useRef(null);
@@ -33,12 +30,12 @@ function App() {
 
 	return (
 		<>
-			<Canvas camera={{ position: [0, 0, 20], rotation: [-Math.PI / 4, 0, 0] }}>
+			<Canvas camera={{ position: [0, 2, 10] }}>
+				<ambientLight />
 				<OrbitControls />
-				{/* <Scene7 /> */}
-				{/* <Angel position={[0, 0, 0]} /> */}
-				{/* <Scene9 onModelLoad={() => setModelLoaded(true)} /> */}
-				{/* <Scene10 /> */ <Init />}
+				<Sky />
+				<Statue />
+				<Overlay />
 			</Canvas>
 
 			{modelLoaded && (

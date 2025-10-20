@@ -27,7 +27,7 @@ const textureLoader = new THREE.TextureLoader();
 
 // Initialize scene early (before loaders)
 scene = new THREE.Scene();
-scene.background = new THREE.Color(0xcccccc); // Temporary gray background to test
+// scene.background = new THREE.Color(0xcccccc); // Temporary gray background to test 
 
 // Load HDR first
 const hdrEquirect = new HDRLoader().load(
@@ -77,7 +77,7 @@ const hdrEquirect = new HDRLoader().load(
 
 				// Load texture after GLTF
 				textureLoader.load(
-					"./scene8/gem/Sapphire_001_COLOR.jpg",
+					"./scene8/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg",
 					function (texture) {
 						console.log("Texture loaded successfully");
 						if (material) {
@@ -123,7 +123,7 @@ function init() {
 	renderer.domElement.style.top = 0;
 
 	camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 2000);
-	camera.position.set(-5, 0.5, 0);
+	camera.position.set(0, 2, 10);
 
 	const controls = new OrbitControls(camera, renderer.domElement);
 	controls.addEventListener("change", render);
