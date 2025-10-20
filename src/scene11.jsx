@@ -1,5 +1,4 @@
 import * as THREE from "three";
-
 import { GUI } from "three/addons/libs/lil-gui.module.min.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { HDRLoader } from "three/addons/loaders/HDRLoader.js";
@@ -7,7 +6,7 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 const params = {
 	color: 0xffffff,
-	transmission: 1,
+	transmission: 0,
 	opacity: 1,
 	metalness: 0,
 	roughness: 0,
@@ -19,51 +18,99 @@ const params = {
 	specularColor: 0xffffff,
 	envMapIntensity: 1,
 	lightIntensity: 1,
-	exposure: 1,
+	exposure: 0.5, // Lowered to avoid overexposure
 };
 
 let camera, scene, renderer;
-
 let mesh, material;
+const textureLoader = new THREE.TextureLoader();
 
-const hdrEquirect = new HDRLoader().load("./royal_esplanade_1k.hdr", function () {
-	hdrEquirect.mapping = THREE.EquirectangularReflectionMapping;
+// Initialize scene early (before loaders)
+scene = new THREE.Scene();
+scene.background = new THREE.Color(0xcccccc); // Temporary gray background to test
 
-	new GLTFLoader().load("./DragonAttenuation.glb", function (gltf) {
-		gltf.scene.traverse(function (child) {
-			if (child.isMesh && child.material.isMeshPhysicalMaterial) {
-				mesh = child;
-				material = mesh.material;
+// Load HDR first
+const hdrEquirect = new HDRLoader().load(
+	"./royal_esplanade_1k.hdr",
+	function () {
+		console.log("HDR loaded successfully");
+		hdrEquirect.mapping = THREE.EquirectangularReflectionMapping;
 
-				const color = new THREE.Color();
+		// Load GLTF after HDR
+		new GLTFLoader().load(
+			"./elven_guard_statue.glb",
+			function (gltf) {
+				console.log("GLTF loaded successfully");
+				gltf.scene.traverse(function (child) {
+					if (child.isMesh) {
+						mesh = child;
+						const originalMaterial = mesh.material;
 
-				params.color = color.copy(mesh.material.color).getHex();
-				params.roughness = mesh.material.roughness;
-				params.metalness = mesh.material.metalness;
+						mesh.material = new THREE.MeshPhysicalMaterial();
+						material = mesh.material;
 
-				params.ior = mesh.material.ior;
-				params.specularIntensity = mesh.material.specularIntensity;
+						if (originalMaterial) {
+							material.roughness = originalMaterial.roughness || 0;
+							material.metalness = originalMaterial.metalness || 0;
+							material.ior = originalMaterial.ior || 1.5;
+							material.specularIntensity = originalMaterial.specularIntensity || 1;
+							material.transmission = originalMaterial.transmission || 0;
+							material.thickness = originalMaterial.thickness || 0.01;
+							material.attenuationDistance = originalMaterial.attenuationDistance || 1;
+							material.opacity = originalMaterial.opacity || 1;
+							material.transparent = originalMaterial.transparent || false;
+						}
 
-				params.transmission = mesh.material.transmission;
-				params.thickness = mesh.material.thickness;
-				params.attenuationColor = color.copy(mesh.material.attenuationColor).getHex();
-				params.attenuationDistance = mesh.material.attenuationDistance;
+						params.color = material.color.getHex();
+						params.roughness = material.roughness;
+						params.metalness = material.metalness;
+						params.ior = material.ior;
+						params.specularIntensity = material.specularIntensity;
+						params.transmission = material.transmission;
+						params.thickness = material.thickness;
+						params.attenuationDistance = material.attenuationDistance;
+					}
+				});
+
+				scene.add(gltf.scene);
+				scene.environment = hdrEquirect;
+
+				// Load texture after GLTF
+				textureLoader.load(
+					"./scene8/gem/Sapphire_001_COLOR.jpg",
+					function (texture) {
+						console.log("Texture loaded successfully");
+						if (material) {
+							material.map = texture;
+							material.needsUpdate = true;
+							render();
+						} else {
+							console.error("Material not found.");
+						}
+					},
+					undefined,
+					function (error) {
+						console.error("Error loading texture:", error);
+					}
+				);
+
+				init();
+				render();
+			},
+			undefined,
+			function (error) {
+				console.error("Error loading GLTF:", error);
 			}
-		});
-
-		init();
-
-		scene.add(gltf.scene);
-
-		scene.environment = hdrEquirect;
-		//scene.background = hdrEquirect;
-
-		render();
-	});
-});
+		);
+	},
+	undefined,
+	function (error) {
+		console.error("Error loading HDR:", error);
+	}
+);
 
 function init() {
-	renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+	renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false }); // Set alpha to false for solid background
 	renderer.setPixelRatio(window.devicePixelRatio);
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	renderer.shadowMap.enabled = true;
@@ -72,25 +119,20 @@ function init() {
 	renderer.toneMapping = THREE.ACESFilmicToneMapping;
 	renderer.toneMappingExposure = params.exposure;
 
-	// accommodate CSS table
 	renderer.domElement.style.position = "absolute";
 	renderer.domElement.style.top = 0;
-
-	scene = new THREE.Scene();
 
 	camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 2000);
 	camera.position.set(-5, 0.5, 0);
 
 	const controls = new OrbitControls(camera, renderer.domElement);
-	controls.addEventListener("change", render); // use if there is no animation loop
+	controls.addEventListener("change", render);
 	controls.minDistance = 5;
 	controls.maxDistance = 20;
 	controls.target.y = 0.5;
 	controls.update();
 
 	window.addEventListener("resize", onWindowResize);
-
-	//
 
 	const gui = new GUI();
 
@@ -107,12 +149,10 @@ function init() {
 	gui.add(params, "opacity", 0, 1, 0.01).onChange(function () {
 		material.opacity = params.opacity;
 		const transparent = params.opacity < 1;
-
 		if (transparent !== material.transparent) {
 			material.transparent = transparent;
 			material.needsUpdate = true;
 		}
-
 		render();
 	});
 
@@ -178,18 +218,14 @@ function init() {
 function onWindowResize() {
 	const width = window.innerWidth;
 	const height = window.innerHeight;
-
 	camera.aspect = width / height;
 	camera.updateProjectionMatrix();
-
 	renderer.setSize(width, height);
-
 	render();
 }
-
-//
 
 function render() {
 	renderer.render(scene, camera);
 }
+
 export default init;
