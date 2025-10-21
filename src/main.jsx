@@ -14,53 +14,66 @@ import Coloring from "./scenes/Coloring.jsx";
 import BlendingModes from "./scenes/BlendingModes.jsx";
 import DemoMaterials from "./scenes/DemoMaterials.jsx";
 import Lines from "./scenes/Lines.jsx";
+import Project from "./Project.jsx";
+import { AmbientLight } from "three";
 //
 //
 function App() {
-	const audioRef = useRef(null);
-	const [modelLoaded, setModelLoaded] = useState(false);
+	// const audioRef = useRef(null);
+	// const [modelLoaded, setModelLoaded] = useState(false);
 
-	useEffect(() => {
-		if (modelLoaded && audioRef.current) {
-			const audio = audioRef.current;
-			audio.volume = 0.5;
-			const playAudio = () => {
-				audio.play().catch((error) => {
-					console.log("Autoplay blocked. Waiting for user interaction:", error);
-					const enableOnClick = () => {
-						audio.play();
-						document.removeEventListener("click", enableOnClick);
-					};
-					document.addEventListener("click", enableOnClick, { once: true });
-				});
-			};
-			playAudio();
-		}
-	}, [modelLoaded]);
+	// useEffect(() => {
+	// 	if (modelLoaded && audioRef.current) {
+	// 		const audio = audioRef.current;
+	// 		audio.volume = 0.5;
+	// 		const playAudio = () => {
+	// 			audio.play().catch((error) => {
+	// 				console.log("Autoplay blocked. Waiting for user interaction:", error);
+	// 				const enableOnClick = () => {
+	// 					audio.play();
+	// 					document.removeEventListener("click", enableOnClick);
+	// 				};
+	// 				document.addEventListener("click", enableOnClick, { once: true });
+	// 			});
+	// 		};
+	// 		playAudio();
+	// 	}
+	// }, [modelLoaded]);
 
+	// return (
+	// 	<>
+	// 		<Suspense fallback={<div>Loading...</div>}>
+	// 			<Canvas camera={{ position: [0, 2, 10] }}>
+	// 				<Perf position="top-left" />
+	// 				<OrbitControls />
+
+	// 				{/* <BasicDemo /> */}
+	// 				{/* <Circles /> */}
+	// 				{/* <Angel position={[0, 0, 0]} /> */}
+	// 				{/* <FullAngelScene onModelLoad={() => setModelLoaded(true)} /> */}
+	// 				{/* <Coloring /> */}
+	// 				{/* <BlendingModes /> */}
+	// 				{/* <DemoMaterials /> */}
+	// 				{/* <Lines /> */}
+
+	// 			</Canvas>
+	// 		</Suspense>
+
+	// 		{modelLoaded && (
+	// 			<audio ref={audioRef} loop controls style={{ display: "none" }} preload="auto">
+	// 				<source src="/Choir.mp3" type="audio/mpeg" />
+	// 			</audio>
+	// 		)}
+	// 	</>
+	// );
 	return (
 		<>
-			<Suspense fallback={<div>Loading...</div>}>
-				<Canvas camera={{ position: [0, 2, 10] }}>
-					<Perf position="top-left" />
-					<OrbitControls />
-
-					{/* <BasicDemo /> */}
-					<Circles />
-					{/* <Angel position={[0, 0, 0]} /> */}
-					{/* <FullAngelScene onModelLoad={() => setModelLoaded(true)} /> */}
-					{/* <Coloring /> */}
-					{/* <BlendingModes /> */}
-					{/* <DemoMaterials /> */}
-					{/* <Lines /> */}
-				</Canvas>
-			</Suspense>
-
-			{modelLoaded && (
-				<audio ref={audioRef} loop controls style={{ display: "none" }} preload="auto">
-					<source src="/Choir.mp3" type="audio/mpeg" />
-				</audio>
-			)}
+			<Canvas shadows camera={{ position: [0, 2, 10] }}>
+				<Perf position="top-left" />
+				<ambientLight intensity={0.5} />
+				<OrbitControls />
+				<Project />
+			</Canvas>
 		</>
 	);
 }
