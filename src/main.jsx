@@ -68,7 +68,7 @@ function App() {
 	// );
 	return (
 		<>
-			<Canvas shadows camera={{ position: [0, 2, 10] }}>
+			<Canvas shadows camera={{ position: [0, 0, 0] }}>
 				<Perf position="top-left" />
 				<ambientLight intensity={0.5} />
 				<OrbitControls />

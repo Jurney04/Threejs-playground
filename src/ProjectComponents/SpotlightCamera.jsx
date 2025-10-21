@@ -33,7 +33,7 @@ function SpotlightCamera() {
 				target={targetRef.current} // Reference the dummy target
 				color="white" // Fixed white color
 				angle={0.25} // Wider angle for visibility
-				penumbra={0.1} // Sharper edges
+				penumbra={0.5} // Sharper edges
 				intensity={200} // Increased brightness for reflection
 				castShadow // Enable shadows
 				shadow-mapSize-width={1024} // Shadow quality
