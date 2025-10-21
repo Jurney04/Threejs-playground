@@ -18,7 +18,7 @@ function TextComponent() {
 			<mesh ref={meshRef} position={[-30, -10, -50]} castShadow receiveShadow>
 				<textGeometry
 					args={[
-						"Welcome to expert Lab",
+						"HuuuuuuuH   Wha s gong on.",
 						{
 							font: font, // Use the loaded font
 							size: 5,

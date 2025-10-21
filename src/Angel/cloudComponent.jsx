@@ -11,6 +11,7 @@ function DefaultCloudComponent({
 	position = [0, 0, 0],
 	scale = 1,
 	base = [0.8, 0.9, 1.0], // Default soft blue-white; prop for variation
+	rotation = true,
 }) {
 	const meshRef = useRef();
 	const { camera } = useThree();
@@ -217,14 +218,14 @@ function DefaultCloudComponent({
 			meshRef.current.material.uniforms.steps.value = steps;
 		}
 	}, [position, scale, base, threshold, opacity, range, steps]);
-
-	useFrame(() => {
-		if (meshRef.current) {
-			meshRef.current.material.uniforms.cameraPos.value.copy(camera.position);
-			meshRef.current.rotation.y = -performance.now() / 7500; // Slow rotation from example for believable drift
-			meshRef.current.material.uniforms.frame.value++;
-		}
-	});
+	if (rotation === true)
+		useFrame(() => {
+			if (meshRef.current) {
+				meshRef.current.material.uniforms.cameraPos.value.copy(camera.position);
+				meshRef.current.rotation.y = -performance.now() / 7500; // Slow rotation from example for believable drift
+				meshRef.current.material.uniforms.frame.value++;
+			}
+		});
 
 	return <primitive object={meshRef.current} renderOrder={1} />;
 }
