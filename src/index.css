@@ -1,11 +1,30 @@
 html,
 body,
-#root
-{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+#root {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+@font-face {
+	font-family: Black_Mustang;
+	src: url(../public/fonts/Black_Mustang.ttf);
+}
+.textbox {
+	position: fixed;
+	background-color: rgb(31, 30, 30);
+	z-index: 1000;
+	bottom: 5%;
+	left: 45%;
+	padding: 0.5% 0.5%;
+	height: 10vh;
+	width: 10vw;
+	align-content: center;
+	border: 1px solid white;
+	color: white;
+	text-align: center;
+	font-family: Black_Mustang;
+	font-size: 2.5rem;
 }

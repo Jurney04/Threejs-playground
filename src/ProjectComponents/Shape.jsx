@@ -8,7 +8,8 @@ import { useFrame } from "@react-three/fiber";
 
 extend({ TextGeometry });
 
-function Shape({ texts, position = [0, 0, 0], size = 5, scale, rotation }) {
+function Shape({ texts, position = [0, 0, 0], size = 5, scale, rotation, onClick }) {
+	// Add onClick prop
 	const font = useLoader(FontLoader, "/fonts/Black_Mustang.json");
 	const meshRef = useRef();
 	const meshColorRef = useRef();
@@ -25,7 +26,6 @@ function Shape({ texts, position = [0, 0, 0], size = 5, scale, rotation }) {
 			if (meshColorRef.current && meshColorRef.current.material && meshColorRef.current.material[1]) {
 				meshColorRef.current.material[1].color = colorRef.current;
 			}
-
 			if (meshRef.current) {
 				meshRef.current.scale.lerp(new THREE.Vector3(1.1, 1.1, 1.1), delta * 5);
 			}
@@ -33,9 +33,8 @@ function Shape({ texts, position = [0, 0, 0], size = 5, scale, rotation }) {
 			colorRef.current.lerp(new THREE.Color(0.05, 0.05, 0.05), delta * 5);
 			colorRef2.current.lerp(new THREE.Color(0.5, 0.5, 0.5), delta * 5);
 			if (meshColorRef.current && meshColorRef.current.material && meshColorRef.current.material[1]) {
-				meshColorRef.current.material[1].color = colorRef.current; 
+				meshColorRef.current.material[1].color = colorRef.current;
 			}
-			
 			if (meshRef.current) {
 				meshRef.current.scale.lerp(new THREE.Vector3(1, 1, 1), delta * 5);
 				const floatOffset = Math.sin(state.clock.elapsedTime * 2) * 0.25;
@@ -45,13 +44,21 @@ function Shape({ texts, position = [0, 0, 0], size = 5, scale, rotation }) {
 		}
 	});
 
-	
 	if (!font) return null;
 	const depth = 25;
 	return (
 		<>
 			<group ref={meshRef} position={position} scale={scale} rotation={rotation}>
-				<mesh ref={meshColorRef} position={[0, 0, 0]} scale={1} castShadow receiveShadow onPointerOver={(e) => (e.stopPropagation(), hover(true))} onPointerOut={() => hover(false)}>
+				<mesh
+					ref={meshColorRef}
+					position={[0, 0, 0]}
+					scale={1}
+					castShadow
+					receiveShadow
+					onPointerOver={(e) => (e.stopPropagation(), hover(true))}
+					onPointerOut={() => hover(false)}
+					onPointerDown={(e) => (e.stopPropagation(), onClick && onClick())} // Add click handler
+				>
 					<textGeometry
 						args={[
 							texts,
@@ -82,7 +89,7 @@ function Shape({ texts, position = [0, 0, 0], size = 5, scale, rotation }) {
 								curveSegments: 12,
 								bevelEnabled: true,
 								bevelThickness: 0,
-								bevelSize: 0.1, 
+								bevelSize: 0.1,
 								bevelOffset: 0,
 								bevelSegments: 1,
 							},

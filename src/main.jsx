@@ -16,64 +16,40 @@ import DemoMaterials from "./scenes/DemoMaterials.jsx";
 import Lines from "./scenes/Lines.jsx";
 import Project from "./Project.jsx";
 import { AmbientLight } from "three";
-//
-//
+import TextBox from "./ProjectComponents/TextBox";
+
 function App() {
-	// const audioRef = useRef(null);
-	// const [modelLoaded, setModelLoaded] = useState(false);
+	const [selectedText, setSelectedText] = useState(""); // State for textbox text
+	const [selectedShape, setSelectedShape] = useState(""); // State for selected shape
 
-	// useEffect(() => {
-	// 	if (modelLoaded && audioRef.current) {
-	// 		const audio = audioRef.current;
-	// 		audio.volume = 0.5;
-	// 		const playAudio = () => {
-	// 			audio.play().catch((error) => {
-	// 				console.log("Autoplay blocked. Waiting for user interaction:", error);
-	// 				const enableOnClick = () => {
-	// 					audio.play();
-	// 					document.removeEventListener("click", enableOnClick);
-	// 				};
-	// 				document.addEventListener("click", enableOnClick, { once: true });
-	// 			});
-	// 		};
-	// 		playAudio();
-	// 	}
-	// }, [modelLoaded]);
+	// Handler for shape click
+	const handleShapeClick = (shapeText) => {
+		setSelectedText(shapeText);
+		setSelectedShape(shapeText);
+	};
 
-	// return (
-	// 	<>
-	// 		<Suspense fallback={<div>Loading...</div>}>
-	// 			<Canvas camera={{ position: [0, 2, 10] }}>
-	// 				<Perf position="top-left" />
-	// 				<OrbitControls />
+	// Handler for textbox click
+	const handleTextboxClick = () => {
+		if (selectedShape === "Welcome") {
+			window.location.href = "/welcome-link"; // Replace with your link
+		} else if (selectedShape === "To") {
+			window.location.href = "/to-link"; // Replace with your link
+		} else if (selectedShape === "My") {
+			window.location.href = "/my-link"; // Replace with your link
+		} else if (selectedShape === "World") {
+			window.location.href = "/world-link"; // Replace with your link
+		} // Add more as needed
+	};
 
-	// 				{/* <BasicDemo /> */}
-	// 				{/* <Circles /> */}
-	// 				{/* <Angel position={[0, 0, 0]} /> */}
-	// 				{/* <FullAngelScene onModelLoad={() => setModelLoaded(true)} /> */}
-	// 				{/* <Coloring /> */}
-	// 				{/* <BlendingModes /> */}
-	// 				{/* <DemoMaterials /> */}
-	// 				{/* <Lines /> */}
-
-	// 			</Canvas>
-	// 		</Suspense>
-
-	// 		{modelLoaded && (
-	// 			<audio ref={audioRef} loop controls style={{ display: "none" }} preload="auto">
-	// 				<source src="/Choir.mp3" type="audio/mpeg" />
-	// 			</audio>
-	// 		)}
-	// 	</>
-	// );
 	return (
 		<>
 			<Canvas shadows camera={{ position: [0, 0, 0] }}>
 				<Perf position="top-left" />
 				<ambientLight intensity={0.5} />
 				<OrbitControls />
-				<Project />
+				<Project onShapeClick={handleShapeClick} /> {/* Pass handler to Project */}
 			</Canvas>
+			<TextBox selectedText={selectedText} onClick={handleTextboxClick} /> {/* Pass text and click handler */}
 		</>
 	);
 }
