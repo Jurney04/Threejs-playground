@@ -8,8 +8,7 @@ import BackgroundPlane from "./ProjectComponents/BackgroundPlane";
 import SpotlightBackground from "./ProjectComponents/SpotlightBackground";
 
 function Project({ onShapeClick }) {
-	// Accept onShapeClick prop
-	const texts = ["Welcome to my project", "We are going on an adventure", "And when we are done", "Your mind will be blown", "up..."];
+	// const texts = ["Welcome to my project", "We are going on an adventure", "And when we are done", "Your mind will be blown", "up..."];
 
 	return (
 		<>
