@@ -7,38 +7,34 @@ import { useFrame } from "@react-three/fiber";
 
 extend({ TextGeometry });
 
-function TextComponent({ texts, position = [0, 0, 0], size = 5, typingSpeed = 100, pauseBetween = 2000 }) {
-	// Accept texts (string or array), position, size, typingSpeed (ms per char), pauseBetween (ms between sentences)
-	// Load the font using FontLoader (via useLoader from react-three-fiber)
+function TypingText({ texts, position = [0, 0, 0], size = 5, typingSpeed = 100, pauseBetween = 2000 }) {
+	
 	const font = useLoader(FontLoader, "/fonts/Black_Mustang.json");
 
 	const lightRef = useRef();
-	const colorRef = useRef(new THREE.Color()); // Use a ref for the color object
-	// Ref for the mesh
+	const colorRef = useRef(new THREE.Color()); 
+	
 	const meshRef = useRef();
 
-	// Normalize texts to array, handle undefined/null
 	const textArray = texts ? (Array.isArray(texts) ? texts : [texts]) : [];
 
-	// State for the displayed text (typewriter effect)
+	
 	const [displayedText, setDisplayedText] = useState("");
-	// State for current sentence index
+	
 	const [currentIndex, setCurrentIndex] = useState(0);
-	// State for typing phase
+	
 	const [isTyping, setIsTyping] = useState(true);
 
 	useEffect(() => {
 		if (meshRef.current && font) {
-			// Compute the bounding box and center the geometry
 			const geometry = meshRef.current.geometry;
 			geometry.computeBoundingBox();
 			const center = new THREE.Vector3();
 			geometry.boundingBox.getCenter(center);
-			geometry.translate(-center.x, -center.y, -center.z); // Center the geometry
+			geometry.translate(-center.x, -center.y, -center.z);
 		}
 	}, [font, displayedText, size]);
 
-	// Typewriter and sequence effect
 	useEffect(() => {
 		if (!textArray || textArray.length === 0 || currentIndex >= textArray.length) return;
 
@@ -51,27 +47,25 @@ function TextComponent({ texts, position = [0, 0, 0], size = 5, typingSpeed = 10
 				i++;
 				if (i >= currentText.length) {
 					clearInterval(interval);
-					setIsTyping(false); // Switch to pause phase
+					setIsTyping(false); 
 				}
 			}, typingSpeed);
 			return () => clearInterval(interval);
 		} else {
-			// Pause phase
 			const timeout = setTimeout(() => {
 				setCurrentIndex((prev) => prev + 1);
-				setDisplayedText(""); // Clear text for next sentence
-				setIsTyping(true); // Start typing next
+				setDisplayedText(""); 
+				setIsTyping(true); 
 			}, pauseBetween);
 			return () => clearTimeout(timeout);
 		}
 	}, [currentIndex, isTyping, textArray, typingSpeed, pauseBetween]);
 
 	useFrame((state, delta) => {
-		// Cycle hue from 0 to 1 over time for a rainbow effect
-		const hue = (state.clock.elapsedTime * 0.1) % 1; // Adjust 0.1 for speed
-		colorRef.current.setHSL(hue, 1, 0.5); // Full saturation, medium lightness
+		const hue = (state.clock.elapsedTime * 0.1) % 1; 
+		colorRef.current.setHSL(hue, 1, 0.5); 
 		if (lightRef.current) {
-			lightRef.current.color = colorRef.current; // Update the light's color
+			lightRef.current.color = colorRef.current;
 		}
 	});
 	return (
@@ -100,4 +94,4 @@ function TextComponent({ texts, position = [0, 0, 0], size = 5, typingSpeed = 10
 	);
 }
 
-export default TextComponent;
+export default TypingText;
