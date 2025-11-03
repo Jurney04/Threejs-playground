@@ -3,44 +3,29 @@ import { useRef } from "react";
 import * as THREE from "three";
 import { extend } from "@react-three/fiber";
 
-// Extend Three.js SpotLight for JSX use
 extend({ SpotLight: THREE.SpotLight });
 
 function SpotlightCamera() {
 	const lightRef = useRef();
-	const targetRef = useRef(new THREE.Object3D()); // Dummy target object
-	const { camera, mouse, raycaster } = useThree(); // Access camera, mouse, and raycaster
+	const targetRef = useRef(new THREE.Object3D());
+	const { camera, mouse, raycaster } = useThree();
 
 	useFrame(() => {
-		// Position the light slightly in front of the static camera
-		lightRef.current.position.set(0, 2, 0); // Closer to camera for clear beam
+		lightRef.current.position.set(0, 2, 0);
 
-		// Use raycasting to target the mouse on the text's plane (z=-75)
-		const plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 25); // Plane at z=-75
-		raycaster.setFromCamera(mouse, camera); // Ray from camera through mouse
+		const plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 25);
+		raycaster.setFromCamera(mouse, camera);
 		const intersection = new THREE.Vector3();
-		raycaster.ray.intersectPlane(plane, intersection); // Find intersection
+		raycaster.ray.intersectPlane(plane, intersection);
 		if (intersection) {
-			targetRef.current.position.copy(intersection); // Set target to intersection
+			targetRef.current.position.copy(intersection);
 		}
 	});
 
 	return (
 		<>
 			<primitive object={targetRef.current} />
-			<spotLight
-				ref={lightRef}
-				target={targetRef.current} // Reference the dummy target
-				color="white" // Fixed white color
-				angle={0.25} // Wider angle for visibility
-				penumbra={0.5} // Sharper edges
-				intensity={200} // Increased brightness for reflection
-				castShadow // Enable shadows
-				shadow-mapSize-width={1024} // Shadow quality
-				shadow-mapSize-height={1024}
-				distance={200} // Longer range
-				decay={0.5} // Reduced falloff for sustained brightness
-			/>
+			<spotLight ref={lightRef} target={targetRef.current} color="white" angle={0.25} penumbra={0.5} intensity={200} castShadow shadow-mapSize-width={1024} shadow-mapSize-height={1024} distance={200} decay={0.5} />
 		</>
 	);
 }
