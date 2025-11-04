@@ -12,6 +12,7 @@ import Angel from "../scenes/Angel.jsx";
 import FullAngelScene from "../scenes/FullAngelScene.jsx";
 import Project from "../Project.jsx";
 import TextBox from "../ProjectComponents/TextBox";
+import Scene from "../scenes/MachineRoom";
 
 function RouterSetup() {
 	const [selectedText, setSelectedText] = useState(""); // State for textbox text
@@ -48,7 +49,7 @@ function RouterSetup() {
 			case "my":
 				return <Angel position={[0, 0, 0]} />;
 			case "world":
-				return <FullAngelScene />;
+				return <FullAngelScene position={[0, 0, 0]} />;
 			default:
 				return <Project onShapeClick={handleShapeClick} />;
 		}
@@ -56,12 +57,15 @@ function RouterSetup() {
 
 	return (
 		<>
-			<div style={{ width: "100%", height: "100vh", position: "absolute" }}>
-				<Canvas shadows camera={{ position: [0, 0, 0] }} style={{ width: "100%", height: "100%", display: "block" }}>
+			<div style={{ width: "100%", height: "100%", position: "absolute" }}>
+				{/* <Canvas shadows camera={{ position: [0, 0, 0] }} style={{ width: "100%", height: "100%", display: "block" }}>
 					<Perf position="top-left" />
 					<ambientLight intensity={0.5} />
 					<OrbitControls />
 					<Suspense fallback={null}>{renderScene()}</Suspense>
+				</Canvas> */}
+				<Canvas shadows camera={{ position: [0, 1.2, 10], fov: 60 }}>
+					<Scene />
 				</Canvas>
 			</div>
 			{currentScene === "project" && <TextBox selectedText={selectedText} onClick={handleTextboxClick} />}

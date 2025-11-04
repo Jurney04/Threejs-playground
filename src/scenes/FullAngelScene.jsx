@@ -21,31 +21,28 @@ export function FullAngelScene({ onModelLoad }) {
 			<SceneLightsAndFog />
 
 			<CloudComponent
-				position={[-1.5, 20, 0]}
+				position={[0, 20, -25]}
 				scale={[15, 80, 15]}
-				threshold={0.75}
-				opacity={0.04}
+				threshold={0.7}
+				opacity={0.07}
 				range={0.8}
-				steps={500}
-				g={0.7}
-				rayVisibility={0.5}
+				steps={600}
+				g={0.85}
+				rayVisibility={1.2}
 				enableRays={true}
-				lightPosition={lightPosition}
-				lightDirection={lightDirection}
-				lightColor={lightColor}
-				lightAngle={lightAngle}
-				lightIntensity={lightIntensity}
-				base={[0.8, 0.8, 0.8]}
-				frustumCulled={false}
-				renderOrder={1}
+				lightPosition={[0, 15, -5]}
+				lightDirection={[0, -0.5, -0.3]}
+				lightColor={[1.0, 0.95, 0.85]}
+				lightIntensity={2.5}
+				base={[1.0, 0.95, 0.9]}
 			/>
 
-			<CloudComponent position={[-50, 15, -65]} scale={[80, 50, 50]} threshold={0.8175} opacity={0.5} range={0.7} steps={500} g={0} enableRays={false} base={[0.35, 0.35, 0.35]} frustumCulled={false} renderOrder={1} />
+			<CloudComponent position={[-60, -5, -65]} scale={[80, 50, 50]} threshold={0.8175} opacity={0.5} range={0.7} steps={500} g={0} enableRays={false} base={[0.35, 0.35, 0.35]} frustumCulled={false} renderOrder={1} rotation="false" />
 
-			<CloudComponent position={[25, 40, -35]} scale={[50, 40, 40]} threshold={0.8175} opacity={0.5} range={0.8} steps={500} g={0} enableRays={false} base={[0.35, 0.35, 0.35]} frustumCulled={false} renderOrder={1} />
+			<CloudComponent position={[25, 30, -35]} scale={[50, 40, 40]} threshold={0.8175} opacity={0.5} range={0.8} steps={500} g={0} enableRays={false} base={[0.35, 0.35, 0.35]} frustumCulled={false} renderOrder={1} rotation="false" />
 
-			<InstancedAngel position={[0, 0, 0]} onModelLoad={onModelLoad} />
+			<InstancedAngel position={[1.5, 5, -20]} onModelLoad={onModelLoad} />
 		</>
 	);
-}	
+}
 export default FullAngelScene;
