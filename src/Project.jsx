@@ -13,7 +13,8 @@ function Project({ onShapeClick }) {
 	return (
 		<>
 			<SpotlightCamera />
-			<ambientLight intensity={0.1} />
+			{/* <ambientLight intensity={0.1} /> */}
+			<ambientLight intensity={0.5} />
 			<mesh position={[5, 0, -70]}>
 				<planeGeometry args={[275, 200]} />
 				<meshStandardMaterial color="grey" opacity={0.5} transparent />

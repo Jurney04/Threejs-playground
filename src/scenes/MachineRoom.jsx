@@ -4,7 +4,6 @@ import * as THREE from "three";
 import { useTexture } from "@react-three/drei";
 import { EffectComposer, Bloom, Vignette } from "@react-three/postprocessing";
 import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader";
-import { normalMap } from "three/tsl";
 
 extend({ SpotLight: THREE.SpotLight });
 
@@ -185,7 +184,7 @@ function CorridorSegment({ segmentData, gearGeometries, normalMapMultiplier = 10
 			</mesh>
 
 			{/* Ceiling lamps */}
-			{Array.from({ length: 6 }).map((_, i) => {
+			{/* {Array.from({ length: 6 }).map((_, i) => {
 				const zPos = segmentData.z + (i / 6) * SEGMENT_LENGTH - SEGMENT_LENGTH / 2;
 				return (
 					<mesh key={`lamp-${i}-${segmentData.z}`} position={[0, 2.2, zPos]} ref={(r) => (lampRefs.current[i] = r)}>
@@ -193,7 +192,7 @@ function CorridorSegment({ segmentData, gearGeometries, normalMapMultiplier = 10
 						<meshStandardMaterial emissive="#ff7b33" emissiveIntensity={0.5} color="#000" />
 					</mesh>
 				);
-			})}
+			})} */}
 
 			{/* Gears */}
 			{segmentData.gears.map((g, i) => {
@@ -221,7 +220,7 @@ function CorridorSegment({ segmentData, gearGeometries, normalMapMultiplier = 10
 }
 
 // Main Corridor Component
-export default function MachineCorridorScroll() {
+export default function MachineCorridor() {
 	const [segments, setSegments] = useState(() => Array.from({ length: VIEW_DISTANCE }, (_, i) => generateCorridorSegment(-SEGMENT_LENGTH + i * SEGMENT_LENGTH)));
 	const [scrollSpeed, setScrollSpeed] = useState(0);
 	const scroll = useRef(0);
@@ -239,9 +238,8 @@ export default function MachineCorridorScroll() {
 		return () => window.removeEventListener("wheel", handleScroll);
 	}, []);
 
-	// Frame loop
 	useFrame(({ camera }) => {
-		scroll.current += scrollSpeed * 2;
+		scroll.current += scrollSpeed;
 		setScrollSpeed((s) => s * DAMPING);
 
 		camera.position.z = scroll.current;
@@ -254,11 +252,21 @@ export default function MachineCorridorScroll() {
 			spotRef.current.target = targetRef.current;
 		}
 
-		// Generate new segments ahead
+		if (!segments.length) return;
+
+		const firstSegment = segments[0];
 		const lastSegment = segments[segments.length - 1];
-		if (camera.position.z > lastSegment.z - SEGMENT_LENGTH / 2) {
+
+		if (camera.position.z > lastSegment.z - SEGMENT_LENGTH * 0.8) {
 			const newZ = lastSegment.z + SEGMENT_LENGTH;
-			setSegments((prev) => [...prev.slice(1), generateCorridorSegment(newZ)]);
+			setSegments((prev) => {
+				if (prev[prev.length - 1]?.z === newZ) return prev;
+				return [...prev, generateCorridorSegment(newZ)];
+			});
+		}
+
+		if (camera.position.z - firstSegment.z > SEGMENT_LENGTH * 2.5) {
+			setSegments((prev) => prev.slice(1));
 		}
 	});
 
@@ -267,14 +275,12 @@ export default function MachineCorridorScroll() {
 			<color attach="background" args={["#050505"]} />
 			<fog attach="fog" args={["#050505", 6, 80]} />
 
-			{/* Lights */}
 			<ambientLight intensity={0.4} color="#b85a28" />
 			<pointLight position={[0, 3, 5]} intensity={0.5} color="#ff7b33" distance={20} />
 			<pointLight position={[0, 2, -10]} intensity={0.3} color="#ff6b22" distance={30} />
 			<spotLight ref={spotRef} intensity={200} angle={1} penumbra={1} color="#fcdb96" distance={50} decay={1.5} castShadow={false} />
 			<primitive ref={targetRef} object={new THREE.Object3D()} />
 
-			{/* Corridor */}
 			{segments.map((seg, i) => (
 				<CorridorSegment key={i} segmentData={seg} gearGeometries={gearGeometries} normalMapMultiplier={normalMapMultiplier} />
 			))}
