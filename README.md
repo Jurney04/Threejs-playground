@@ -46,3 +46,9 @@ npm install
 
 # 3️⃣ Start the development server
 npm run dev
+```
+
+To continue from the startscreen
+1. Click on one of the words
+2. Click the button at the bottom of the screen
+3. Each word leads to a different scene
