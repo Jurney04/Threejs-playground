@@ -1,40 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 🧠 Three.js Playground
 
-## Getting Started
+A collection of small 3D experiments and demos built with **React**, **Three.js**, and **Vite**.  
+This is my personal sandbox for learning and testing creative web-3D ideas — from simple shapes and animations to more complex interactive scenes.
 
-First, run the development server:
+---
+
+## 🚧 Project Status
+> **Currently in development** — I’m actively adding new experiments, refining components, and trying out new Three.js concepts.
+
+---
+
+## 🧩 Overview
+This project is structured as a React app containing multiple Three.js demos.  
+Each experiment explores a specific feature or concept in 3D graphics — such as lighting, materials, motion, and camera movement.
+
+| Demo | Description |
+|------|--------------|
+| Circles | Basic use of circle that are animated the turn around eachother |
+| Angel | Custom Angel where the use of textures and materials is used |
+| FullAngel | This is a extra step above Angel, where i added volumetric cloud and lighting |
+| MachineRoom| This is a proceduraly generating hallway with gears and pipes |
+
+
+---
+
+## 🛠️ Tech Stack
+- ⚛️ **React** – component-based structure for reusable scenes  
+- 🎨 **Three.js** – 3D rendering and WebGL engine  
+- ⚡ **Vite** – fast dev server and build system  
+- 💅 **CSS / SCSS** – for styling and layout
+
+---
+
+## 🚀 Getting Started
+
+To run the project locally:
 
 ```bash
+# 1️⃣ Clone the repository
+git clone https://github.com/Jurney04/Threejs-playground.git
+cd Threejs-playground
+
+# 2️⃣ Install dependencies
+npm install
+
+# 3️⃣ Start the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
