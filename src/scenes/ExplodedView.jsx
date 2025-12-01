@@ -1,8 +1,13 @@
 import React, { useRef, useEffect, useMemo } from "react";
-import { useFBX, useTexture } from "@react-three/drei";
+import { useFBX } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import BackgroundPlane from "../ProjectComponents/BackgroundPlane";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function Model({ url }) {
 	const group = useRef();
@@ -20,14 +25,14 @@ function Model({ url }) {
 	useEffect(() => {
 		const parts = [];
 		const materials = [
-			new THREE.MeshStandardMaterial({ color: 0x0000ff, roughness: 0.5, metalness: 0.9, transparent: false, opacity: 1.0, side: THREE.DoubleSide }), //blue
-			new THREE.MeshStandardMaterial({ color: "ffffff", roughness: 0.3, metalness: 0.9, transparent: true, opacity: 0.3, side: THREE.DoubleSide }), //white
-			new THREE.MeshStandardMaterial({ color: "ffffff", roughness: 0.3, metalness: 0.9, transparent: true, opacity: 0.3, side: THREE.DoubleSide }), //white
-			new THREE.MeshStandardMaterial({ color: "black", roughness: 0.3, metalness: 0.9, transparent: false, opacity: 1.0, side: THREE.DoubleSide }), // black
-			new THREE.MeshStandardMaterial({ color: "ffffff", roughness: 0.3, metalness: 0.9, transparent: true, opacity: 0.3, side: THREE.DoubleSide }), //white
-			new THREE.MeshStandardMaterial({ color: "gold", roughness: 0.3, metalness: 0.9, transparent: false, opacity: 1.0, side: THREE.DoubleSide }), //gold
-			new THREE.MeshStandardMaterial({ color: "gold", roughness: 0.1, metalness: 1.0, transparent: false, opacity: 1.0, side: THREE.DoubleSide }), // gold
-			new THREE.MeshStandardMaterial({ color: 0x0000ff, roughness: 0.5, metalness: 0.9, transparent: false, opacity: 1.0, side: THREE.DoubleSide }), //blue
+			new THREE.MeshStandardMaterial({ color: "blue", roughness: 1, metalness: 0.5, transparent: false, opacity: 1.0, side: THREE.DoubleSide }),
+			new THREE.MeshStandardMaterial({ color: "white", roughness: 0.3, metalness: 0.9, transparent: true, opacity: 0.3, side: THREE.DoubleSide }),
+			new THREE.MeshStandardMaterial({ color: "white", roughness: 0.3, metalness: 0.9, transparent: true, opacity: 0.3, side: THREE.DoubleSide }),
+			new THREE.MeshStandardMaterial({ color: "black", roughness: 0.3, metalness: 0.9, transparent: false, opacity: 1.0, side: THREE.DoubleSide }),
+			new THREE.MeshStandardMaterial({ color: "white", roughness: 0.3, metalness: 0.9, transparent: true, opacity: 0.3, side: THREE.DoubleSide }),
+			new THREE.MeshStandardMaterial({ color: "gold", roughness: 0.3, metalness: 0.9, transparent: false, opacity: 1.0, side: THREE.DoubleSide }),
+			new THREE.MeshStandardMaterial({ color: "gold", roughness: 0.1, metalness: 1.0, transparent: false, opacity: 1.0, side: THREE.DoubleSide }),
+			new THREE.MeshStandardMaterial({ color: "blue", roughness: 1, metalness: 0.5, transparent: false, opacity: 1.0, side: THREE.DoubleSide }),
 		];
 
 		clonedFbx.traverse((child) => {
@@ -39,79 +44,13 @@ function Model({ url }) {
 			}
 		});
 		const timeline = gsap.timeline({
-			repeat: -1,
-			yoyo: true,
-			repeatDelay: 1,
+			// repeat: -1,
+			// yoyo: true,
+			// repeatDelay: 1,
 		});
-
-		// Animate parts in groups: 0 and 7 together, 1 and 2 together, 3-6 together
-		timeline
-			.fromTo(
-				[parts[0], parts[7]], // top cover and cap
-				{
-					x: (i, target) => target.originalPosition.x,
-					y: (i, target) => target.originalPosition.y,
-					z: (i, target) => target.originalPosition.z,
-					rotationX: (i, target) => target.originalRotation.x,
-					rotationY: (i, target) => target.originalRotation.y,
-					rotationZ: (i, target) => target.originalRotation.z,
-				},
-				{
-					x: (i, target) => target.originalPosition.x * 3.0,
-					y: (i, target) => target.originalPosition.y * 3.0,
-					z: (i, target) => target.originalPosition.z * 3.0,
-					rotationX: `+=${Math.PI}`,
-					rotationY: `+=${Math.PI * 2}`,
-					duration: 1.5,
-					ease: "power2.inOut",
-				}
-			)
-			.fromTo(
-				[parts[1], parts[2]], // plastic linings
-				{
-					x: (i, target) => target.originalPosition.x,
-					y: (i, target) => target.originalPosition.y,
-					z: (i, target) => target.originalPosition.z,
-					rotationX: (i, target) => target.originalRotation.x,
-					rotationY: (i, target) => target.originalRotation.y,
-					rotationZ: (i, target) => target.originalRotation.z,
-				},
-				{
-					x: (i, target) => target.originalPosition.x * 3.0,
-					y: (i, target) => target.originalPosition.y * 3.0,
-					z: (i, target) => target.originalPosition.z * 3.0,
-					rotationX: `+=${Math.PI}`,
-					rotationY: `+=${Math.PI * 2}`,
-					duration: 1.5,
-					ease: "power2.inOut",
-				},
-				"<"
-			)
-			.fromTo(
-				[parts[3], parts[4], parts[5], parts[6]], // tube, metal cap, ball holder, rolling ball
-				{
-					x: (i, target) => target.originalPosition.x,
-					y: (i, target) => target.originalPosition.y,
-					z: (i, target) => target.originalPosition.z,
-					rotationX: (i, target) => target.originalRotation.x,
-					rotationY: (i, target) => target.originalRotation.y,
-					rotationZ: (i, target) => target.originalRotation.z,
-				},
-				{
-					x: (i, target) => target.originalPosition.x * 3.0,
-					y: (i, target) => target.originalPosition.y * 3.0,
-					z: (i, target) => target.originalPosition.z * 3.0,
-					rotationX: `+=${Math.PI}`,
-					rotationY: `+=${Math.PI * 2}`,
-					duration: 1.5,
-					ease: "power2.inOut",
-				},
-				"<"
-			);
 
 		return () => {
 			timeline.kill();
-			// Restore original state on cleanup
 			parts.forEach((part) => {
 				if (part.originalPosition) {
 					part.position.copy(part.originalPosition);
@@ -126,9 +65,15 @@ function Model({ url }) {
 	useEffect(() => {
 		if (group.current) {
 			const timeline = gsap.timeline({
-				repeat: -1,
-				yoyo: true,
-				repeatDelay: 1,
+				scrollTrigger: {
+					trigger: "body",
+					start: "top top",
+					end: "bottom bottom",
+					scrub: 2,
+				},
+				// repeat: -1,
+				// yoyo: true,
+				// repeatDelay: 1,
 			});
 
 			timeline
@@ -282,8 +227,12 @@ export default function ExplodedView() {
 		<>
 			<ambientLight intensity={1.5} />
 			<directionalLight position={[10, 10, 5]} intensity={2.5} />
+			<BackgroundPlane />
+			<mesh position={[5, 0, -70]}>
+				<planeGeometry args={[275, 200]} />
+				<meshStandardMaterial color="grey" opacity={0.9} transparent />
+			</mesh>
 			<Model url="/BIC-static.fbx" />
-			<color color="#000000" background />
 		</>
 	);
 }
