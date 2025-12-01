@@ -13,6 +13,7 @@ import FullAngelScene from "../scenes/FullAngelScene.jsx";
 import Project from "../Project.jsx";
 import TextBox from "../ProjectComponents/TextBox";
 import MachineCorridor from "../scenes/MachineRoom";
+import ExplodedView from "../scenes/ExplodedView.jsx";
 
 function RouterSetup() {
 	const [selectedText, setSelectedText] = useState(""); // State for textbox text
@@ -59,10 +60,10 @@ function RouterSetup() {
 		<>
 			<div style={{ width: "100%", height: "100%", position: "absolute" }}>
 				<Canvas shadows camera={{ position: [0, 0, 0] }} style={{ width: "100%", height: "100%", display: "block" }}>
-					<Perf position="top-left" />
-					
+					{/* <Perf position="top-left" /> */}
 					<OrbitControls />
-					<Suspense fallback={null}>{renderScene()}</Suspense>
+					{/* <Suspense fallback={null}>{renderScene()}</Suspense> */}
+					<ExplodedView />
 				</Canvas>
 			</div>
 			{currentScene === "project" && <TextBox selectedText={selectedText} onClick={handleTextboxClick} />}
