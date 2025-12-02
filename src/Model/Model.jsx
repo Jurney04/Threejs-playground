@@ -102,383 +102,45 @@ function Model({ url }) {
 			});
 
 			timeline
-				.to(
-					group.current.rotation,
-					{
-						x: -0.25,
-						z: 0.5,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"0.5"
-				)
-				.to(
-					group.current.position,
-					{
-						x: 2.25,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"0.5"
-				)
-				.to(
-					group.current.scale,
-					{
-						x: 1.25,
-						y: 1.25,
-						z: 1.25,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"3"
-				)
-				.to(
-					group.current.children[0].position,
-					{
-						y: 0.5,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"4"
-				)
-				.to(
-					group.current.children[7].position,
-					{
-						y: -1,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"4"
-				)
-				.to(
-					group.current.children[1].position,
-					{
-						x: -0.5,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"5"
-				)
-				.to(
-					group.current.children[1].rotation,
-					{
-						y: -0.5,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"5"
-				)
-				.to(
-					group.current.children[2].position,
-					{
-						x: 0.5,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"5"
-				)
-				.to(
-					group.current.children[2].rotation,
-					{
-						y: -0.5,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"5"
-				)
-				.to(
-					group.current.children[3].position,
-					{
-						y: 0.5,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"5"
-				)
-				.to(
-					group.current.children[4].position,
-					{
-						y: 0.35,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"4"
-				)
-				.to(
-					group.current.children[5].position,
-					{
-						y: 0.15,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"4"
-				)
-				.to(
-					group.current.children[6].position,
-					{
-						y: 0.15,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"4"
-				)
-				.to(
-					group.current.rotation,
-					{
-						z: 1.575,
-						x: 0,
-						y: 0,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"5.5"
-				)
-				.to(
-					group.current.position,
-					{
-						x: 3,
-						y: -0,
-						z: -1,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"5.5"
-				)
-				.to(
-					group.current.position,
-					{
-						x: 6.5,
-						y: -0.5,
-						z: -1,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"7"
-				)
-				.to(
-					group.current.rotation,
-					{
-						z: 0,
-
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"9"
-				)
-				.to(
-					group.current.position,
-					{
-						x: 0,
-						y: -6,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"9"
-				)
-				.to(
-					group.current.position,
-					{
-						x: 0,
-						y: -3.5,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"11"
-				)
-				.to(
-					group.current.children[7].position,
-					{
-						x: 0,
-						y: -3,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"11"
-				)
-				.to(
-					group.current.position,
-					{
-						x: -1.4,
-						y: -0.15,
-						z: 2.3,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"13"
-				)
-				.to(
-					group.current.rotation,
-					{
-						x: -1.5,
-						z: -0.5,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"13"
-				)
-				.to(
-					group.current.position,
-					{
-						x: -2.2,
-						y: -0.15,
-						z: 1.8,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"15"
-				)
-				.to(
-					group.current.rotation,
-					{
-						x: -1.5,
-						z: -0.75,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"15"
-				)
-				.to(
-					group.current.children[5].position,
-					{
-						y: 0.35,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"15"
-				)
-				.to(
-					group.current.children[6].position,
-					{
-						y: 0.35,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"15"
-				)
-				.to(
-					group.current.position,
-					{
-						x: 0,
-						y: 3.2,
-						z: -1,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"17"
-				)
-				.to(
-					group.current.rotation,
-					{
-						x: -3.14,
-						z: 0,
-						y: 0,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"17"
-				)
-				.to(
-					group.current.position,
-					{
-						x: 0,
-						y: 3.2,
-						z: -2,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"19"
-				)
-				.to(
-					group.current.children[0].position,
-					{
-						y: 0,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"20"
-				)
-				.to(
-					group.current.children[3].position,
-					{
-						y: 0,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"20"
-				)
-				.to(
-					group.current.children[4].position,
-					{
-						y: 0,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"20"
-				)
-				.to(
-					group.current.children[5].position,
-					{
-						y: 0,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"20"
-				)
-				.to(
-					group.current.children[6].position,
-					{
-						y: 0,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"20"
-				)
-				.to(
-					group.current.children[1].position,
-					{
-						x: 0,
-						duration: 3,
-						ease: "power1.inOut",
-					},
-					"21"
-				)
-				.to(
-					group.current.children[2].position,
-					{
-						x: 0,
-						duration: 3,
-						ease: "power1.inOut",
-					},
-					"21"
-				)
-				.to(
-					group.current.rotation,
-					{
-						y: 6.2,
-						duration: 3,
-						ease: "power1.inOut",
-					},
-					"21"
-				)
-				.to(
-					group.current.children[7].position,
-					{
-						y: 0,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"24"
-				)
-				.to(
-					group.current.position,
-					{
-						y: 5,
-						z: -5,
-						duration: 2,
-						ease: "power1.inOut",
-					},
-					"24"
-				);
+				.to(group.current.rotation, { x: -0.25, z: 0.5, duration: 2, ease: "power1.inOut" }, "0.5")
+				.to(group.current.position, { x: 2.25, duration: 2, ease: "power1.inOut" }, "0.5")
+				.to(group.current.scale, { x: 1.25, y: 1.25, z: 1.25, duration: 2, ease: "power1.inOut" }, "3")
+				.to(group.current.children[0].position, { y: 0.5, duration: 2, ease: "power1.inOut" }, "4")
+				.to(group.current.children[7].position, { y: -1, duration: 2, ease: "power1.inOut" }, "4")
+				.to(group.current.children[1].position, { x: -0.5, duration: 2, ease: "power1.inOut" }, "5")
+				.to(group.current.children[1].rotation, { y: -0.5, duration: 2, ease: "power1.inOut" }, "5")
+				.to(group.current.children[2].position, { x: 0.5, duration: 2, ease: "power1.inOut" }, "5")
+				.to(group.current.children[2].rotation, { y: -0.5, duration: 2, ease: "power1.inOut" }, "5")
+				.to(group.current.children[3].position, { y: 0.5, duration: 2, ease: "power1.inOut" }, "5")
+				.to(group.current.children[4].position, { y: 0.35, duration: 2, ease: "power1.inOut" }, "4")
+				.to(group.current.children[5].position, { y: 0.15, duration: 2, ease: "power1.inOut" }, "4")
+				.to(group.current.children[6].position, { y: 0.15, duration: 2, ease: "power1.inOut" }, "4")
+				.to(group.current.rotation, { z: 1.575, x: 0, y: 0, duration: 2, ease: "power1.inOut" }, "5.5")
+				.to(group.current.position, { x: 3, y: -0, z: -1, duration: 2, ease: "power1.inOut" }, "5.5")
+				.to(group.current.position, { x: 6.5, y: -0.5, z: -1, duration: 2, ease: "power1.inOut" }, "7")
+				.to(group.current.rotation, { z: 0, duration: 2, ease: "power1.inOut" }, "9")
+				.to(group.current.position, { x: 0, y: -6, duration: 2, ease: "power1.inOut" }, "9")
+				.to(group.current.position, { x: 0, y: -3.5, duration: 2, ease: "power1.inOut" }, "11")
+				.to(group.current.children[7].position, { x: 0, y: -3, duration: 2, ease: "power1.inOut" }, "11")
+				.to(group.current.position, { x: -1.4, y: -0.15, z: 2.3, duration: 2, ease: "power1.inOut" }, "13")
+				.to(group.current.rotation, { x: -1.5, z: -0.5, duration: 2, ease: "power1.inOut" }, "13")
+				.to(group.current.position, { x: -2.2, y: -0.15, z: 1.8, duration: 2, ease: "power1.inOut" }, "15")
+				.to(group.current.rotation, { x: -1.5, z: -0.75, duration: 2, ease: "power1.inOut" }, "15")
+				.to(group.current.children[5].position, { y: 0.35, duration: 2, ease: "power1.inOut" }, "15")
+				.to(group.current.children[6].position, { y: 0.35, duration: 2, ease: "power1.inOut" }, "15")
+				.to(group.current.position, { x: 0, y: 3.2, z: -1, duration: 2, ease: "power1.inOut" }, "17")
+				.to(group.current.rotation, { x: -3.14, z: 0, y: 0, duration: 2, ease: "power1.inOut" }, "17")
+				.to(group.current.position, { x: 0, y: 3.2, z: -2, duration: 2, ease: "power1.inOut" }, "19")
+				.to(group.current.children[0].position, { y: 0, duration: 2, ease: "power1.inOut" }, "20")
+				.to(group.current.children[3].position, { y: 0, duration: 2, ease: "power1.inOut" }, "20")
+				.to(group.current.children[4].position, { y: 0, duration: 2, ease: "power1.inOut" }, "20")
+				.to(group.current.children[5].position, { y: 0, duration: 2, ease: "power1.inOut" }, "20")
+				.to(group.current.children[6].position, { y: 0, duration: 2, ease: "power1.inOut" }, "20")
+				.to(group.current.children[1].position, { x: 0, duration: 3, ease: "power1.inOut" }, "21")
+				.to(group.current.children[2].position, { x: 0, duration: 3, ease: "power1.inOut" }, "21")
+				.to(group.current.rotation, { y: 6.2, duration: 3, ease: "power1.inOut" }, "21")
+				.to(group.current.children[7].position, { y: 0, duration: 2, ease: "power1.inOut" }, "24")
+				.to(group.current.position, { y: 5, z: -5, duration: 2, ease: "power1.inOut" }, "24");
 		}
 	}, []);
 
