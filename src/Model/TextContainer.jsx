@@ -30,57 +30,21 @@ function TextContainer() {
 					trigger: "body",
 					start: "top top",
 					end: "bottom bottom",
-					scrub: 5,
+					scrub: 0,
 				},
 			});
 
 			timeline
-				.to(
-					text1Ref.current.position,
-					{
-						x: -5,
-						z: -5,
-						duration: 0.2,
-						ease: "power1.inOut",
-					},
-					"0"
-				)
-				.to(
-					text1Ref.current.material,
-					{
-						opacity: 0,
-						duration: 0.1,
-						ease: "power1.inOut",
-					},
-					"0"
-				)
-				.to(
-					text2Ref.current.material,
-					{
-						opacity: 1,
-						duration: 0.05,
-						ease: "power1.inOut",
-					},
-					"0.05"
-				)
-				.to(
-					text2Ref.current.material,
-					{
-						opacity: 0,
-						duration: 0.05,
-						ease: "power1.inOut",
-					},
-					"0.075"
-				)
-				.to(
-					text16Ref.current.material,
-					{
-						opacity: 1,
-						duration: 0.05,
-						ease: "power1.inOut",
-					},
-					"0.08"
-				);
+				.to(text1Ref.current.position, { z: -5, duration: 0.05, ease: "power1.inOut" }, "0")
+				.call(() => console.log("At 0 - text"), null, "0")
+				.to(text1Ref.current.material, { opacity: 0, duration: 0.05, ease: "power1.inOut" }, "0")
+				.to(text2Ref.current.material, { opacity: 1, duration: 0.05, ease: "power1.inOut" }, "0.025")
+				.to(text16Ref.current.material, { opacity: 1, duration: 0.05, ease: "power1.inOut" }, "0.05")
+				.to(text2Ref.current.material, { opacity: 0, duration: 0.05, ease: "power1.inOut" }, "0.055")
+				.to(text16Ref.current.material, { opacity: 0, duration: 0.05, ease: "power1.inOut" }, "0.085")
+				// .to(text3Ref.current.material, { opacity: 1, duration: 0.05, ease: "power1.inOut" }, "0.085")
+				// .to(text4Ref.current.material, { opacity: 1, duration: 0.05, ease: "power1.inOut" }, "0.085")
+				// .to(text5Ref.current.material, { opacity: 1, duration: 0.05, ease: "power1.inOut" }, "0.085");
 
 			return () => {
 				timeline.kill();
@@ -90,22 +54,22 @@ function TextContainer() {
 
 	return (
 		<>
-			<DynamicText ref={text1Ref} text="THE BIC" position={[-0.15, 1, -10]} scale={2} opacity={1} />
+			<DynamicText ref={text1Ref} text="THE BIC" position={[-0.3, 1, -10]} scale={3} opacity={1} />
 			<DynamicText ref={text2Ref} text="A revolution in writing" position={[-5, 2, -10]} scale={1} opacity={0} />
 			<DynamicText ref={text16Ref} text="and engeneering" position={[7.5, 0, -10]} scale={1} opacity={0} />
-			<DynamicText ref={text3Ref} text="The Clear Barrel" position={[-0.15, 2, -10]} scale={2} opacity={0} />
-			<DynamicText ref={text4Ref} text="A transparent shell—showing the ink, showing the truth." position={[-0.15, 2, -10]} scale={2} opacity={0} />
-			<DynamicText ref={text5Ref} text="The Ink Reservoir" position={[-0.15, 2, -10]} scale={2} opacity={0} />
-			<DynamicText ref={text6Ref} text="A simple tube, perfectly measured for miles of lines." position={[-0.15, 2, -10]} scale={2} opacity={0} />
-			<DynamicText ref={text7Ref} text="The Tungsten-Carbide Ball" position={[-0.15, 2, -10]} scale={2} opacity={0} />
-			<DynamicText ref={text8Ref} text="A tiny sphere, engineered to glide with absolute precision." position={[-0.15, 2, -10]} scale={2} opacity={0} />
-			<DynamicText ref={text9Ref} text="The Tip Housing" position={[-0.15, 2, -10]} scale={2} opacity={0} />
-			<DynamicText ref={text10Ref} text="Metal meets motion, channeling ink into every stroke." position={[-0.15, 2, -10]} scale={2} opacity={0} />
-			<DynamicText ref={text11Ref} text="The Cap" position={[-0.15, 2, -10]} scale={2} opacity={0} />
-			<DynamicText ref={text12Ref} text="Lightweight, iconic—and ventilated for safety." position={[-0.15, 2, -10]} scale={2} opacity={0} />
-			<DynamicText ref={text13Ref} text="The Whole Design" position={[-0.15, 2, -10]} scale={2} opacity={0} />
-			<DynamicText ref={text14Ref} text="Nothing extra. Nothing wasted." position={[-0.15, 2, -10]} scale={2} opacity={0} />
-			<DynamicText ref={text15Ref} text="Simplicity turned into a global legend." position={[-0.15, 2, -10]} scale={2} opacity={0} />
+			<DynamicText ref={text3Ref} text="The Clear Barrel" position={[0, 5, -10]} scale={1.5} opacity={0} />
+			<DynamicText ref={text4Ref} text="A transparent shell showing the ink, showing the truth." position={[0, -0.25, -10]} scale={1} opacity={0} />
+			<DynamicText ref={text5Ref} text="The Ink Reservoir" position={[-3, 6, -10]} scale={2} opacity={0} rotation={[0, 0, 1.6]} />
+			<DynamicText ref={text6Ref} text="A simple tube, perfectly measured for miles of lines." position={[0, 2, -10]} scale={2} opacity={0} />
+			<DynamicText ref={text7Ref} text="The Tungsten-Carbide Ball" position={[0, 2, -10]} scale={2} opacity={0} />
+			<DynamicText ref={text8Ref} text="A tiny sphere, engineered to glide with absolute precision." position={[0, 2, -10]} scale={2} opacity={0} />
+			<DynamicText ref={text9Ref} text="The Tip Housing" position={[0, 2, -10]} scale={2} opacity={0} />
+			<DynamicText ref={text10Ref} text="Metal meets motion, channeling ink into every stroke." position={[0, 2, -10]} scale={2} opacity={0} />
+			<DynamicText ref={text11Ref} text="The Cap" position={[0, 2, -10]} scale={2} opacity={0} />
+			<DynamicText ref={text12Ref} text="Lightweight, iconic—and ventilated for safety." position={[0, 2, -10]} scale={2} opacity={0} />
+			<DynamicText ref={text13Ref} text="The Whole Design" position={[0, 2, -10]} scale={2} opacity={0} />
+			<DynamicText ref={text14Ref} text="Nothing extra. Nothing wasted." position={[0, 2, -10]} scale={2} opacity={0} />
+			<DynamicText ref={text15Ref} text="Simplicity turned into a global legend." position={[0, 2, -10]} scale={2} opacity={0} />
 		</>
 	);
 }
