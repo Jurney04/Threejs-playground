@@ -4,6 +4,7 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { useState, Suspense } from "react";
 import { Perf } from "r3f-perf";
+import { EffectComposer, TiltShift } from "@react-three/postprocessing";
 
 // Imports scenes
 import BasicDemo from "../scenes/BasicDemo.jsx";
@@ -67,8 +68,7 @@ function RouterSetup() {
 				</Canvas>
 			</div>
 
-			<div style={{ height: "200vh", position: "relative" }}>
-			</div>
+			<div style={{ height: "200vh", position: "relative" }}></div>
 
 			{currentScene === "project" && <TextBox selectedText={selectedText} onClick={handleTextboxClick} />}
 		</>

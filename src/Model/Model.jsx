@@ -96,7 +96,7 @@ function Model({ url }) {
 						duration: 2,
 						ease: "power1.inOut",
 					},
-					"0"
+					"0.5"
 				)
 				.to(
 					group.current.position,
@@ -105,7 +105,7 @@ function Model({ url }) {
 						duration: 2,
 						ease: "power1.inOut",
 					},
-					"0"
+					"0.5"
 				)
 				.to(group.current.position, {
 					x: 2.25,
@@ -121,7 +121,7 @@ function Model({ url }) {
 						duration: 2,
 						ease: "power1.inOut",
 					},
-					"1"
+					"3"
 				)
 				.to(
 					group.current.children[0].position,
@@ -130,7 +130,7 @@ function Model({ url }) {
 						duration: 2,
 						ease: "power1.inOut",
 					},
-					"2"
+					"4"
 				)
 				.to(
 					group.current.children[7].position,
@@ -139,7 +139,7 @@ function Model({ url }) {
 						duration: 2,
 						ease: "power1.inOut",
 					},
-					"2"
+					"4"
 				)
 				.to(
 					group.current.children[1].position,
@@ -148,7 +148,7 @@ function Model({ url }) {
 						duration: 2,
 						ease: "power1.inOut",
 					},
-					"3"
+					"5"
 				)
 				.to(
 					group.current.children[2].position,
@@ -157,7 +157,7 @@ function Model({ url }) {
 						duration: 2,
 						ease: "power1.inOut",
 					},
-					"3"
+					"5"
 				)
 				.to(
 					group.current.children[3].position,
@@ -166,7 +166,7 @@ function Model({ url }) {
 						duration: 2,
 						ease: "power1.inOut",
 					},
-					"4"
+					"5"
 				)
 				.to(
 					group.current.children[4].position,
