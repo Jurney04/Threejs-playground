@@ -26,7 +26,7 @@ function Model({ url }) {
 				roughness: 0.1,
 				metalness: 0,
 				transmission: 0.9, // Half transparent
-				ior: 5, // Index of refraction for distortion
+				ior: 1.75, // Index of refraction for distortion
 				thickness: 0.5, // Amount of distortion
 				side: THREE.DoubleSide,
 			}),
@@ -80,7 +80,7 @@ function Model({ url }) {
 					trigger: "body",
 					start: "top top",
 					end: "bottom bottom",
-					scrub: 5,
+					scrub: 1,
 				},
 				// repeat: -1,
 				// yoyo: true,
@@ -223,7 +223,7 @@ function Model({ url }) {
 					group.current.position,
 					{
 						x: 3,
-						y: -0.5,
+						y: -0,
 						z: -1,
 						duration: 2,
 						ease: "power1.inOut",
