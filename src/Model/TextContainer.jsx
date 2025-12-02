@@ -32,40 +32,46 @@ function TextContainer() {
 					end: "bottom bottom",
 					scrub: 1,
 				},
+				// repeat: -1,
+				// yoyo: false,
+				// repeatDelay: 1,
 			});
 
 			timeline
-				.to(text1Ref.current.position, { z: 5, duration: 0.05, ease: "power1.inOut" }, "0")
-				.to(text1Ref.current.material, { opacity: 0, duration: 0.01, ease: "power1.inOut" }, "0")
-				.to(text2Ref.current.material, { opacity: 1, duration: 0.005, ease: "power1.inOut" }, "0.005")
-				.to(text16Ref.current.material, { opacity: 1, duration: 0.005, ease: "power1.inOut" }, "0.0075")
-				.to(text2Ref.current.material, { opacity: 0, duration: 0.005, ease: "power1.inOut" }, "0.01")
-				.to(text16Ref.current.material, { opacity: 0, duration: 0.005, ease: "power1.inOut" }, "0.0105")
-				.to(text3Ref.current.material, { opacity: 1, duration: 0.005, ease: "power1.inOut" }, "0.011")
-				.to(text4Ref.current.material, { opacity: 1, duration: 0.005, ease: "power1.inOut" }, "0.012")
-				.to(text3Ref.current.material, { opacity: 0, duration: 0.005, ease: "power1.inOut" }, "0.014")
-				.to(text4Ref.current.material, { opacity: 0, duration: 0.005, ease: "power1.inOut" }, "0.015")
-				.to(text5Ref.current.material, { opacity: 1, duration: 0.005, ease: "power1.inOut" }, "0.019")
-				.to(text6Ref.current.material, { opacity: 1, duration: 0.005, ease: "power1.inOut" }, "0.019")
-				.to(text6Ref.current.position, { y: 10, duration: 0.005, ease: "power1.inOut" }, "0.020")
-				.to(text5Ref.current.material, { opacity: 0, duration: 0.005, ease: "power1.inOut" }, "0.021")
-				.to(text6Ref.current.material, { opacity: 0, duration: 0.005, ease: "power1.inOut" }, "0.022")
-				.to(text7Ref.current.material, { opacity: 1, duration: 0.005, ease: "power1.inOut" }, "0.023")
-				.to(text8Ref.current.material, { opacity: 1, duration: 0.005, ease: "power1.inOut" }, "0.023")
-				.to(text7Ref.current.material, { opacity: 0, duration: 0.005, ease: "power1.inOut" }, "0.026")
-				.to(text8Ref.current.material, { opacity: 0, duration: 0.005, ease: "power1.inOut" }, "0.026")
-				.to(text9Ref.current.material, { opacity: 1, duration: 0.005, ease: "power1.inOut" }, "0.028")
-				.to(text10Ref.current.material, { opacity: 1, duration: 0.005, ease: "power1.inOut" }, "0.028")
-				.to(text9Ref.current.material, { opacity: 0, duration: 0.005, ease: "power1.inOut" }, "0.031")
-				.to(text10Ref.current.material, { opacity: 0, duration: 0.005, ease: "power1.inOut" }, "0.031")
-				.to(text11Ref.current.material, { opacity: 1, duration: 0.005, ease: "power1.inOut" }, "0.033")
-				.to(text12Ref.current.material, { opacity: 1, duration: 0.005, ease: "power1.inOut" }, "0.033")
-				.to(text11Ref.current.material, { opacity: 0, duration: 0.005, ease: "power1.inOut" }, "0.040")
-				.to(text12Ref.current.material, { opacity: 0, duration: 0.005, ease: "power1.inOut" }, "0.036")
-				.to(text13Ref.current.material, { opacity: 1, duration: 0.005, ease: "power1.inOut" }, "0.042")
-				.to(text14Ref.current.material, { opacity: 1, duration: 0.005, ease: "power1.inOut" }, "0.043")
-				.to(text15Ref.current.material, { opacity: 1, duration: 0.005, ease: "power1.inOut" }, "0.044")
-				;
+				.to(text1Ref.current.position, { z: 5, duration: 1, ease: "power1.inOut" }, "0")
+				.to(text1Ref.current.material, { opacity: 0, duration: 1, ease: "power1.inOut" }, "0")
+				.to(text2Ref.current.material, { opacity: 1, duration: 1, ease: "power1.inOut" }, "1")
+				.to(text16Ref.current.material, { opacity: 1, duration: 1, ease: "power1.inOut" }, "3")
+				.to(text2Ref.current.material, { opacity: 0, duration: 1, ease: "power1.inOut" }, "4")
+				.to(text16Ref.current.material, { opacity: 0, duration: 1, ease: "power1.inOut" }, "5")
+				.to(text3Ref.current.material, { opacity: 1, duration: 1, ease: "power1.inOut" }, "6")
+				.to(text4Ref.current.material, { opacity: 1, duration: 1, ease: "power1.inOut" }, "6.5")
+				.to(text3Ref.current.material, { opacity: 0, duration: 1, ease: "power1.inOut" }, "8")
+				.to(text4Ref.current.material, { opacity: 0, duration: 1, ease: "power1.inOut" }, "8")
+				.to(text5Ref.current.material, { opacity: 1, duration: 1, ease: "power1.inOut" }, "10")
+				.to(text6Ref.current.material, { opacity: 1, duration: 1, ease: "power1.inOut" }, "10.25")
+				.to(text6Ref.current.position, { y: 7.5, duration: 1, ease: "power1.inOut" }, "10.5")
+				.to(text5Ref.current.material, { opacity: 0, duration: 1, ease: "power1.inOut" }, "11.5")
+				.to(text6Ref.current.material, { opacity: 0, duration: 1, ease: "power1.inOut" }, "11.5")
+				.to(text7Ref.current.material, { opacity: 1, duration: 1, ease: "power1.inOut" }, "13")
+				.to(text8Ref.current.material, { opacity: 1, duration: 1, ease: "power1.inOut" }, "13.5")
+				.to(text7Ref.current.material, { opacity: 0, duration: 1, ease: "power1.inOut" }, "14.5")
+				.to(text8Ref.current.material, { opacity: 0, duration: 1, ease: "power1.inOut" }, "15")
+				.to(text9Ref.current.material, { opacity: 1, duration: 1, ease: "power1.inOut" }, "15")
+				.to(text10Ref.current.material, { opacity: 1, duration: 1, ease: "power1.inOut" }, "15.5")
+				.to(text9Ref.current.material, { opacity: 0, duration: 1, ease: "power1.inOut" }, "16")
+				.to(text10Ref.current.material, { opacity: 0, duration: 1, ease: "power1.inOut" }, "16.25")
+				.to(text11Ref.current.material, { opacity: 1, duration: 1, ease: "power1.inOut" }, "17")
+				.to(text12Ref.current.material, { opacity: 1, duration: 1, ease: "power1.inOut" }, "17.5")
+				.to(text11Ref.current.material, { opacity: 0, duration: 1, ease: "power1.inOut" }, "20")
+				.to(text12Ref.current.material, { opacity: 0, duration: 1, ease: "power1.inOut" }, "19.5")
+				.to(text13Ref.current.material, { opacity: 1, duration: 1, ease: "power1.inOut" }, "22")
+				.to(text14Ref.current.material, { opacity: 1, duration: 1, ease: "power1.inOut" }, "22.5")
+				.to(text15Ref.current.material, { opacity: 1, duration: 1, ease: "power1.inOut" }, "22.5")
+				.to(text13Ref.current.material, { opacity: 1, duration: 1, ease: "power1.inOut" }, "24")
+				.to(text14Ref.current.material, { opacity: 1, duration: 1, ease: "power1.inOut" }, "24")
+				.to(text15Ref.current.material, { opacity: 1, duration: 1, ease: "power1.inOut" }, "24");
+
 			return () => {
 				timeline.kill();
 			};

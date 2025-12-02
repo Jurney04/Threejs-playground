@@ -83,7 +83,7 @@ function Model({ url }) {
 					scrub: 1,
 				},
 				// repeat: -1,
-				// yoyo: true,
+				// yoyo: false,
 				// repeatDelay: 1,
 			});
 
