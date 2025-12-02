@@ -8,7 +8,19 @@ function Model({ url }) {
 	const group = useRef();
 	const fbx = useFBX(url);
 
-	const clonedFbx = useMemo(() => fbx.clone(), [fbx]);
+	const clonedFbx = useMemo(() => {
+		const fbxClone = fbx.clone();
+
+		// Create and add the sphere mesh
+		const sphereGeo = new THREE.SphereGeometry(10, 32, 16);
+		const sphereMat = new THREE.MeshBasicMaterial({ color: "white", wireframe: true });
+		const sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
+		sphereMesh.position.set(0, 0, 0); // Position relative to the parent (clonedFbx)
+		sphereMesh.scale.set(5, 5, 5); // Scale of the sphere mesh
+		fbxClone.add(sphereMesh); // Add to the clonedFbx group
+
+		return fbxClone;
+	}, [fbx]);
 	//child0 --> top cover
 	//child1 --> plastic lining 1
 	//child2 --> plastic lining 2
@@ -44,6 +56,8 @@ function Model({ url }) {
 			new THREE.MeshStandardMaterial({ color: "gold", roughness: 0.3, metalness: 0.9, transparent: false, opacity: 1.0, side: THREE.DoubleSide }),
 			new THREE.MeshStandardMaterial({ color: "gold", roughness: 0.3, metalness: 0.9, transparent: false, opacity: 1.0, side: THREE.DoubleSide }),
 			new THREE.MeshStandardMaterial({ color: "grey", roughness: 0, metalness: 0.5, transparent: false, opacity: 1.0, side: THREE.DoubleSide }),
+			new THREE.MeshStandardMaterial({ color: "darkblue", roughness: 0, metalness: 0.5, transparent: false, opacity: 1.0, side: THREE.DoubleSide }),
+			new THREE.MeshBasicMaterial({ color: "grey", wireframe: true }),
 		];
 
 		clonedFbx.traverse((child) => {

@@ -12,10 +12,10 @@ export default function ExplodedView() {
 		<>
 			<ambientLight intensity={1.5} />
 			<directionalLight position={[10, 10, 5]} intensity={2.5} />
-			<BackgroundPlane />
+
 			<mesh position={[5, 0, -70]}>
 				<planeGeometry args={[275, 200]} />
-				<meshStandardMaterial color="grey" opacity={0.2} transparent />
+				<meshStandardMaterial color="#051f2e" opacity={1} />
 			</mesh>
 			<Model url="/BIC-static.fbx" />
 			<TextContainer />
