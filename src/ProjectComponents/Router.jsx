@@ -59,18 +59,15 @@ function RouterSetup() {
 
 	return (
 		<>
-			<div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100vh", zIndex: -1 }}>
-				<Canvas shadows camera={{ position: [0, 0, 0] }} style={{ width: "100%", height: "100%", display: "block", pointerEvents: "none" }}>
+			<div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100vh", zIndex: 1 }}>
+				<Canvas shadows camera={{ position: [0, 0, 0] }} style={{ width: "100%", height: "100%", display: "block" }}>
 					{/* <Perf position="top-left" /> */}
 					{/* <OrbitControls /> */}
-					{/* <Suspense fallback={null}>{renderScene()}</Suspense> */}
-					<ExplodedView />
+					<Project />
 				</Canvas>
 			</div>
 
 			<div style={{ height: "200vh", position: "relative" }}></div>
-
-			{currentScene === "project" && <TextBox selectedText={selectedText} onClick={handleTextboxClick} />}
 		</>
 	);
 }
