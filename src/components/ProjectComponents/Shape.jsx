@@ -57,7 +57,7 @@ function Shape({ texts, position = [0, 0, 0], size = 5, scale, rotation, onClick
 					receiveShadow
 					onPointerOver={(e) => (e.stopPropagation(), hover(true))}
 					onPointerOut={() => hover(false)}
-					onPointerDown={(e) => (e.stopPropagation(), onClick && onClick())} // Add click handler
+					onPointerDown={(e) => (e.stopPropagation(), onClick && onClick(texts))} // Add click handler
 				>
 					<textGeometry
 						args={[
