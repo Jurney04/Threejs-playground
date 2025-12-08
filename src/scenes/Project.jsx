@@ -1,11 +1,32 @@
 import * as THREE from "three";
+import React, { useRef, useEffect } from "react";
 import SpotlightCamera from "../components/ProjectComponents/SpotlightCamera";
 import Shape from "../components/ProjectComponents/Shape";
 import BackgroundPlane from "../components/ProjectComponents/BackgroundPlane";
 import SpotlightBackground from "../components/ProjectComponents/SpotlightBackground";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-function Project({ onShapeClick }) {
+gsap.registerPlugin(ScrollTrigger);
+function Project() {
+	const groupRef = useRef();
 
+	useEffect(() => {
+		const timeline = gsap.timeline({
+			scrollTrigger: {
+				trigger: "body",
+				start: "top top",
+				end: "bottom bottom",
+				scrub: 1,
+			},
+		});
+
+		timeline.to(groupRef.current.position, { y: 300, duration: 1, ease: "power1.inOut" }, "0");
+
+		return () => {
+			timeline.kill();
+		};
+	}, []);
 	return (
 		<>
 			<mesh onPointerMove={() => {}} visible={false} position-z={-26}>
@@ -20,10 +41,12 @@ function Project({ onShapeClick }) {
 			</mesh>
 			<BackgroundPlane />
 			<SpotlightBackground position={[0, 0, -95]} rotation={[0, 0, 0.5]} scale={2.5} />
-			<Shape position={[-15, 2.5, -50]} scale={1} texts="Welcome" size={5} rotation={[0, 0, 0]} onClick={onShapeClick} />
-			<Shape position={[10, 2.5, -50]} scale={1} texts="To" size={5} rotation={[0, 0, 0]} onClick={onShapeClick} />
-			<Shape position={[-10, -5, -50]} scale={1} texts="My" size={5} rotation={[0, 0, 0]} onClick={onShapeClick} />
-			<Shape position={[0.5, -5, -50]} scale={1} texts="World" size={5} rotation={[0, 0, 0]} onClick={onShapeClick} />
+			<group ref={groupRef} position={[0, -2.5, 0]}>
+				<Shape position={[-15, 2.5, -50]} scale={1} texts="Welcome" size={5} rotation={[0, 0, 0]} />
+				<Shape position={[10, 2.5, -50]} scale={1} texts="To" size={5} rotation={[0, 0, 0]} />
+				<Shape position={[-10, -5, -50]} scale={1} texts="My" size={5} rotation={[0, 0, 0]} />
+				<Shape position={[0.5, -5, -50]} scale={1} texts="World" size={5} rotation={[0, 0, 0]} />
+			</group>
 		</>
 	);
 }

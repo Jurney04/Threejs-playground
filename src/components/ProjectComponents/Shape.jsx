@@ -8,7 +8,7 @@ import { useFrame } from "@react-three/fiber";
 
 extend({ TextGeometry });
 
-function Shape({ texts, position = [0, 0, 0], size = 5, scale, rotation, onClick }) {
+function Shape({ texts, position = [0, 0, 0], size = 5, scale, rotation, onClick, disableFloatingAnimation = false }) {
 	// Add onClick prop
 	const font = useLoader(FontLoader, "/fonts/Black_Mustang.json");
 	const meshRef = useRef();
@@ -37,9 +37,11 @@ function Shape({ texts, position = [0, 0, 0], size = 5, scale, rotation, onClick
 			}
 			if (meshRef.current) {
 				meshRef.current.scale.lerp(new THREE.Vector3(1, 1, 1), delta * 5);
-				const floatOffset = Math.sin(state.clock.elapsedTime * 2) * 0.25;
-				meshRef.current.position.x = position[0] + floatOffset;
-				meshRef.current.position.y = position[1] + floatOffset;
+				if (!disableFloatingAnimation) {
+					const floatOffset = Math.sin(state.clock.elapsedTime * 2) * 0.25;
+					meshRef.current.position.x = position[0] + floatOffset;
+					meshRef.current.position.y = position[1] + floatOffset;
+				}
 			}
 		}
 	});
