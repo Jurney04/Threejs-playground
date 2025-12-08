@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Text, Image } from "@react-three/drei";
@@ -12,6 +12,8 @@ function ProjectPreview() {
 	const group4Ref = useRef();
 	const group5Ref = useRef();
 	const group6Ref = useRef();
+	const group7Ref = useRef();
+	const [group7Opacity, setGroup7Opacity] = useState(1);
 
 	useEffect(() => {
 		const timeline = gsap.timeline({
@@ -23,6 +25,17 @@ function ProjectPreview() {
 			},
 		});
 
+		timeline.to(
+			{ value: 1 },
+			{
+				value: 0,
+				onUpdate: function () {
+					setGroup7Opacity(this.targets()[0].value);
+				},
+				duration: 1,
+			},
+			"0"
+		);
 		timeline.to(group1Ref.current.position, { y: 0.5, duration: 2, ease: "power1.inOut" }, "2");
 		timeline.to(group2Ref.current.position, { y: 0.5, duration: 2, ease: "power1.inOut" }, "4");
 		timeline.to(group1Ref.current.position, { x: -15, duration: 1, ease: "power1.inOut" }, "4.5");
@@ -43,6 +56,12 @@ function ProjectPreview() {
 
 	return (
 		<>
+			<group ref={group7Ref} position={[0, -3, 0]}>
+				<Text color="white" position={[0, -0.35, 0]} transparent fontSize={0.15} opacity={group7Opacity}>
+					Scroll to continue
+				</Text>
+				<Image url="/white-down-arrow.png" transparent position={[0, 0, 0]} scale={[0.5, 0.5, 0.5]} opacity={group7Opacity} />
+			</group>
 			<group ref={group1Ref} position={[0, -6, 0]}>
 				<Text color="white" position={[-2, 0, 0]} fontSize={0.5}>
 					First Demo

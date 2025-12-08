@@ -44,11 +44,11 @@ function Project() {
 			</mesh>
 			<BackgroundPlane />
 			<SpotlightBackground position={[0, 0, -95]} rotation={[0, 0, 0.5]} scale={2.5} />
-			<group ref={groupRef} position={[0, -2.5, 0]}>
+			<group ref={groupRef} position={[-4, -2.5, 0]}>
 				<Shape position={[-15, 2.5, -50]} scale={1} texts="Welcome" size={5} rotation={[0, 0, 0]} />
 				<Shape position={[10, 2.5, -50]} scale={1} texts="To" size={5} rotation={[0, 0, 0]} />
 				<Shape position={[-10, -5, -50]} scale={1} texts="My" size={5} rotation={[0, 0, 0]} />
-				<Shape position={[0.5, -5, -50]} scale={1} texts="World" size={5} rotation={[0, 0, 0]} />
+				<Shape position={[0.5, -5, -50]} scale={1} texts="Dimension" size={5} rotation={[0, 0, 0]} />
 			</group>
 		</>
 	);

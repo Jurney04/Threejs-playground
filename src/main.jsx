@@ -10,14 +10,13 @@ import Circles from "./scenes/Circles.jsx";
 import Angel from "./scenes/Angel.jsx";
 import FullAngelScene from "./scenes/FullAngelScene.jsx";
 import "./index.css";
+import ExplodedView from "./scenes/ExplodedView.jsx";
 
 function SceneWrapper({ children }) {
 	return (
 		<div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100vh", zIndex: 1 }}>
 			<Canvas shadows camera={{ position: [0, 0, 0] }} style={{ width: "100%", height: "100%", display: "block" }}>
-				<Suspense fallback={null}>
-					{children}
-				</Suspense>
+				<Suspense fallback={null}>{children}</Suspense>
 			</Canvas>
 		</div>
 	);
@@ -30,19 +29,43 @@ const router = createBrowserRouter([
 	},
 	{
 		path: "machine-corridor",
-		element: <SceneWrapper><MachineCorridor /></SceneWrapper>,
+		element: (
+			<SceneWrapper>
+				<MachineCorridor />
+			</SceneWrapper>
+		),
 	},
 	{
 		path: "circles",
-		element: <SceneWrapper><Circles /></SceneWrapper>,
+		element: (
+			<SceneWrapper>
+				<Circles />
+			</SceneWrapper>
+		),
 	},
 	{
 		path: "angel-model",
-		element: <SceneWrapper><Angel /></SceneWrapper>,
+		element: (
+			<SceneWrapper>
+				<Angel />
+			</SceneWrapper>
+		),
 	},
 	{
 		path: "full-scene-angel",
-		element: <SceneWrapper><FullAngelScene /></SceneWrapper>,
+		element: (
+			<SceneWrapper>
+				<FullAngelScene />
+			</SceneWrapper>
+		),
+	},
+	{
+		path: "bic",
+		element: (
+			<SceneWrapper>
+				<ExplodedView />
+			</SceneWrapper>
+		),
 	},
 ]);
 
