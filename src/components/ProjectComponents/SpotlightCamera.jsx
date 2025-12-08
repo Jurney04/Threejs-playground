@@ -1,14 +1,33 @@
 import { useFrame, useThree } from "@react-three/fiber";
-import { useRef } from "react";
+import { useRef, useEffect } from "react"; // Added useEffect
 import * as THREE from "three";
 import { extend } from "@react-three/fiber";
+import gsap from "gsap"; // Added gsap import
+import { ScrollTrigger } from "gsap/ScrollTrigger"; // Added ScrollTrigger import
 
 extend({ SpotLight: THREE.SpotLight });
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 function SpotlightCamera() {
 	const lightRef = useRef();
 	const targetRef = useRef(new THREE.Object3D());
 	const { camera, mouse, raycaster } = useThree();
+
+	useEffect(() => {
+		if (lightRef.current) {
+			gsap.to(lightRef.current, {
+				intensity: 0, // Fade to a lower intensity
+				scrollTrigger: {
+					trigger: document.body, // Trigger animation based on body scroll
+					start: "top top", // Start when the top of the body hits the top of the viewport
+					end: "20% top", // End when 20% of the body has been scrolled
+					scrub: true, // Smoothly links the animation to the scroll position
+				},
+			});
+		}
+	}, []); // Empty dependency array means this effect runs once on mount
 
 	useFrame(() => {
 		lightRef.current.position.set(0, 2, 0);

@@ -617,7 +617,7 @@ function Angel({ position = [0, 0, 0] }) {
 
 	return (
 		<>
-			<Perf position="top-left" />
+			{/* <Perf position="top-left" /> */}
 			<OrbitControls />
 			<Environment files="/angel/HDR.hdr" background />
 			{/* <Environment files="/angel/HDR.hdr" background /> */}

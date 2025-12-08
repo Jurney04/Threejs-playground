@@ -12,7 +12,6 @@ function ProjectPreview() {
 	const group4Ref = useRef();
 	const group5Ref = useRef();
 	const group6Ref = useRef();
-	const group7Ref = useRef();
 
 	useEffect(() => {
 		const timeline = gsap.timeline({
@@ -35,7 +34,6 @@ function ProjectPreview() {
 		timeline.to(group4Ref.current.position, { x: 15, duration: 1, ease: "power1.inOut" }, "10.5");
 		timeline.to(group6Ref.current.position, { y: 0.5, duration: 2, ease: "power1.inOut" }, "12");
 		timeline.to(group5Ref.current.position, { x: -15, duration: 1, ease: "power1.inOut" }, "12.5");
-		timeline.to(group7Ref.current.position, { y: 0.5, duration: 2, ease: "power1.inOut" }, "14");
 		timeline.to(group6Ref.current.position, { x: 15, duration: 1, ease: "power1.inOut" }, "14.5");
 
 		return () => {
@@ -52,7 +50,7 @@ function ProjectPreview() {
 				<Text color="white" position={[-2, -0.5, 0]} fontSize={0.25}>
 					This was the beginning of my Three.js journey
 				</Text>
-				<Image url="/image.jpeg" position={[3, -0.75, 0]} scale={[3, 2, 2]} />
+				<Image url="/basic-demo.png" position={[3, -0.75, 0]} scale={[3, 2, 2]} />
 			</group>
 			<group ref={group2Ref} position={[0, -6, 0]}>
 				<Text color="white" position={[-2, 0, 0]} fontSize={0.5}>
@@ -61,7 +59,7 @@ function ProjectPreview() {
 				<Text color="white" position={[-2, -0.5, 0]} fontSize={0.25}>
 					Then i started animating some circles
 				</Text>
-				<Image url="/image.jpeg" position={[3, -0.75, 0]} scale={[3, 2, 2]} />
+				<Image url="/circles.png" position={[3, -0.75, 0]} scale={[3, 2, 2]} />
 			</group>
 			<group ref={group3Ref} position={[0, -6, 0]}>
 				<Text color="white" position={[-2, 0, 0]} fontSize={0.5}>
@@ -76,7 +74,7 @@ function ProjectPreview() {
 				<Text color="white" position={[-2, -1.1, 0]} fontSize={0.25}>
 					so that was my next project
 				</Text>
-				<Image url="/image.jpeg" position={[3, -0.75, 0]} scale={[3, 2, 2]} />
+				<Image url="/angel.png" position={[3, -0.75, 0]} scale={[3, 2, 2]} />
 			</group>
 			<group ref={group4Ref} position={[0, -6, 0]}>
 				<Text color="white" position={[-2, 0, 0]} fontSize={0.5}>
@@ -94,27 +92,9 @@ function ProjectPreview() {
 				<Text color="white" position={[-2, -1.4, 0]} fontSize={0.25}>
 					so i worked on another iteration
 				</Text>
-				<Image url="/image.jpeg" position={[3, -0.75, 0]} scale={[3, 2, 2]} />
+				<Image url="/angel.png" position={[3, -0.75, 0]} scale={[3, 2, 2]} />
 			</group>
 			<group ref={group5Ref} position={[0, -6, 0]}>
-				<Text color="white" position={[-2, 0, 0]} fontSize={0.5}>
-					Raycast
-				</Text>
-				<Text color="white" position={[-2, -0.5, 0]} fontSize={0.25}>
-					For this project i started
-				</Text>
-				<Text color="white" position={[-2, -0.8, 0]} fontSize={0.25}>
-					using raycast to hit objects.
-				</Text>
-				<Text color="white" position={[-2, -1.1, 0]} fontSize={0.25}>
-					This changed materials and positions
-				</Text>
-				<Text color="white" position={[-2, -1.4, 0]} fontSize={0.25}>
-					if it hit something.
-				</Text>
-				<Image url="/image.jpeg" position={[3, -0.75, 0]} scale={[3, 2, 2]} />
-			</group>
-			<group ref={group6Ref} position={[0, -6, 0]}>
 				<Text color="white" position={[-2, 0, 0]} fontSize={0.5}>
 					Procedural Generating
 				</Text>
@@ -127,9 +107,9 @@ function ProjectPreview() {
 				<Text color="white" position={[-2, -1.1, 0]} fontSize={0.25}>
 					it is basically infinite
 				</Text>
-				<Image url="/image.jpeg" position={[3, -0.75, 0]} scale={[3, 2, 2]} />
+				<Image url="/machine-room.png" position={[3, -0.75, 0]} scale={[3, 2, 2]} />
 			</group>
-			<group ref={group7Ref} position={[0, -6, 0]}>
+			<group ref={group6Ref} position={[0, -6, 0]}>
 				<Text color="white" position={[-2, 0, 0]} fontSize={0.5}>
 					BIC
 				</Text>
@@ -145,7 +125,7 @@ function ProjectPreview() {
 				<Text color="white" position={[-2, -1.4, 0]} fontSize={0.25}>
 					with a small text as explanation
 				</Text>
-				<Image url="/image.jpeg" position={[3, -0.75, 0]} scale={[3, 2, 2]} />
+				<Image url="/bic.png" position={[3, -0.75, 0]} scale={[3, 2, 2]} />
 			</group>
 		</>
 	);

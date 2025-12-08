@@ -10,6 +10,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 function Project() {
 	const groupRef = useRef();
+	const greyPlaneRef = useRef();
+	const spotlightRef = useRef();
 
 	useEffect(() => {
 		const timeline = gsap.timeline({
@@ -22,6 +24,7 @@ function Project() {
 		});
 
 		timeline.to(groupRef.current.position, { y: 300, duration: 1, ease: "power1.inOut" }, "0");
+		timeline.to(greyPlaneRef.current, { opacity: 0.2, duration: 0.5, ease: "power1.inOut" }, "0");
 
 		return () => {
 			timeline.kill();
@@ -32,12 +35,12 @@ function Project() {
 			<mesh onPointerMove={() => {}} visible={false} position-z={-26}>
 				<planeGeometry args={[1000, 1000]} />
 			</mesh>
-			<SpotlightCamera />
+			<SpotlightCamera ref={spotlightRef} />
 			{/* <ambientLight intensity={0.1} /> */}
 			<ambientLight intensity={0.5} />
 			<mesh position={[5, 0, -70]}>
 				<planeGeometry args={[275, 200]} />
-				<meshStandardMaterial color="grey" opacity={0.5} transparent />
+				<meshStandardMaterial ref={greyPlaneRef} color="grey" opacity={0.5} transparent />
 			</mesh>
 			<BackgroundPlane />
 			<SpotlightBackground position={[0, 0, -95]} rotation={[0, 0, 0.5]} scale={2.5} />
