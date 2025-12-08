@@ -1,7 +1,7 @@
 import React from "react";
-import { InstancedAngel } from "../Angel/InstancedAngel.jsx";
-import { SceneLightsAndFog } from "../Angel/SceneLightsAndFog.jsx";
-import CloudComponent from "../Angel/cloudComponent.jsx";
+import { InstancedAngel } from "../components/Angel/InstancedAngel.jsx";
+import { SceneLightsAndFog } from "../components/Angel/SceneLightsAndFog.jsx";
+import CloudComponent from "../components/Angel/cloudComponent.jsx";
 import * as THREE from "three";
 
 // Static light props (kept as is)
