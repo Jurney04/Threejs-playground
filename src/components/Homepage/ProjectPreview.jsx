@@ -1,7 +1,9 @@
 import React, { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Text, Image } from "@react-three/drei";
+import { Text, Image, MeshTransmissionMaterial, Svg } from "@react-three/drei";
+import { useLoader } from "@react-three/fiber";
+import { TextureLoader } from "three";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,7 +15,9 @@ function ProjectPreview() {
 	const group5Ref = useRef();
 	const group6Ref = useRef();
 	const group7Ref = useRef();
-	const [group7Opacity, setGroup7Opacity] = useState(1);
+	const textRef = useRef();
+	const imageRef = useRef();
+	const svgRef = useRef();
 
 	useEffect(() => {
 		const timeline = gsap.timeline({
@@ -25,17 +29,8 @@ function ProjectPreview() {
 			},
 		});
 
-		timeline.to(
-			{ value: 1 },
-			{
-				value: 0,
-				onUpdate: function () {
-					setGroup7Opacity(this.targets()[0].value);
-				},
-				duration: 1,
-			},
-			"0"
-		);
+		timeline.to(textRef.current.material, { opacity: 0, duration: 1, ease: "power1.inOut" }, "0");
+		timeline.to(imageRef.current.material, { opacity: 0, duration: 1, ease: "power1.inOut" }, "0");
 		timeline.to(group1Ref.current.position, { y: 0.5, duration: 2, ease: "power1.inOut" }, "2");
 		timeline.to(group2Ref.current.position, { y: 0.5, duration: 2, ease: "power1.inOut" }, "4");
 		timeline.to(group1Ref.current.position, { x: -15, duration: 1, ease: "power1.inOut" }, "4.5");
@@ -48,6 +43,16 @@ function ProjectPreview() {
 		timeline.to(group6Ref.current.position, { y: 0.5, duration: 2, ease: "power1.inOut" }, "12");
 		timeline.to(group5Ref.current.position, { x: -15, duration: 1, ease: "power1.inOut" }, "12.5");
 		timeline.to(group6Ref.current.position, { x: 15, duration: 1, ease: "power1.inOut" }, "14.5");
+		if (svgRef.current) {
+			const path = svgRef.current.querySelector("path");
+			const length = path.getTotalLength();
+			timeline.fromTo(
+				path,
+				{ strokeDashoffset: length },
+				{ strokeDashoffset: 0, duration: 14, ease: "power1.inOut" },
+				"0"
+			);
+		}
 
 		return () => {
 			timeline.kill();
@@ -57,30 +62,45 @@ function ProjectPreview() {
 	return (
 		<>
 			<group ref={group7Ref} position={[0, -3, 0]}>
-				<Text color="white" position={[0, -0.35, 0]} transparent fontSize={0.15} opacity={group7Opacity}>
+				<Text ref={textRef} color="white" position={[0, -0.35, 0]} transparent fontSize={0.12}>
 					Scroll to continue
 				</Text>
-				<Image url="/white-down-arrow.png" transparent position={[0, 0, 0]} scale={[0.5, 0.5, 0.5]} opacity={group7Opacity} />
+				<Image ref={imageRef} url="/white-down-arrow.png" transparent position={[0, 0, 0]} scale={[0.5, 0.5, 0.5]} />
 			</group>
-			<group ref={group1Ref} position={[0, -6, 0]}>
+			<Svg ref={svgRef} src="/line.svg" position={[0, -1, -6]} scale={[0.01, 0.01, 0.01]} />
+			<group ref={group1Ref} position={[0, -11, -5]} scale={[1.2, 1.2, 1.2]}>
 				<Text color="white" position={[-2, 0, 0]} fontSize={0.5}>
 					First Demo
 				</Text>
 				<Text color="white" position={[-2, -0.5, 0]} fontSize={0.25}>
 					This was the beginning of my Three.js journey
 				</Text>
-				<Image url="/basic-demo.png" position={[3, -0.75, 0]} scale={[3, 2, 2]} />
+				<mesh position={[3, -0.75, 0]}>
+					<planeGeometry args={[3, 2]} />
+					<meshStandardMaterial map={useLoader(TextureLoader, "/basic-demo.png")} />
+				</mesh>
+				<mesh position={[0.5, -0.75, 0.2]}>
+					<boxGeometry args={[12, 6, 0.1]} />
+					<MeshTransmissionMaterial backsideThickness={0.5} thickness={0.3} chromaticAberration={0.05} anisotropy={0.1} />
+				</mesh>
 			</group>
-			<group ref={group2Ref} position={[0, -6, 0]}>
+			<group ref={group2Ref} position={[0, -11, -5]} scale={[1.2, 1.2, 1.2]}>
 				<Text color="white" position={[-2, 0, 0]} fontSize={0.5}>
 					Circles
 				</Text>
 				<Text color="white" position={[-2, -0.5, 0]} fontSize={0.25}>
 					Then i started animating some circles
 				</Text>
-				<Image url="/circles.png" position={[3, -0.75, 0]} scale={[3, 2, 2]} />
+				<mesh position={[3, -0.75, 0]}>
+					<planeGeometry args={[3, 2]} />
+					<meshStandardMaterial map={useLoader(TextureLoader, "/circles.png")} />
+				</mesh>
+				<mesh position={[0.5, -0.75, 0.2]}>
+					<boxGeometry args={[12, 6, 0.1]} />
+					<MeshTransmissionMaterial backsideThickness={0.5} thickness={0.3} chromaticAberration={0.05} anisotropy={0.1} />
+				</mesh>
 			</group>
-			<group ref={group3Ref} position={[0, -6, 0]}>
+			<group ref={group3Ref} position={[0, -11, -5]} scale={[1.2, 1.2, 1.2]}>
 				<Text color="white" position={[-2, 0, 0]} fontSize={0.5}>
 					Angel
 				</Text>
@@ -93,9 +113,16 @@ function ProjectPreview() {
 				<Text color="white" position={[-2, -1.1, 0]} fontSize={0.25}>
 					so that was my next project
 				</Text>
-				<Image url="/angel.png" position={[3, -0.75, 0]} scale={[3, 2, 2]} />
+				<mesh position={[3, -0.75, 0]}>
+					<planeGeometry args={[3, 2]} />
+					<meshStandardMaterial map={useLoader(TextureLoader, "/angel.png")} />
+				</mesh>
+				<mesh position={[0.5, -0.75, 0.2]}>
+					<boxGeometry args={[12, 6, 0.1]} />
+					<MeshTransmissionMaterial backsideThickness={0.5} thickness={0.3} chromaticAberration={0.05} anisotropy={0.1} />
+				</mesh>
 			</group>
-			<group ref={group4Ref} position={[0, -6, 0]}>
+			<group ref={group4Ref} position={[0, -11, -5]} scale={[1.2, 1.2, 1.2]}>
 				<Text color="white" position={[-2, 0, 0]} fontSize={0.5}>
 					Scenic Angel
 				</Text>
@@ -111,14 +138,21 @@ function ProjectPreview() {
 				<Text color="white" position={[-2, -1.4, 0]} fontSize={0.25}>
 					so i worked on another iteration
 				</Text>
-				<Image url="/angel.png" position={[3, -0.75, 0]} scale={[3, 2, 2]} />
+				<mesh position={[3, -0.75, 0]}>
+					<planeGeometry args={[3, 2]} />
+					<meshStandardMaterial map={useLoader(TextureLoader, "/angel.png")} />
+				</mesh>
+				<mesh position={[0.5, -0.75, 0.2]}>
+					<boxGeometry args={[12, 6, 0.1]} />
+					<MeshTransmissionMaterial backsideThickness={0.5} thickness={0.3} chromaticAberration={0.05} anisotropy={0.1} />
+				</mesh>
 			</group>
-			<group ref={group5Ref} position={[0, -6, 0]}>
+			<group ref={group5Ref} position={[0, -11, -5]} scale={[1.2, 1.2, 1.2]}>
 				<Text color="white" position={[-2, 0, 0]} fontSize={0.5}>
 					Procedural Generating
 				</Text>
 				<Text color="white" position={[-2, -0.5, 0]} fontSize={0.25}>
-					The hallway is filled with gears nd pipes
+					The hallway is filled with gears and pipes
 				</Text>
 				<Text color="white" position={[-2, -0.8, 0]} fontSize={0.25}>
 					These are constanly generated,
@@ -126,9 +160,16 @@ function ProjectPreview() {
 				<Text color="white" position={[-2, -1.1, 0]} fontSize={0.25}>
 					it is basically infinite
 				</Text>
-				<Image url="/machine-room.png" position={[3, -0.75, 0]} scale={[3, 2, 2]} />
+				<mesh position={[3, -0.75, 0]}>
+					<planeGeometry args={[3, 2]} />
+					<meshStandardMaterial map={useLoader(TextureLoader, "/machine-room.png")} />
+				</mesh>
+				<mesh position={[0.5, -0.75, 0.2]}>
+					<boxGeometry args={[12, 6, 0.1]} />
+					<MeshTransmissionMaterial backsideThickness={0.5} thickness={0.3} chromaticAberration={0.05} anisotropy={0.1} />
+				</mesh>
 			</group>
-			<group ref={group6Ref} position={[0, -6, 0]}>
+			<group ref={group6Ref} position={[0, -11, -5]} scale={[1.2, 1.2, 1.2]}>
 				<Text color="white" position={[-2, 0, 0]} fontSize={0.5}>
 					BIC
 				</Text>
@@ -144,7 +185,14 @@ function ProjectPreview() {
 				<Text color="white" position={[-2, -1.4, 0]} fontSize={0.25}>
 					with a small text as explanation
 				</Text>
-				<Image url="/bic.png" position={[3, -0.75, 0]} scale={[3, 2, 2]} />
+				<mesh position={[3, -0.75, 0]}>
+					<planeGeometry args={[3, 2]} />
+					<meshStandardMaterial map={useLoader(TextureLoader, "/bic.png")} />
+				</mesh>
+				<mesh position={[0.5, -0.75, -0.1]}>
+					<boxGeometry args={[12, 6, 0.1]} />
+					<MeshTransmissionMaterial backsideThickness={0.5} thickness={0.3} chromaticAberration={0.05} anisotropy={0.1} />
+				</mesh>
 			</group>
 		</>
 	);

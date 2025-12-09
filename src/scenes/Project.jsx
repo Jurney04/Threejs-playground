@@ -11,6 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 function Project() {
 	const groupRef = useRef();
 	const greyPlaneRef = useRef();
+	const blackPlaneRef = useRef();
 	const spotlightRef = useRef();
 
 	useEffect(() => {
@@ -25,6 +26,7 @@ function Project() {
 
 		timeline.to(groupRef.current.position, { y: 300, duration: 1, ease: "power1.inOut" }, "0");
 		timeline.to(greyPlaneRef.current, { opacity: 0.2, duration: 0.5, ease: "power1.inOut" }, "0");
+		timeline.to(blackPlaneRef.current, { opacity: 0.75, duration: 0.5, ease: "power1.inOut" }, "0");
 
 		return () => {
 			timeline.kill();
@@ -41,6 +43,10 @@ function Project() {
 			<mesh position={[5, 0, -70]}>
 				<planeGeometry args={[275, 200]} />
 				<meshStandardMaterial ref={greyPlaneRef} color="grey" opacity={0.5} transparent />
+			</mesh>
+			<mesh position={[5, 0, -65]}>
+				<planeGeometry args={[275, 200]} />
+				<meshStandardMaterial ref={blackPlaneRef} color="black" opacity={0} transparent />
 			</mesh>
 			<BackgroundPlane />
 			<SpotlightBackground position={[0, 0, -95]} rotation={[0, 0, 0.5]} scale={2.5} />
