@@ -3,6 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import Project from "./scenes/Project";
 import ProjectPreview from "./components/Homepage/ProjectPreview";
 import MachineRoom from "./scenes/ExplodedView";
+import ProjectBackground from "./components/Homepage/ProjectsBackground";
 
 function HomePage() {
 	return (
@@ -12,6 +13,7 @@ function HomePage() {
 				<directionalLight position={[10, 10, 5]} intensity={1} />
 				<Project />
 				<ProjectPreview />
+				<ProjectBackground />
 				{/* <MachineRoom /> */}
 			</Canvas>
 		</div>

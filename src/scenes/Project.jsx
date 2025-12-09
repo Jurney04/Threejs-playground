@@ -19,14 +19,14 @@ function Project() {
 			scrollTrigger: {
 				trigger: "body",
 				start: "top top",
-				end: "bottom bottom",
+				end: "20% top",
 				scrub: 1,
 			},
 		});
 
-		timeline.to(groupRef.current.position, { y: 300, duration: 1, ease: "power1.inOut" }, "0");
-		timeline.to(greyPlaneRef.current, { opacity: 0.2, duration: 0.5, ease: "power1.inOut" }, "0");
-		timeline.to(blackPlaneRef.current, { opacity: 0.75, duration: 0.5, ease: "power1.inOut" }, "0");
+		timeline.to(groupRef.current.position, { y: 50, duration: 0.25, ease: "power1.inOut" }, "0");
+		timeline.to(greyPlaneRef.current, { opacity: 0, duration: 0.15, ease: "power1.inOut" }, "0");
+		timeline.to(blackPlaneRef.current, { opacity: 1, duration: 0.15, ease: "power1.inOut" }, "0.05");
 
 		return () => {
 			timeline.kill();
@@ -46,7 +46,7 @@ function Project() {
 			</mesh>
 			<mesh position={[5, 0, -65]}>
 				<planeGeometry args={[275, 200]} />
-				<meshStandardMaterial ref={blackPlaneRef} color="black" opacity={0} transparent />
+				<meshStandardMaterial ref={blackPlaneRef} color="white" opacity={0} transparent />
 			</mesh>
 			<BackgroundPlane />
 			<SpotlightBackground position={[0, 0, -95]} rotation={[0, 0, 0.5]} scale={2.5} />

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Text, Image, MeshTransmissionMaterial, Svg } from "@react-three/drei";
+import { Text, Image, MeshTransmissionMaterial, Html } from "@react-three/drei";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
 
@@ -17,9 +17,14 @@ function ProjectPreview() {
 	const group7Ref = useRef();
 	const textRef = useRef();
 	const imageRef = useRef();
-	const svgRef = useRef();
+	const pathRef = useRef(null);
+	const [svgContent, setSvgContent] = useState("");
 
 	useEffect(() => {
+		fetch("/line.svg")
+			.then((res) => res.text())
+			.then(setSvgContent);
+
 		const timeline = gsap.timeline({
 			scrollTrigger: {
 				trigger: "body",
@@ -43,16 +48,15 @@ function ProjectPreview() {
 		timeline.to(group6Ref.current.position, { y: 0.5, duration: 2, ease: "power1.inOut" }, "12");
 		timeline.to(group5Ref.current.position, { x: -15, duration: 1, ease: "power1.inOut" }, "12.5");
 		timeline.to(group6Ref.current.position, { x: 15, duration: 1, ease: "power1.inOut" }, "14.5");
-		if (svgRef.current) {
-			const path = svgRef.current.querySelector("path");
-			const length = path.getTotalLength();
-			timeline.fromTo(
-				path,
-				{ strokeDashoffset: length },
-				{ strokeDashoffset: 0, duration: 14, ease: "power1.inOut" },
-				"0"
-			);
-		}
+		// if (pathRef.current) {
+		// 	const length = pathRef.current.getTotalLength();
+		// 	timeline.fromTo(
+		// 		pathRef.current,
+		// 		{ strokeDashoffset: length },
+		// 		{ strokeDashoffset: 0, duration: 14, ease: "power1.inOut" },
+		// 		"0"
+		// 	);
+		// }
 
 		return () => {
 			timeline.kill();
@@ -67,7 +71,22 @@ function ProjectPreview() {
 				</Text>
 				<Image ref={imageRef} url="/white-down-arrow.png" transparent position={[0, 0, 0]} scale={[0.5, 0.5, 0.5]} />
 			</group>
-			<Svg ref={svgRef} src="/line.svg" position={[0, -1, -6]} scale={[0.01, 0.01, 0.01]} />
+			<Html
+				position={[0, -1, -4]}
+				style={{
+					width: "100vw",
+					height: "100vh",
+				}}
+			>
+				<div
+					ref={(el) => {
+						if (el) {
+							pathRef.current = el.querySelector("path");
+						}
+					}}
+					dangerouslySetInnerHTML={{ __html: svgContent }}
+				/>
+			</Html>
 			<group ref={group1Ref} position={[0, -11, -5]} scale={[1.2, 1.2, 1.2]}>
 				<Text color="white" position={[-2, 0, 0]} fontSize={0.5}>
 					First Demo
