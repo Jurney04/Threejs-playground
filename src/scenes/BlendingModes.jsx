@@ -4,7 +4,7 @@ import { Environment } from "@react-three/drei";
 function BlendingModes() {
 	return (
 		<>
-			<Environment files="/theater.hdr" background />
+			<Environment files="./theater.hdr" background />
 			<Statue />
 			<Overlay />
 		</>

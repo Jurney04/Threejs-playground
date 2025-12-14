@@ -9,7 +9,7 @@ extend({ TextGeometry });
 
 function TypingText({ texts, position = [0, 0, 0], size = 5, typingSpeed = 100, pauseBetween = 2000 }) {
 	
-	const font = useLoader(FontLoader, "/fonts/Black_Mustang.json");
+	const font = useLoader(FontLoader, "./fonts/Black_Mustang.json");
 
 	const lightRef = useRef();
 	const colorRef = useRef(new THREE.Color()); 
