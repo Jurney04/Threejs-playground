@@ -7,7 +7,7 @@ export default defineConfig({
 	optimizeDeps: {
 		include: ["gsap", "gsap/ScrollTrigger"]
 	},
-	base: "/",
+	base: "/Threejs-playground/",
 	server: {
 		port: 5173,
 		host: '0.0.0.0',
