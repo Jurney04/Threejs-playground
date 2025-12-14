@@ -10,7 +10,7 @@ extend({ TextGeometry });
 
 function Shape({ texts, position = [0, 0, 0], size = 5, scale, rotation, onClick, disableFloatingAnimation = false }) {
 	// Add onClick prop
-	const font = useLoader(FontLoader, "/fonts/Black_Mustang.json");
+	const font = useLoader(FontLoader, "./fonts/Black_Mustang.json");
 	const meshRef = useRef();
 	const meshColorRef = useRef();
 	const meshColorRef2 = useRef();

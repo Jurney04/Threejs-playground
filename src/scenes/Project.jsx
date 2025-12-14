@@ -72,7 +72,7 @@ function Project() {
 			</mesh>
 
 			<color attach="background" args={["#000000"]} />
-			<Environment files="/angel/HDR_sunset.hdr" background={true} environmentIntensity={0} />
+			<Environment files="./angel/HDR_sunset.hdr" background={true} environmentIntensity={0} />
 			<BackgroundPlane ref={backgroundRef} opacity={backgroundOpacity} />
 			<SpotlightBackground position={[0, 0, -95]} rotation={[0, 0, 0.5]} scale={2.5} />
 			<group ref={groupRef} position={[-4, -2.5, 0]}>
