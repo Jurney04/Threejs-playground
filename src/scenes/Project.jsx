@@ -1,18 +1,19 @@
 import * as THREE from "three";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import SpotlightCamera from "../components/ProjectComponents/SpotlightCamera";
 import Shape from "../components/ProjectComponents/Shape";
 import BackgroundPlane from "../components/ProjectComponents/BackgroundPlane";
 import SpotlightBackground from "../components/ProjectComponents/SpotlightBackground";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { Environment } from "@react-three/drei";
 function Project() {
 	const groupRef = useRef();
 	const greyPlaneRef = useRef();
-	const blackPlaneRef = useRef();
+	const backgroundRef = useRef();
 	const spotlightRef = useRef();
+	const [backgroundOpacity, setBackgroundOpacity] = useState(1);
+	const [hasFadedOut, setHasFadedOut] = useState(false);
 
 	useEffect(() => {
 		const timeline = gsap.timeline({
@@ -26,7 +27,26 @@ function Project() {
 
 		timeline.to(groupRef.current.position, { y: 50, duration: 0.25, ease: "power1.inOut" }, "0");
 		timeline.to(greyPlaneRef.current, { opacity: 0, duration: 0.15, ease: "power1.inOut" }, "0");
-		timeline.to(blackPlaneRef.current, { opacity: 1, duration: 0.15, ease: "power1.inOut" }, "0.05");
+
+		// Animate background opacity state - only fade out once
+		timeline.to(
+			{},
+			{
+				onUpdate: function () {
+					if (!hasFadedOut) {
+						const progress = this.progress();
+						const newOpacity = 1 - progress;
+						setBackgroundOpacity(newOpacity);
+						
+						// Mark as faded out when fully invisible
+						if (progress >= 0.99) {
+							setHasFadedOut(true);
+						}
+					}
+				},
+			},
+			"0"
+		);
 
 		return () => {
 			timeline.kill();
@@ -42,13 +62,12 @@ function Project() {
 			<ambientLight intensity={0.5} />
 			<mesh position={[5, 0, -70]}>
 				<planeGeometry args={[275, 200]} />
-				<meshStandardMaterial ref={greyPlaneRef} color="grey" opacity={0.5} transparent />
+				<meshStandardMaterial ref={greyPlaneRef} color="grey" opacity={0.3} transparent />
 			</mesh>
-			<mesh position={[5, 0, -65]}>
-				<planeGeometry args={[275, 200]} />
-				<meshStandardMaterial ref={blackPlaneRef} color="white" opacity={0} transparent />
-			</mesh>
-			<BackgroundPlane />
+
+			<color attach="background" args={["#000000"]} />
+			<Environment files="/angel/HDR_sunset.hdr" background={true} environmentIntensity={0} />
+			<BackgroundPlane ref={backgroundRef} opacity={backgroundOpacity} />
 			<SpotlightBackground position={[0, 0, -95]} rotation={[0, 0, 0.5]} scale={2.5} />
 			<group ref={groupRef} position={[-4, -2.5, 0]}>
 				<Shape position={[-15, 2.5, -50]} scale={1} texts="Welcome" size={5} rotation={[0, 0, 0]} />

@@ -3,8 +3,6 @@ import DynamicText from "./DynamicText";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
-
 function TextContainer() {
 	const text1Ref = useRef();
 	const text2Ref = useRef();

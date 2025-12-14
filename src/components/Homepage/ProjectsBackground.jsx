@@ -5,8 +5,6 @@ import { Text, Image, MeshTransmissionMaterial, Html } from "@react-three/drei";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
 
-gsap.registerPlugin(ScrollTrigger);
-
 function ProjectBackground() {
 	const group1Ref = useRef();
 	const planeRef = useRef();

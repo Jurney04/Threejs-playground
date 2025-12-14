@@ -150,6 +150,17 @@ function Model({ url }) {
 		}
 	}, []);
 
+	useEffect(() => {
+		if (group.current) {
+			group.current.traverse((child) => {
+				if (child.isMesh) {
+					child.material.transparent = true;
+					child.material.opacity = 0;
+				}
+			});
+		}
+	}, []);
+
 	return <primitive object={clonedFbx} ref={group} position={[0, -3, -5]} dispose={null} />;
 }
 export default Model;

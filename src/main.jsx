@@ -3,6 +3,10 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 import HomePage from "./HomePage.jsx";
 import MachineCorridor from "./scenes/MachineRoom";
@@ -15,7 +19,7 @@ import ExplodedView from "./scenes/ExplodedView.jsx";
 function SceneWrapper({ children }) {
 	return (
 		<div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100vh", zIndex: 1 }}>
-			<Canvas shadows camera={{ position: [0, 0, 0] }} style={{ width: "100%", height: "100%", display: "block" }}>
+			<Canvas shadows camera={{ position: [0, 0, 5] }} style={{ width: "100%", height: "100%", display: "block" }}>
 				<Suspense fallback={null}>{children}</Suspense>
 			</Canvas>
 		</div>
@@ -59,11 +63,11 @@ const router = createBrowserRouter([
 			</SceneWrapper>
 		),
 	},
-	{
+{
 		path: "bic",
 		element: (
 			<SceneWrapper>
-				<ExplodedView />
+				<ExplodedView camera={{ position: [0, 0, 0] }} />
 			</SceneWrapper>
 		),
 	},

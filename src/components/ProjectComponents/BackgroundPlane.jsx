@@ -3,7 +3,7 @@ import { useLoader, extend } from "@react-three/fiber";
 import { useRef, useEffect, useState, useLayoutEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 
-function BackgroundPlane() {
+function BackgroundPlane({ opacity = 1 }) {
 	const [planeHovered, setPlaneHovered] = useState(false);
 	const planeRef = useRef();
 	const texture = useLoader(THREE.TextureLoader, "/night.jpg");
@@ -24,11 +24,18 @@ function BackgroundPlane() {
 		}
 	});
 
-	return (
+return (
 		<>
 			<mesh ref={planeRef} scale={27.5} position={[0, 0, -100]}>
 				<planeGeometry args={[15, 10]} />
-				<meshStandardMaterial map={texture} emissiveMap={texture} emissive={new THREE.Color(1, 1, 1)} emissiveIntensity={0} />
+				<meshStandardMaterial 
+					map={texture} 
+					emissiveMap={texture} 
+					emissive={new THREE.Color(1, 1, 1)} 
+					emissiveIntensity={0}
+					transparent 
+					opacity={opacity} 
+				/>
 			</mesh>
 		</>
 	);

@@ -13,7 +13,7 @@ function HomePage() {
 				<directionalLight position={[10, 10, 5]} intensity={1} />
 				<Project />
 				<ProjectPreview />
-				<ProjectBackground />
+				{/* <ProjectBackground /> */}
 				{/* <MachineRoom /> */}
 			</Canvas>
 		</div>

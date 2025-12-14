@@ -7,9 +7,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"; // Added ScrollTrigger impor
 
 extend({ SpotLight: THREE.SpotLight });
 
-// Register ScrollTrigger plugin
-gsap.registerPlugin(ScrollTrigger);
-
 function SpotlightCamera() {
 	const lightRef = useRef();
 	const targetRef = useRef(new THREE.Object3D());
