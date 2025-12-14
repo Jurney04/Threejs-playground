@@ -15,10 +15,10 @@ export default function ExplodedView() {
 				<planeGeometry args={[275, 200]} />
 				<meshStandardMaterial color="#051f2e" opacity={1} />
 			</mesh>
-			<Model url="/BIC-static.fbx" />
+			<Model url="./BIC-static.fbx" />
 			<TextContainer />
 		</>
 	);
 }
 
-useFBX.preload("/BIC-static.fbx");
+useFBX.preload("./BIC-static.fbx");
