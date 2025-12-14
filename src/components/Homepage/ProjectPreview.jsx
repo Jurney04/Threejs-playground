@@ -186,7 +186,7 @@ function ProjectPreview() {
 				<Text ref={textRef} color="white" position={[0, -0.35, 0]} transparent fontSize={0.12}>
 					Scroll to continue
 				</Text>
-				<Image ref={imageRef} url="/white-down-arrow.png" transparent position={[0, 0, 0]} scale={[0.5, 0.5, 0.5]} />
+				<Image ref={imageRef} url="./white-down-arrow.png" transparent position={[0, 0, 0]} scale={[0.5, 0.5, 0.5]} />
 			</group>
 			<Html
 				position={[0, -1, -4]}
