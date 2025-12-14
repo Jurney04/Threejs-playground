@@ -619,7 +619,7 @@ function Angel({ position = [0, 0, 0] }) {
 		<>
 			{/* <Perf position="top-left" /> */}
 			<OrbitControls />
-			<Environment files="/angel/HDR.hdr" background />
+			<Environment files="./angel/HDR.hdr" background />
 			{/* <Environment files="/angel/HDR.hdr" background /> */}
 			{/* <Sky distance={100} up={0} /> */}
 			{/* <ambientLight intensity={1} /> */}
