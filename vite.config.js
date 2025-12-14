@@ -7,6 +7,7 @@ export default defineConfig({
 	optimizeDeps: {
 		include: ["gsap", "gsap/ScrollTrigger"]
 	},
+	base: "/expertlab-demo/",
 	server: {
 		port: 5173,
 		host: '0.0.0.0',
