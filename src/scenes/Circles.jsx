@@ -17,11 +17,11 @@ function Circles() {
 	const groupRef = useRef();
 
 	const [basecolor, ambientOcclusion, metallic, normal, roughness] = useTexture([
-		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg",
-		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_AmbientOcclusion.jpg",
-		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_Metallic.jpg",
-		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_Normal.png",
-		"/angel/gold_texture/Poliigon_MetalGoldPaint_7253_Roughness.jpg",
+		"/Threejs-playground/angel/gold_texture/Poliigon_MetalGoldPaint_7253_BaseColor.jpg",
+		"/Threejs-playground/angel/gold_texture/Poliigon_MetalGoldPaint_7253_AmbientOcclusion.jpg",
+		"/Threejs-playground/angel/gold_texture/Poliigon_MetalGoldPaint_7253_Metallic.jpg",
+		"/Threejs-playground/angel/gold_texture/Poliigon_MetalGoldPaint_7253_Normal.png",
+		"/Threejs-playground/angel/gold_texture/Poliigon_MetalGoldPaint_7253_Roughness.jpg",
 	]);
 
 	//State and delta are passed to the function. State is the current state of the scene and delta is the time since the last frame.
