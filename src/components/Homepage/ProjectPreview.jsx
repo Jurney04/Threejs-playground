@@ -116,7 +116,7 @@ function ProjectPreview() {
 	});
 
 	useEffect(() => {
-		fetch("/line.svg")
+		fetch("/Threejs-playground/line.svg")
 			.then((res) => res.text())
 			.then(setSvgContent);
 
@@ -150,12 +150,16 @@ function ProjectPreview() {
 		}
 
 		// Move button from behind camera to final position using state
-		timeline.to({}, {
-			duration: 0.001,
-			onStart: () => {
-				setButtonZ(0);
-			}
-		}, "14.5");
+		timeline.to(
+			{},
+			{
+				duration: 0.001,
+				onStart: () => {
+					setButtonZ(0);
+				},
+			},
+			"14.5"
+		);
 
 		if (group6Ref.current && group6Ref.current.traverse) {
 			group6Ref.current.traverse((child) => {
@@ -217,7 +221,7 @@ function ProjectPreview() {
 					</Text>
 					<mesh position={[0, 0, 0]}>
 						<planeGeometry args={[5, 3]} />
-						<meshStandardMaterial map={useLoader(TextureLoader, "/circles.png")} />
+						<meshStandardMaterial map={useLoader(TextureLoader, "/Threejs-playground/circles.png")} />
 					</mesh>
 					<Html position={[0, -3, 0.1]} transform>
 						<button
@@ -234,14 +238,24 @@ function ProjectPreview() {
 							}}
 							onMouseEnter={(e) => (e.target.style.background = "rgba(255, 255, 255, 1)")}
 							onMouseLeave={(e) => (e.target.style.background = "rgba(255, 255, 255, 0.9)")}
-							onClick={() => window.open("/circles", "_blank")}
+							onClick={() => window.open("/Threejs-playground/circles", "_blank")}
 						>
 							View Demo
 						</button>
 					</Html>
 					<mesh position={[0, 0, 0.2]}>
 						<boxGeometry args={[6, 10, 3]} />
-						<MeshTransmissionMaterial transparent backsideThickness={0.5} thickness={0.3} color="#ffffff" roughness={0.1} metalness={0.1} chromaticAberration={0.2} anisotropy={0.5} map={useLoader(TextureLoader, "/rounded_rectangle.svg")} />
+						<MeshTransmissionMaterial
+							transparent
+							backsideThickness={0.5}
+							thickness={0.3}
+							color="#ffffff"
+							roughness={0.1}
+							metalness={0.1}
+							chromaticAberration={0.2}
+							anisotropy={0.5}
+							map={useLoader(TextureLoader, "/Threejs-playground/rounded_rectangle.svg")}
+						/>
 					</mesh>
 				</group>
 				<group ref={group2Ref} position={[17.3, 10, 0]} scale={[0.75, 0.75, 0.75]} rotation={[0, 0, -Math.PI / 3]} onPointerDown={(e) => handleGroupPointerDown("group2", e)} onPointerUp={handleGroupPointerUp} onPointerMove={handleGroupPointerMove}>
@@ -253,7 +267,7 @@ function ProjectPreview() {
 					</Text>
 					<mesh position={[0, 0, 0]}>
 						<planeGeometry args={[5, 3]} />
-						<meshStandardMaterial map={useLoader(TextureLoader, "/angel.png")} />
+						<meshStandardMaterial map={useLoader(TextureLoader, "/Threejs-playground/angel.png")} />
 					</mesh>
 					<Html position={[0, -2.5, 0.1]} transform>
 						<button
@@ -270,14 +284,24 @@ function ProjectPreview() {
 							}}
 							onMouseEnter={(e) => (e.target.style.background = "rgba(255, 255, 255, 1)")}
 							onMouseLeave={(e) => (e.target.style.background = "rgba(255, 255, 255, 0.9)")}
-							onClick={() => window.open("/angel-model", "_blank")}
+							onClick={() => window.open("/Threejs-playground/angel-model", "_blank")}
 						>
 							View Demo
 						</button>
 					</Html>
 					<mesh position={[0, 0, 0.2]}>
 						<boxGeometry args={[6, 10, 3]} />
-						<MeshTransmissionMaterial transparent backsideThickness={0.5} thickness={0.3} color="#ffffff" roughness={0.1} metalness={0.1} chromaticAberration={0.2} anisotropy={0.5} map={useLoader(TextureLoader, "/rounded_rectangle.svg")} />
+						<MeshTransmissionMaterial
+							transparent
+							backsideThickness={0.5}
+							thickness={0.3}
+							color="#ffffff"
+							roughness={0.1}
+							metalness={0.1}
+							chromaticAberration={0.2}
+							anisotropy={0.5}
+							map={useLoader(TextureLoader, "/Threejs-playground/rounded_rectangle.svg")}
+						/>
 					</mesh>
 				</group>
 				<group
@@ -303,7 +327,7 @@ function ProjectPreview() {
 					</Text>
 					<mesh position={[0, 0, 0]}>
 						<planeGeometry args={[5, 3]} />
-						<meshStandardMaterial map={useLoader(TextureLoader, "/angel.png")} />
+						<meshStandardMaterial map={useLoader(TextureLoader, "/Threejs-playground/angel.png")} />
 					</mesh>
 					<Html position={[0, -2.5, 0.1]} transform>
 						<button
@@ -320,14 +344,24 @@ function ProjectPreview() {
 							}}
 							onMouseEnter={(e) => (e.target.style.background = "rgba(255, 255, 255, 1)")}
 							onMouseLeave={(e) => (e.target.style.background = "rgba(255, 255, 255, 0.9)")}
-							onClick={() => window.open("/full-scene-angel", "_blank")}
+							onClick={() => window.open("/Threejs-playground/full-scene-angel", "_blank")}
 						>
 							View Demo
 						</button>
 					</Html>
 					<mesh position={[0, 0, 0.2]}>
 						<boxGeometry args={[6, 10, 3]} />
-						<MeshTransmissionMaterial transparent backsideThickness={0.5} thickness={0.3} color="#ffffff" roughness={0.1} metalness={0.1} chromaticAberration={0.5} anisotropy={0.2} map={useLoader(TextureLoader, "/rounded_rectangle.svg")} />
+						<MeshTransmissionMaterial
+							transparent
+							backsideThickness={0.5}
+							thickness={0.3}
+							color="#ffffff"
+							roughness={0.1}
+							metalness={0.1}
+							chromaticAberration={0.5}
+							anisotropy={0.2}
+							map={useLoader(TextureLoader, "/Threejs-playground/rounded_rectangle.svg")}
+						/>
 					</mesh>
 				</group>
 				<group ref={group4Ref} position={[0, -20, 0]} scale={[0.75, 0.75, 0.75]} rotation={[0, 0, Math.PI]} onPointerDown={(e) => handleGroupPointerDown("group4", e)} onPointerUp={handleGroupPointerUp} onPointerMove={handleGroupPointerMove}>
@@ -345,7 +379,7 @@ function ProjectPreview() {
 					</Text>
 					<mesh position={[0, 0, 0]}>
 						<planeGeometry args={[5, 3]} />
-						<meshStandardMaterial map={useLoader(TextureLoader, "/machine-room.png")} />
+						<meshStandardMaterial map={useLoader(TextureLoader, "/Threejs-playground/machine-room.png")} />
 					</mesh>
 					<Html position={[0, -2.5, 0.1]} transform>
 						<button
@@ -362,14 +396,24 @@ function ProjectPreview() {
 							}}
 							onMouseEnter={(e) => (e.target.style.background = "rgba(255, 255, 255, 1)")}
 							onMouseLeave={(e) => (e.target.style.background = "rgba(255, 255, 255, 0.9)")}
-							onClick={() => window.open("/machine-corridor", "_blank")}
+							onClick={() => window.open("/Threejs-playground/machine-corridor", "_blank")}
 						>
 							View Demo
 						</button>
 					</Html>
 					<mesh position={[0, 0, 0.2]}>
 						<boxGeometry args={[6, 10, 3]} />
-						<MeshTransmissionMaterial transparent backsideThickness={0.5} thickness={0.3} color="#ffffff" roughness={0.1} metalness={0.1} chromaticAberration={0.2} anisotropy={0.5} map={useLoader(TextureLoader, "/rounded_rectangle.svg")} />
+						<MeshTransmissionMaterial
+							transparent
+							backsideThickness={0.5}
+							thickness={0.3}
+							color="#ffffff"
+							roughness={0.1}
+							metalness={0.1}
+							chromaticAberration={0.2}
+							anisotropy={0.5}
+							map={useLoader(TextureLoader, "/Threejs-playground/rounded_rectangle.svg")}
+						/>
 					</mesh>
 				</group>
 				{/* <group
@@ -395,12 +439,12 @@ function ProjectPreview() {
 					</Text>
 					<mesh position={[0, 0, 0]}>
 						<planeGeometry args={[5, 3]} />
-						<meshStandardMaterial map={useLoader(TextureLoader, "/basic-demo.png")} />
+						<meshStandardMaterial map={useLoader(TextureLoader, "/Threejs-playground/basic-demo.png")} />
 					</mesh>
 
 					<mesh position={[0, 0, 0.2]}>
 						<boxGeometry args={[6, 10, 3]} />
-						<MeshTransmissionMaterial transparent backsideThickness={0.5} thickness={0.3} color="#ffffff" roughness={0.1} metalness={0.1} chromaticAberration={0.5} anisotropy={0.5} map={useLoader(TextureLoader, "/rounded_rectangle.svg")} />
+						<MeshTransmissionMaterial transparent backsideThickness={0.5} thickness={0.3} color="#ffffff" roughness={0.1} metalness={0.1} chromaticAberration={0.5} anisotropy={0.5} map={useLoader(TextureLoader, "/Threejs-playground/rounded_rectangle.svg")} />
 					</mesh>
 				</group> */}
 				<group
@@ -427,7 +471,7 @@ function ProjectPreview() {
 					</Text>
 					<mesh position={[0, 0, 0]}>
 						<planeGeometry args={[5, 3]} />
-						<meshStandardMaterial map={useLoader(TextureLoader, "/bic.png")} />
+						<meshStandardMaterial map={useLoader(TextureLoader, "/Threejs-playground/bic.png")} />
 					</mesh>
 					<Html position={[0, -2.5, buttonZ]} transform ref={buttonRef}>
 						<button
@@ -444,14 +488,24 @@ function ProjectPreview() {
 							}}
 							onMouseEnter={(e) => (e.target.style.background = "rgba(255, 255, 255, 1)")}
 							onMouseLeave={(e) => (e.target.style.background = "rgba(255, 255, 255, 0.9)")}
-							onClick={() => window.open("/bic", "_blank")}
+							onClick={() => window.open("/Threejs-playground/bic", "_blank")}
 						>
 							View Demo
 						</button>
 					</Html>
 					<mesh position={[0, 0, 0.2]}>
 						<boxGeometry args={[6, 10, 3]} />
-						<MeshTransmissionMaterial transparent backsideThickness={0.5} thickness={0.3} color="#ffffff" roughness={0.1} metalness={0.1} chromaticAberration={0.5} anisotropy={0.5} map={useLoader(TextureLoader, "/rounded_rectangle.svg")} />
+						<MeshTransmissionMaterial
+							transparent
+							backsideThickness={0.5}
+							thickness={0.3}
+							color="#ffffff"
+							roughness={0.1}
+							metalness={0.1}
+							chromaticAberration={0.5}
+							anisotropy={0.5}
+							map={useLoader(TextureLoader, "/Threejs-playground/rounded_rectangle.svg")}
+						/>
 					</mesh>
 				</group>
 			</group>

@@ -28,11 +28,11 @@ function SceneWrapper({ children }) {
 
 const router = createBrowserRouter([
 	{
-		path: "/",
+		path: "/Threejs-playground/",
 		element: <HomePage />,
 	},
 	{
-		path: "machine-corridor",
+		path: "/Threejs-playground/machine-corridor",
 		element: (
 			<SceneWrapper>
 				<MachineCorridor />
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
 		),
 	},
 	{
-		path: "circles",
+		path: "/Threejs-playground/circles",
 		element: (
 			<SceneWrapper>
 				<Circles />
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
 		),
 	},
 	{
-		path: "angel-model",
+		path: "/Threejs-playground/angel-model",
 		element: (
 			<SceneWrapper>
 				<Angel />
@@ -56,7 +56,7 @@ const router = createBrowserRouter([
 		),
 	},
 	{
-		path: "full-scene-angel",
+		path: "/Threejs-playground/full-scene-angel",
 		element: (
 			<SceneWrapper>
 				<FullAngelScene />
@@ -64,7 +64,7 @@ const router = createBrowserRouter([
 		),
 	},
 	{
-		path: "bic",
+		path: "/Threejs-playground/bic",
 		element: (
 			<SceneWrapper>
 				<ExplodedView camera={{ position: [0, 0, 0] }} />

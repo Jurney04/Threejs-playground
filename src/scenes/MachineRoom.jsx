@@ -122,10 +122,10 @@ function CorridorSegment({ segmentData, gearGeometries, normalMapMultiplier = 10
 
 	// Textures
 	const textureMapsFloor = useTexture({
-		map: "/mossy_brick/mossy_brick_diff.jpg",
-		heightMap: "/mossy_brick/mossy_brick_disp.png",
-		// normalMap: "/mossy_brick/mossy_brick_disp.png",
-		aoMap: "/mossy_brick/mossy_brick_ao.jpg",
+		map: "/Threejs-playground/mossy_brick/mossy_brick_diff.jpg",
+		heightMap: "/Threejs-playground/mossy_brick/mossy_brick_disp.png",
+		// normalMap: "/Threejs-playground/mossy_brick/mossy_brick_disp.png",
+		aoMap: "/Threejs-playground/mossy_brick/mossy_brick_ao.jpg",
 	});
 	Object.values(textureMapsFloor).forEach((t) => {
 		if (t) {
@@ -135,9 +135,9 @@ function CorridorSegment({ segmentData, gearGeometries, normalMapMultiplier = 10
 	});
 
 	const textureMapsSide = useTexture({
-		map: "/rebar_reinforced_concrete/rebar_reinforced_concrete_diff.png",
-		heightMap: "/rebar_reinforced_concrete/rebar_reinforced_concrete_disp.png",
-		aoMap: "/rebar_reinforced_concrete/rebar_reinforced_concrete_ao.jpg",
+		map: "/Threejs-playground/rebar_reinforced_concrete/rebar_reinforced_concrete_diff.png",
+		heightMap: "/Threejs-playground/rebar_reinforced_concrete/rebar_reinforced_concrete_disp.png",
+		aoMap: "/Threejs-playground/rebar_reinforced_concrete/rebar_reinforced_concrete_ao.jpg",
 	});
 	Object.values(textureMapsSide).forEach((t) => {
 		if (t) {
@@ -147,9 +147,9 @@ function CorridorSegment({ segmentData, gearGeometries, normalMapMultiplier = 10
 	});
 
 	const textureMapsRoof = useTexture({
-		map: "/rough_plaster_brick/rough_plaster_brick_diff.jpg",
-		heightMap: "/rough_plaster_brick/rough_plaster_brick_disp.png",
-		aoMap: "/rough_plaster_brick/rough_plaster_brick_ao.jpg",
+		map: "/Threejs-playground/rough_plaster_brick/rough_plaster_brick_diff.jpg",
+		heightMap: "/Threejs-playground/rough_plaster_brick/rough_plaster_brick_disp.png",
+		aoMap: "/Threejs-playground/rough_plaster_brick/rough_plaster_brick_ao.jpg",
 	});
 	Object.values(textureMapsRoof).forEach((t) => {
 		if (t) {
@@ -229,7 +229,7 @@ export default function MachineCorridor() {
 
 	const normalMapMultiplier = 1.5; // adjust globally
 
-	const gearGeometries = useGearGeometries(["/Gear1.svg", "/Gear2.svg", "/Gear3.svg"], 15, 0.02);
+	const gearGeometries = useGearGeometries(["/Threejs-playground/Gear1.svg", "/Threejs-playground/Gear2.svg", "/Threejs-playground/Gear3.svg"], 15, 0.02);
 
 	// Scroll input
 	useEffect(() => {

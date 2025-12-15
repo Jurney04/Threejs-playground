@@ -18,21 +18,21 @@ const Wing = React.memo(function Wing({
 	const svgConfigs = useMemo(
 		() => ({
 			default: {
-				bottom: "/angel/wing_bottom.svg",
-				middle: "/angel/wing_middle.svg",
-				top: "/angel/wing_top.svg",
+				bottom: "/Threejs-playground/angel/wing_bottom.svg",
+				middle: "/Threejs-playground/angel/wing_middle.svg",
+				top: "/Threejs-playground/angel/wing_top.svg",
 				textureRotation: Math.PI, // No rotation
 			},
 			v2: {
-				bottom: "/angel/wing_top_bottom.svg",
-				middle: "/angel/wing_top_middle.svg",
-				top: "/angel/wing_top_top.svg",
+				bottom: "/Threejs-playground/angel/wing_top_bottom.svg",
+				middle: "/Threejs-playground/angel/wing_top_middle.svg",
+				top: "/Threejs-playground/angel/wing_top_top.svg",
 				textureRotation: Math.PI, // 90 degrees (example: clockwise rotation for v2)
 			},
 			v3: {
-				bottom: "/angel/wing_bottom_bottom.svg",
-				middle: "/angel/wing_bottom_middle.svg",
-				top: "/angel/wing_bottom_top.svg",
+				bottom: "/Threejs-playground/angel/wing_bottom_bottom.svg",
+				middle: "/Threejs-playground/angel/wing_bottom_middle.svg",
+				top: "/Threejs-playground/angel/wing_bottom_top.svg",
 				textureRotation: -Math.PI, // -45 degrees (example: counter-clockwise for v3)
 			},
 		}),
@@ -127,10 +127,10 @@ const Wing = React.memo(function Wing({
 	}));
 
 	const [basecolor, ambientOcclusion, normal, roughness] = useTexture([
-		"/angel/feathers/Stylized_Feathers_002_ambientOcclusion.png", // Note: This is used as basecolor; consider swapping if needed
-		"/angel/feathers/Stylized_Feathers_002_ambientOcclusion.png",
-		"/angel/feathers/Stylized_Feathers_002_normal.png",
-		"/angel/feathers/Stylized_Feathers_002_roughness.png",
+		"/Threejs-playground/angel/feathers/Stylized_Feathers_002_ambientOcclusion.png", // Note: This is used as basecolor; consider swapping if needed
+		"/Threejs-playground/angel/feathers/Stylized_Feathers_002_ambientOcclusion.png",
+		"/Threejs-playground/angel/feathers/Stylized_Feathers_002_normal.png",
+		"/Threejs-playground/angel/feathers/Stylized_Feathers_002_roughness.png",
 	]);
 
 	// Unified material configuration (same for all wings, based on original Wing2)

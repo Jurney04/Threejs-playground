@@ -6,7 +6,7 @@ import { useFrame } from "@react-three/fiber";
 function BackgroundPlane({ opacity = 1 }) {
 	const [planeHovered, setPlaneHovered] = useState(false);
 	const planeRef = useRef();
-	const texture = useLoader(THREE.TextureLoader, "/night.jpg");
+	const texture = useLoader(THREE.TextureLoader, "/Threejs-playground/night.jpg");
 
 	useFrame((state, delta) => {
 		if (planeHovered) {
@@ -24,18 +24,11 @@ function BackgroundPlane({ opacity = 1 }) {
 		}
 	});
 
-return (
+	return (
 		<>
 			<mesh ref={planeRef} scale={27.5} position={[0, 0, -100]}>
 				<planeGeometry args={[15, 10]} />
-				<meshStandardMaterial 
-					map={texture} 
-					emissiveMap={texture} 
-					emissive={new THREE.Color(1, 1, 1)} 
-					emissiveIntensity={0}
-					transparent 
-					opacity={opacity} 
-				/>
+				<meshStandardMaterial map={texture} emissiveMap={texture} emissive={new THREE.Color(1, 1, 1)} emissiveIntensity={0} transparent opacity={opacity} />
 			</mesh>
 		</>
 	);

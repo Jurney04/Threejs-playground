@@ -5,12 +5,12 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
 	plugins: [react()],
 	optimizeDeps: {
-		include: ["gsap", "gsap/ScrollTrigger"]
+		include: ["gsap", "gsap/ScrollTrigger"],
 	},
 	base: "/Threejs-playground/",
 	server: {
 		port: 5173,
-		host: '0.0.0.0',
+		host: "0.0.0.0",
 		watch: {
 			usePolling: true,
 		},
