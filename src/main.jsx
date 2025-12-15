@@ -71,6 +71,8 @@ const router = createBrowserRouter([
 			</SceneWrapper>
 		),
 	},
-]);
+], {
+	basename: "/Threejs-playground"
+});
 
 createRoot(document.getElementById("root")).render(<RouterProvider router={router} />);
